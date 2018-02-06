@@ -15,7 +15,7 @@ export default class ItemCarousal extends Component {
 					<Carousel {...options}>
 						{items.map((item, index) => {
 							return (
-								<Col xs={{ span: 24 }} key={index} className="carousalItem" style={{ backgroundImage: `url(${item.imageUrl})` }} />
+								<img className="carousalItem" src={item.imageUrl} key={index} />
 							)
 						})}
 					</Carousel>
@@ -29,8 +29,8 @@ export default class ItemCarousal extends Component {
 							return (
 								<Col xs={{ span: 24 }} sm={{ span: 20 }} key={index}className="flex-row carousalItem">
 									<div className="full-flex flex-column flex-jsa flex-ac  textContainer">
-										<div className="word-wrap subtitle">{item.subtitle}</div>
-										<div className="font-24 word-wrap title">
+										<div className="is-text-center word-wrap subtitle">{item.subtitle}</div>
+										<div className="is-text-center font-24 word-wrap title">
 											<span>{item.title}</span>
 											<Col xs={{ span: 4, offset: 10}} className="underline">&nbsp;</Col>
 										</div>
@@ -41,8 +41,8 @@ export default class ItemCarousal extends Component {
 											</Button>
 										</div>
 									</div>
-									<div className="mediaContainer" >
-										<img src={item.imageUrl} alt="" />
+									<div className="mediaContainer" style={{ backgroundImage: `url(${item.imageUrl})`}} >
+										&nbsp;
 									</div >
 								</Col>
 							)

@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import classNames from 'classnames';
 
 import * as UTILS from './data/config/utils';
 import * as pageActions from './data/redux/page_details/actions';
-// import AppHeader from './components/appheader';
 import AppNavbar from './components/appnavbar';
 
 import './index.scss';
@@ -31,10 +31,12 @@ class AppContainer extends Component {
         }
     }
 
-    render() {
+	render() {
+		const { page_details } = this.props;
+		const is_mobile = (this.props.page_details.device_data.screen_width < 768)
         return (
-            <div className="flex-column full-width full-height AppContainer">
-                <AppNavbar/>
+			<div className={classNames("flex-column full-width full-height AppContainer", { "mobile": is_mobile})}>
+				<AppNavbar page_details={page_details}/>
 				<div className="MainContentContainer full-flex is-no-lr-pad">
                     {this.props.children}
                 </div>

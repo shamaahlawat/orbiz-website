@@ -15,11 +15,14 @@ export default class ItemListContainer extends Component {
 			<Row className="full-flex ItemsListContainer">
 				<Col xs={{ span: 24 }} className="flex-row flex-jsb flex-ac titleContainer">
 					<div className="font-24 titleText">{title}</div>
-					<div className="flex-row flex-jsa filterContainer">
+					<div className="flex-row flex-jsa filterContainer desktop">
 						<span className="filterItem is-capitalize pad-10">For:</span>
 						{filters.map((item, index) => {
 							return <span key={index} className={classNames("is-capitalize pad-10 is-cursor-ptr filterItem", { 'active': this.props.current_filter_type === item })}>{item}</span>
 						})}
+					</div>
+					<div className="flex-row flex-jsa filterContainer mobile">
+						<span className="filterItem is-capitalize pad-10 active">View All</span>
 					</div>
 				</Col>
 				<Col xs={{ span: 24 }} className="flex-row flex-wrap flex-ac ItemsList">

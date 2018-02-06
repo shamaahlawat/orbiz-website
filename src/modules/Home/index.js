@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { Row, Col } from 'antd';
+import PropTypes from 'prop-types';
 
 import './index.scss';
 
+import * as pageActions from '../../data/redux/page_details/actions';
 import ItemCarousal from './components/itemcarousal';
 import ItemListContainer from './components/itemlist';
 import VehicleSelector from './components/vehicleselector';
@@ -252,8 +256,19 @@ const vehicleData = [
 	}
 ];
 
-export default class Home extends Component {
+function mapStateToProps(state) {
+	return {
+		page_details: state.page_details,
+	};
+}
 
+function mapDispatchToProps(dispatch) {
+	return {
+		actions: bindActionCreators(Object.assign({}, pageActions, ), dispatch)
+	};
+}
+
+class Home extends Component {
 	render() {
 		return (
 			<div className="HomeContainer page-container">
@@ -266,7 +281,7 @@ export default class Home extends Component {
 					</Col>
 					<Col xs={{ span: 24 }} className="t-pad-20 b-pad-50 black-bg SectionContainer CarousalContainer">
 						<Col xs={{ span: 24 }} className="b-mrgn-20 flex-row flex-center titleContainer">
-							<div className="font-24 titleText">We Also Make Custom Number Plates For Your Premium Car</div>
+							<div className="lr-pad-15 is-text-center font-24 titleText">We Also Make Custom Number Plates For Your Premium Car</div>
 						</Col>
 						<ItemCarousal type="mixed" items={frameCarousalItems} options={option1} />
 					</Col>
@@ -275,7 +290,7 @@ export default class Home extends Component {
 					</Col>
 					<Col xs={{ span: 24 }} className="tb-pad-20 black-bg SectionContainer vehicleSelectorContainer">
 						<Col xs={{ span: 24 }} className="b-mrgn-20 flex-row flex-center titleContainer">
-							<div className="font-24 titleText">Want to see how number plate will look on your vehicle?</div>
+							<div className="lr-pad-15 is-text-center font-24 titleText">Want to see how number plate will look on your vehicle?</div>
 						</Col>
 						<Col xs={{ span: 22, offset: 1 }}>
 							<VehicleSelector vehicles={vehicleData}/>
@@ -295,3 +310,5 @@ export default class Home extends Component {
 		);
 	}
 }
+
+export default connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(Home);

@@ -8,6 +8,14 @@
 					color: $primary;
 				}
 			}
+
+			&.mobile {
+				display: none !important;
+			}
+
+			&.desktop {
+				display: block !important;
+			}
 		}
 	}
 
@@ -15,5 +23,21 @@
 		min-width: 100px;
 		height: auto;
 		padding: 10px 20px;
+	}
+}
+
+.mobile {
+	.ItemsListContainer {
+		.titleContainer {
+			.filterContainer{
+				&.mobile {
+					display: block !important;
+				}
+
+				&.desktop {
+					display: none !important;
+				}
+			}
+		}
 	}
 }

@@ -36,12 +36,14 @@
 		}
 
 		.mediaContainer {
-			img {
-				max-width: 100%;
-				// width: 100%;
-				height: auto;
-				max-height: 75vh;
-			}
+			min-width: 40vw;
+			background-size: cover;
+			// img {
+			// 	max-width: 100%;
+			// 	// width: 100%;
+			// 	height: auto;
+			// 	max-height: 75vh;
+			// }
 		}
 	}
 
@@ -51,5 +53,50 @@
 			min-height: 300px;
 			max-height: 75vh;
 		}
+	}
+
+	.slick-list {
+		height: auto !important;
+	}
+}
+
+.mobile {
+	.CarousalContainer {
+		.textContainer {
+			background-image: linear-gradient(303deg, #594cc3, #2b8aeb);
+			color: $white;
+
+			.subtitle {
+				font-size: 12px;
+			}
+
+			.title {
+				font-size: 16px !important;
+			}
+
+			.description {
+				display: none;
+			}
+
+			.button {
+				button {
+					padding: 5px 10px;
+					font-size: 10px;
+					height: auto;
+				}
+			}
+		}
+
+		.mediaContainer {
+			max-width: 40vw;
+		}
+
+		&.itemCarousal {
+			.carousalItem {
+				min-height: 200px;
+				max-height: 75vh;
+			}
+		}
+
 	}
 }

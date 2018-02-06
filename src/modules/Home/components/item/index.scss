@@ -5,6 +5,9 @@
 	font-family: $font-family-secondary;
 
 	.imageContainer {
+		z-index: 1;
+		overflow: hidden;
+
 		.itemImage {
 			max-height: 250px;
 			width: 100%;
@@ -20,9 +23,47 @@
 			top: -10px;
 			left: -10px;
 		}
+
+		.itemDetails {
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.9);
+			position: absolute;
+			top: 0;
+			margin-top: 500px;
+			transition: all 1s ease-in-out;
+
+			button {
+				height: auto;
+				padding: 5px 20px;
+			}
+
+			.seperator {
+				width: 100%;
+				border-bottom: 1px solid $font-color-light;
+				opacity: 0.69;
+			}
+
+			.link {
+				color: $white;
+
+				&:hover {
+					color: $primary;
+				}
+			}
+		}
+
+		&:hover {
+			.itemDetails {
+				margin-top: 0;
+			}
+		}
+
 	}
 
 	.detailsContainer {
+		z-index: 2;
+
 		.favorites {
 			color: $font-color-light;
 		}

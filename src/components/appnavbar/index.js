@@ -11,59 +11,77 @@ import './index.scss';
 
 class AppNavbar extends Component {
     render() {
-        let { page_details } = this.props;
+		let { page_details } = this.props;
 
-        return (
-            <Row className="appNavbarContainer">
-                <Col xs={{ span: 24 }}>
-                    <Row>
-						<Col xs={{ span: 24 }} sm={{ span: 22, offset: 1 }} className="flex-row flex-jsb">
-							<Col className="flex-row flex-jsa flex-ac">
-								<div className="navItem">
-									<img src="https://i0.wp.com/orbiz.in/wp-content/uploads/2017/11/a.png" alt="orbiz" className="is-cursor-ptr setBrandIcon" />
-								</div>
-								<div className="navItem">
-									<Dropdown overlay={dropdown_menu} placement="bottomCenter" trigger={['click']} style={{ display: 'flex'}}>
-										<a className="ant-dropdown-link" href="#">Shop for <Icon style={{fontSize: 10, verticalAlign: 'middle', paddingLeft: 5}}type="caret-down" /></a>
-									</Dropdown>
-								</div>
+		if(page_details.device_data.screen_width < 768) {
+			return (
+				<Row className="mobile appNavbarContainer">
+					<Col xs={{ span: 24 }}>
+						<Row>
+							<Col xs={{ span: 24 }} sm={{ span: 22, offset: 1 }} className="flex-row flex-jsb">
+								<Col className="flex-row flex-jsa flex-ac">
+									<div className="navItem">
+										<SideNavbar page_details={page_details} />
+									</div>
+									<div className="navItem">
+										<img src="https://i0.wp.com/orbiz.in/wp-content/uploads/2017/11/a.png" alt="orbiz" className="is-cursor-ptr setBrandIcon" />
+									</div>
+								</Col>
+							</Col>
+						</Row>
+					</Col>
 
-								<div className="navItem">
-									<a href="#">
-										<div className="icon">Products</div>
-									</a>
-								</div>
-								<div className="navItem">
-									<a href="#">
-										<div className="icon">
-											<Icon type="search" />
-										</div>
-									</a>
-								</div>
+				</Row>
+			)
+		}
+		else {
+			return (
+				<Row className="appNavbarContainer">
+					<Col xs={{ span: 24 }}>
+						<Row>
+							<Col xs={{ span: 24 }} sm={{ span: 22, offset: 1 }} className="flex-row flex-jsb">
+								<Col className="flex-row flex-jsa flex-ac">
+									<div className="navItem">
+										<img src="https://i0.wp.com/orbiz.in/wp-content/uploads/2017/11/a.png" alt="orbiz" className="is-cursor-ptr setBrandIcon" />
+									</div>
+									<div className="navItem">
+										<Dropdown overlay={dropdown_menu} placement="bottomCenter" trigger={['click']} style={{ display: 'flex'}}>
+											<a className="ant-dropdown-link" href="#">Shop for <Icon style={{fontSize: 10, verticalAlign: 'middle', paddingLeft: 5}}type="caret-down" /></a>
+										</Dropdown>
+									</div>
+
+									<div className="navItem">
+										<a href="#">
+											<div className="icon">Products</div>
+										</a>
+									</div>
+									<div className="navItem">
+										<a href="#">
+											<div className="icon">
+												<Icon type="search" />
+											</div>
+										</a>
+									</div>
+								</Col>
+								<Col className="flex-row flex-jfe flex-ac">
+									<div className="navItem">
+										<a href="#" className="flex-row flex-center">
+											<span>Cart&nbsp;</span>
+											<i className="material-icons iconColor">shopping_cart</i>
+										</a>
+									</div>
+									<div className="navItem">
+										<Button className={classNames("animated zoomIn flex-row btn-fill-violet")}>
+											<a href="#">Login/Signup</a>
+										</Button>
+									</div>
+								</Col>
 							</Col>
-							<Col className="flex-row flex-jfe flex-ac">
-								<div className="navItem">
-									<a href="#" className="flex-row flex-center">
-										<span>Cart&nbsp;</span>
-										<i className="material-icons iconColor">shopping_cart</i>
-									</a>
-								</div>
-								<div className="navItem">
-									<Button className={classNames("animated zoomIn flex-row btn-fill-violet")}>
-										<a href="#">Login/Signup</a>
-									</Button>
-								</div>
-							</Col>
-                        </Col>
-                    </Row>
-                </Col>
-                <If condition={page_details.device_data.screen_width < 768}>
-                    <div className="desktopHidden">
-                        <SideNavbar page_details={page_details} />
-                    </div>
-                </If>
-            </Row>
-        );
+						</Row>
+					</Col>
+				</Row>
+			);
+		}
     }
 }
 
@@ -85,12 +103,12 @@ const dropdown_menu = (
                     <span>Car</span>
                 </a>
 			</Menu.Item>
-			<Menu.Item key="2">
+			<Menu.Item key="3">
 				<a href="#" className="font-14 is-font-medium">
 					<span>Super Car</span>
 				</a>
 			</Menu.Item>
-			<Menu.Item key="2">
+			<Menu.Item key="4">
 				<a href="#" className="font-14 is-font-medium">
 					<span>Bus</span>
 				</a>
