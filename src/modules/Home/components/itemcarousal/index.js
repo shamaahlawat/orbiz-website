@@ -55,7 +55,6 @@ export default class ItemCarousal extends Component {
 }
 
 ItemCarousal.propTypes = {
-	type: PropTypes.string,
 	items: PropTypes.arrayOf(PropTypes.object).isRequired,
 	type: PropTypes.string.isRequired,
 	options: PropTypes.object
