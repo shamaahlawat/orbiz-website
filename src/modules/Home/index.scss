@@ -1,0 +1,36 @@
+@import "../data/assets/style/style_import";
+
+.HomeContainer {
+	.SectionContainer {
+
+		&.black-bg {
+			background-color: $black-bg-dark;
+		}
+
+		.titleContainer {
+			&.primary {
+				.titleText {
+					color: $primary;
+				}
+			}
+		}
+
+		.underline {
+			border-bottom: 2px solid $primary;
+			width: 50px;
+			height: 5px;
+		}
+	}
+
+	.MainCarousalContainer {
+		.carousalItem {
+			min-height: 70vh;
+		}
+	}
+
+	.CarousalContainer {
+		.slick-dots {
+			bottom: -30px;
+		}
+	}
+}

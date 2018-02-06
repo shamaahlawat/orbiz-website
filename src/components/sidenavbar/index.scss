@@ -1,0 +1,68 @@
+@import "../../data/assets/style/colors";
+@import "../../data/assets/style/variables";
+
+.sideNavbarContainer {
+    .bm-burger-button {
+        position: fixed;
+        top: 16px;
+        left: 12px;
+        height: 24px;
+        width: 24px;
+
+        .bm-icon {
+            display: flex;
+            color: $font-color-light;
+        }
+    }
+
+    .bm-menu-wrap {
+        .bm-menu {
+            background: $white;
+
+            .bm-item-list {
+                .sideBarContent {
+                    height: 100%;
+                    min-height: 600px;
+
+                    .headerList {
+                        color: $font-color-light;
+
+                        .activeHeaderItem {
+                            .iconBox {
+                                color: $primary;
+                            }
+
+                            .title {
+                                color: $black;
+                                opacity: 0.7;
+                                font-weight: $font-medium;
+                            }
+                        }
+                    }
+
+                    .sidebarFooter {
+                        bottom: 0px;
+                        left: 0px;
+                        background-image: linear-gradient(to top, #fe5196, #f77062);
+                        color: $white;
+
+                        .footerIconBox {
+                            height: 30px;
+                            width: 35%;
+                        }
+                    }
+                }
+            }
+        }
+
+        .bm-cross-button {
+            height: 24px;
+            width: 24px;
+
+            .bm-cross {
+                background-color: $font-color-light;
+                height: 16px !important;
+            }
+        }
+    }
+}

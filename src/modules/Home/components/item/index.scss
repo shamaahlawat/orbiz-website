@@ -1,0 +1,50 @@
+@import "../../../../data/assets/style/style_import";
+
+.NumberPlateContainer {
+	background: $black-bg-light;
+	font-family: $font-family-secondary;
+
+	.imageContainer {
+		.itemImage {
+			max-height: 250px;
+			width: 100%;
+		}
+
+		.offerTag {
+			background-color: $green;
+			color: $white;
+			border-radius: 3px;
+			padding: 5px 10px;
+			box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.1);
+			position: absolute;
+			top: -10px;
+			left: -10px;
+		}
+	}
+
+	.detailsContainer {
+		.favorites {
+			color: $font-color-light;
+		}
+
+		.itemDetails {
+			.name {
+				font-weight: 600;
+			}
+
+			.price {
+				color: $green-dark;
+
+				.actualPrice.hasOffer {
+					opacity: 0.5;
+					text-decoration: line-through;
+				}
+
+				.offerPrice {
+					font-weight: 900;
+					margin-left: 10px;
+				}
+			}
+		}
+	}
+}

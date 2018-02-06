@@ -1,0 +1,143 @@
+@import "../../data/assets/style/style_import";
+
+@media only screen and (max-width: 767px) {
+    .appNavbarContainer {
+        .mobileHidden {
+            display: none !important;
+        }
+
+        .desktopHidden {
+            display: block !important;
+        }
+
+        .setBrandIcon {
+            max-width: 120px !important;
+        }
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .appNavbarContainer {
+        .setBrandIcon {
+            max-width: 120px !important;
+        }
+    }
+}
+
+.appNavbarContainer {
+	z-index: 10;
+	position: fixed !important;
+	top: 0;
+	width: 100%;
+	padding: 5px 0;
+	font-family: $font-family-secondary;
+	background-color: rgba(0, 0, 0, .3);
+	-webkit-box-shadow: inset 6px 6px 50px 2px rgba(0,0,0,0.5);
+	-moz-box-shadow: inset 6px 6px 50px 2px rgba(0,0,0,0.5);
+	box-shadow: inset 6px 6px 50px 2px rgba(0,0,0,0.5);
+
+    .desktopHidden {
+        display: none;
+    }
+
+    .setBrandIcon {
+        max-width: 135px;
+        max-height: 50px;
+    }
+
+    .navItem {
+		padding: 15px;
+	}
+
+	.navItem a {
+		color: $font-color-light !important;
+		font-size: 16px;
+
+		&:hover, &.active {
+			color: $primary !important;
+		}
+	}
+
+	.ant-dropdown-link {
+		padding: 15px;
+		border-right: solid 1px rgba(255, 255, 255, .5);
+	}
+
+    .navItemAlign {
+        ul {
+            list-style-type: none;
+
+            li {
+                @include lr-padding(15px);
+
+                display: inline-block;
+                border-bottom: 3px solid transparent;
+            }
+
+            .navItem {
+                a {
+                    line-height: 52px;
+                    color: $font-color-light;
+
+                    .badgeAlign {
+                        .ant-badge-count {
+                            @include lr-padding(4px);
+
+                            background-color: $green;
+                            font-size: 11px;
+                            top: -15px;
+                        }
+                    }
+                }
+
+                &:hover {
+                    .icon {
+                        color: $primary;
+                    }
+
+                    .title {
+                        color: $black;
+                        opacity: 0.8;
+                    }
+                }
+            }
+        }
+    }
+
+    .activeItem {
+        .icon {
+            color: $primary;
+        }
+
+        .title {
+            color: $black;
+            opacity: 0.8;
+            font-weight: $font-medium;
+        }
+    }
+
+    .activeBorder {
+        border-bottom: 3px solid $primary !important;
+    }
+
+    .fixedAvatar {
+        .ant-dropdown-link {
+            display: flex !important;
+        }
+    }
+}
+
+.navbarDropdownMenuContainer {
+    padding-top: 8px;
+
+    .ant-menu-item {
+        color: $font-color-light !important;
+
+        &:hover {
+            span {
+                color: $black;
+                opacity: 0.8;
+            }
+        }
+    }
+}

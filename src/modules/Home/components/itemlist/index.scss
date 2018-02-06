@@ -1,0 +1,19 @@
+@import "../../../../data/assets/style/style_import";
+
+.ItemsListContainer {
+	.titleContainer {
+		.filterContainer {
+			.filterItem {
+				&.active {
+					color: $primary;
+				}
+			}
+		}
+	}
+
+	.btn-fill-black {
+		min-width: 100px;
+		height: auto;
+		padding: 10px 20px;
+	}
+}

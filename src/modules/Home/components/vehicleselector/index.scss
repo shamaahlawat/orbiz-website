@@ -1,0 +1,25 @@
+@import "../../../../data/assets/style/style_import";
+
+.VehicleSelectorContainer {
+	.selectContainer {
+		.ant-select {
+			color: $white;
+
+			.ant-select-selection {
+				height: auto;
+				padding: 5px 20px;
+				background-color: $black-bg-dark;
+
+				.ant-select-arrow {
+					color: $white;
+				}
+			}
+		}
+
+		.btn-fill-black {
+			background-color: $black-bg-dark !important;
+			height: auto;
+			padding: 12px 20px;
+		}
+	}
+}

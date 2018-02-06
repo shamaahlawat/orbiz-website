@@ -1,0 +1,55 @@
+@import "../../../../data/assets/style/style_import";
+
+.CarousalContainer {
+    .carousalItem {
+        background-repeat: no-repeat;
+		background-size: cover;
+
+		.textContainer {
+			background-color: $white;
+			color: $font-dark;
+			padding: 15px;
+
+			.subtitle {
+				opacity: 0.5;
+				font-weight: 500;
+			}
+
+			.title {
+				.underline {
+					border-bottom: 2px solid $font-dark;
+					height: 5px;
+					opacity: .5;
+				}
+			}
+
+			.description {
+				opacity: 0.69;
+			}
+
+			.button {
+				button {
+					padding: 10px 20px;
+					height: auto;
+				}
+			}
+		}
+
+		.mediaContainer {
+			img {
+				max-width: 100%;
+				// width: 100%;
+				height: auto;
+				max-height: 75vh;
+			}
+		}
+	}
+
+	&.itemCarousal {
+		.carousalItem {
+			padding: 0 15px;
+			min-height: 300px;
+			max-height: 75vh;
+		}
+	}
+}
