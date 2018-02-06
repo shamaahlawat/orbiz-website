@@ -18,7 +18,9 @@ export default class ItemListContainer extends Component {
 					<div className="flex-row flex-jsa filterContainer desktop">
 						<span className="filterItem is-capitalize pad-10">For:</span>
 						{filters.map((item, index) => {
-							return <span key={index} className={classNames("is-capitalize pad-10 is-cursor-ptr filterItem", { 'active': this.props.current_filter_type === item })}>{item}</span>
+							return (
+								<span key={index} className={classNames("is-capitalize pad-10 is-cursor-ptr filterItem", { 'active': this.props.current_filter_type === item })}>{item}</span>
+							);
 						})}
 					</div>
 					<div className="flex-row flex-jsa filterContainer mobile">
@@ -26,12 +28,12 @@ export default class ItemListContainer extends Component {
 					</div>
 				</Col>
 				<Col xs={{ span: 24 }} className="flex-row flex-wrap flex-ac ItemsList">
-					{items.map((item, index) => {
+					{items.map((item) => {
 						return (
 							<Col xs={{ span: 12 }} sm={{ span: 8 }} md={{ span: 6 }} key={item._id} className="flex-row full-flex flex-ac pad-15 ItemContainer">
-								<Item item={item} {...actions}/>
+								<Item item={item} {...actions} />
 							</Col>
-						)
+						);
 					})}
 				</Col>
 				<Col xs={{ span: 24 }} className="pad-15 flex-row flex-center buttonContainer">
@@ -45,6 +47,7 @@ export default class ItemListContainer extends Component {
 }
 
 ItemListContainer.propTypes = {
+	title: PropTypes.string,
 	items: PropTypes.arrayOf(PropTypes.object).isRequired,
 	current_filter_type: PropTypes.string,
 	actions: PropTypes.object,

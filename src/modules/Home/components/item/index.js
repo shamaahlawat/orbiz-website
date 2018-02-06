@@ -8,7 +8,7 @@ import If from '../../../../components/_if_component';
 
 export default class Item extends Component {
 	render() {
-		const { actions, item } = this.props;
+		const { item } = this.props;
 
 		return (
 			<Col xs={{ span: 24 }} className="pad-15 flex-column NumberPlateContainer">
@@ -50,6 +50,6 @@ export default class Item extends Component {
 
 Item.propTypes = {
 	item: PropTypes.object.isRequired,
-	actions: PropTypes.object,
+	actions: PropTypes.object
 };
 

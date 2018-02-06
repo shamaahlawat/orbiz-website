@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { Row, Col, Select, Button, Icon } from 'antd';
+import { Row, Select, Button } from 'antd';
 const Option = Select.Option;
 
 import './index.scss';
@@ -97,7 +96,9 @@ export default class VehicleSelector extends Component {
 						value={this.state.type}
 						filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
 						{vehicles.map((item) => {
-							return (<Option key={item._id} value={item._id.toString()}>{item.type}</Option>)
+							return (
+								<Option key={item._id} value={item._id.toString()}>{item.type}</Option>
+							);
 						})}
 					</Select>
 				</div>

@@ -5,7 +5,7 @@ import { ConnectedRouter } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import ReactGA from 'react-ga';
 
-import * as CONSTANTS from './data/config/constants';
+// import * as CONSTANTS from './data/config/constants';
 
 import AppContainer from './app_container';
 import Home from './modules/Home';
@@ -25,7 +25,7 @@ export default class Root extends Component {
             <Provider store={store}>
                 <ConnectedRouter history={history} onChange={logPageView}>
                     <Switch>
-                        <AppContainer history={history} path={CONSTANTS.appcontainer_path} >
+                        <AppContainer history={history} >
                             <Route exact path="/" component={Home} />
                         </AppContainer>
                     </Switch>

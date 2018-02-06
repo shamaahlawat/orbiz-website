@@ -33,7 +33,7 @@ class AppContainer extends Component {
 
 	render() {
 		const { page_details } = this.props;
-		const is_mobile = (this.props.page_details.device_data.screen_width < 768)
+		const is_mobile = (this.props.page_details.device_data.screen_width < 768);
         return (
 			<div className={classNames("flex-column full-width full-height AppContainer", { "mobile": is_mobile})}>
 				<AppNavbar page_details={page_details}/>
@@ -46,6 +46,7 @@ class AppContainer extends Component {
 }
 
 AppContainer.propTypes = {
+	page_details: PropTypes.object,
     actions: PropTypes.object,
     children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired
 };

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Row, Col } from 'antd';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 import './index.scss';
 
@@ -26,7 +26,7 @@ const option1 = {
 	effect: 'scrollx',
 	adaptiveHeight: true,
 	centerMode: true
-}
+};
 
 const CarousalItems = [
 	{ imageUrl: "http://orbiz.in/wp-content/uploads/2018/01/slider1.jpg" },

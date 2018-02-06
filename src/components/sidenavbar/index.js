@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { slide as Sidebar } from 'react-burger-menu';
 import PropTypes from 'prop-types';
-import { Icon } from 'antd';
 
 import './index.scss';
 

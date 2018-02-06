@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import SideNavbar from '../sidenavbar';
-import If from '../_if_component';
 
 import './index.scss';
 
@@ -32,7 +31,7 @@ class AppNavbar extends Component {
 					</Col>
 
 				</Row>
-			)
+			);
 		}
 		else {
 			return (
