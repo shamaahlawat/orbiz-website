@@ -32,6 +32,41 @@ export default function page_details(state = initialStates.page_details, action)
                 page_load_error: true
             };
 
+        case actionTypes.CAROUSAL_LOADING: {
+            return {
+                ...state,
+                loaders: {
+                    ...state.loaders,
+                    carousal_loading: true,
+                    carousal_load_err: false
+                }
+            }
+        }
+
+        case actionTypes.CAROUSAL_LOADED: {
+            return {
+                ...state,
+                primary_carousal: action.payload.primary_carousal,
+                secondary_carousal: action.payload.secondary_carousal,
+                loaders: {
+                    ...state.loaders,
+                    carousal_loading: false,
+                    carousal_load_err: false
+                }
+            }
+        }
+
+        case actionTypes.CAROUSAL_LOAD_ERR: {
+            return {
+                ...state,
+                loaders: {
+                    ...state.loaders,
+                    carousal_loading: false,
+                    carousal_load_err: true
+                }
+            }
+        }
+
         default:
             return state;
     }

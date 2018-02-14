@@ -3,6 +3,10 @@
 export const base_url = "https://app.poletalks.com"; //production
 
 export const appPages = {
-    HOME: "HOME",
-    CART: "CART"
+    HOME: "home",
+    PRODUCT: "product",
+    PRODUCT_LIST: "/product/list",
+    PRODUCT_DETAILS: "/product/details",
+    PRODUCT_TRY: "/product/details/:product_id/try",
+    CART: "cart",
 };

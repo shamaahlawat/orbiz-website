@@ -28,6 +28,8 @@ node_modules
 
 #dist folder
 dist
+orbiz
+orbiz.zip
 
 # IDEA/Webstorm project files
 .idea

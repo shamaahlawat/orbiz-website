@@ -1,8 +1,21 @@
 @import "../../../../data/assets/style/style_import";
 
-.NumberPlateContainer {
+.Item {
 	background: $black-bg-light;
 	font-family: $font-family-secondary;
+
+	.offerTag {
+		background-color: $green;
+		color: $white;
+		border-radius: 3px;
+		padding: 5px 10px;
+		box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.1);
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		z-index: 2;
+	}
+
 
 	.imageContainer {
 		z-index: 1;
@@ -11,17 +24,6 @@
 		.itemImage {
 			max-height: 250px;
 			width: 100%;
-		}
-
-		.offerTag {
-			background-color: $green;
-			color: $white;
-			border-radius: 3px;
-			padding: 5px 10px;
-			box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.1);
-			position: absolute;
-			top: -10px;
-			left: -10px;
 		}
 
 		.itemDetails {

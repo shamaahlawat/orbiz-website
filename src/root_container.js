@@ -5,10 +5,13 @@ import { ConnectedRouter } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import ReactGA from 'react-ga';
 
-// import * as CONSTANTS from './data/config/constants';
+import * as CONSTANTS from './data/config/constants';
 
 import AppContainer from './app_container';
 import Home from './modules/Home';
+import ProductList from './modules/ProductList';
+import ProductDetails from './modules/ProductDetails';
+import TryIt from './modules/TryIt';
 
 import 'antd/dist/antd.css';
 
@@ -27,6 +30,12 @@ export default class Root extends Component {
                     <Switch>
                         <AppContainer history={history} >
                             <Route exact path="/" component={Home} />
+                            <Route path={CONSTANTS.appPages.PRODUCT.EXACT}>
+                                <Switch>
+                                    <Route exact path={`/${CONSTANTS.appPages.PRODUCT}/list`} component={ProductList} />
+                                    <Route path={`/${CONSTANTS.appPages.PRODUCT}/details/:product_id`} component={ProductDetails} />
+                                </Switch>
+                            </Route>
                         </AppContainer>
                     </Switch>
                 </ConnectedRouter>
@@ -39,3 +48,4 @@ Root.propTypes = {
     store: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };
+

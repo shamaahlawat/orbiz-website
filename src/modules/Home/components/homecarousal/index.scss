@@ -1,6 +1,8 @@
 @import "../../../../data/assets/style/style_import";
 
 .CarousalContainer {
+    min-height: 250px;
+
     .carousalItem {
         background-repeat: no-repeat;
 		background-size: cover;
@@ -47,13 +49,17 @@
 		}
 	}
 
-	&.itemCarousal {
+	&.homeCarousal {
 		.carousalItem {
 			padding: 0 15px;
 			min-height: 300px;
 			max-height: 75vh;
 		}
-	}
+    }
+
+    &.loadingContainer {
+        background-color: $black-bg-light;
+    }
 
 	.slick-list {
 		height: auto !important;
@@ -91,7 +97,7 @@
 			max-width: 40vw;
 		}
 
-		&.itemCarousal {
+		&.homeCarousal {
 			.carousalItem {
 				min-height: 200px;
 				max-height: 75vh;

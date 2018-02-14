@@ -11,12 +11,12 @@ export default class Item extends Component {
 		const { item } = this.props;
 
 		return (
-			<Col xs={{ span: 24 }} className="pad-15 flex-column NumberPlateContainer">
+            <Col xs={{ span: 24 }} className="is-relative pad-15 flex-column Item">
+				<If condition={item.hasOffer}>
+					<div className="font-12 offerTag">OFFER</div>
+				</If>
 				<Col xs={{ span: 24 }} className="is-relative is-cursor-ptr imageContainer">
 					<img className="itemImage" src={item.imageUrl} alt={item.name}/>
-					<If condition={item.hasOffer}>
-						<div className="font-12 offerTag">OFFER</div>
-					</If>
 					<div className="pad-15 flex-column flex-jsa flex-ac itemDetails">
 						<Button className="flex-row flex-center btn-fill-violet">
 							<a href="#" className="flex-row flex-center full-flex">
@@ -33,9 +33,9 @@ export default class Item extends Component {
 					<div className="flex-column itemDetails">
 						<div className="t-pad-10 name">{item.name}</div>
 						<div className="t-pad-5 flex-row price">
-							<span className={classNames("actualPrice", { 'hasOffer': item.offerPrice > 0 })}>${item.price}</span>
+                            <span className={classNames("actualPrice", { 'hasOffer': item.offerPrice > 0 })}>₹{item.price}</span>
 							<If condition={item.offerPrice > 0}>
-								<div className="offerPrice">${item.offerPrice}</div>
+                                <div className="offerPrice">₹{item.offerPrice}</div>
 							</If>
 						</div>
 					</div>

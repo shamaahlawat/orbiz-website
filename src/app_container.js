@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
+import { Affix } from 'antd';
 
 import * as UTILS from './data/config/utils';
 import * as pageActions from './data/redux/page_details/actions';
@@ -35,8 +36,10 @@ class AppContainer extends Component {
 		const { page_details } = this.props;
 		const is_mobile = (this.props.page_details.device_data.screen_width < 768);
         return (
-			<div className={classNames("flex-column full-width full-height AppContainer", { "mobile": is_mobile})}>
-				<AppNavbar page_details={page_details}/>
+            <div className={classNames("flex-column full-width full-height AppContainer", { "mobile": is_mobile })}>
+                <Affix>
+                    <AppNavbar page_details={page_details} />
+                </Affix>
 				<div className="MainContentContainer full-flex is-no-lr-pad">
                     {this.props.children}
                 </div>
