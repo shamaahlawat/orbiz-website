@@ -1,0 +1,13 @@
+@import "../../../../data/assets/style/style_import";
+
+.virtualFitting {
+    .title {
+        color: #fff;
+    }
+
+    .selectors {
+        .btn-fill-black{
+            color: $grey-bg !important;
+        }
+    }
+}

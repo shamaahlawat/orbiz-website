@@ -1,0 +1,22 @@
+.ProdDetails.loader {
+    .virtualFittingContainer {
+        min-height: 100px;
+    }
+
+    .designsContainer {
+        .design {
+            width: 30px;
+            height: 30px;
+        }
+    }
+
+    .cartContainer {
+        .icon {
+            width: 10px;
+        }
+
+        button {
+            width: 50px;
+        }
+    }
+}

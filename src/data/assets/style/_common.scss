@@ -92,6 +92,11 @@ body {
     height: 100vh !important;
 }
 
+.full-parent-height {
+    height: 100% !important;
+    height: fit-content !important;
+}
+
 .full-min-height {
     min-height: 100vh !important;
 }
@@ -491,6 +496,10 @@ body {
     padding-right: 10px;
 }
 
+.r-pad-15 {
+    padding-right: 15px !important;
+}
+
 .r-pad-20 {
     padding-right: 20px;
 }
@@ -592,6 +601,23 @@ body {
 .is-no-b-mrgn { //no-bottom-margin
     margin-bottom: 0px !important;
 }
+
+.mrgn-5 {
+    margin: 5px;
+}
+
+.mrgn-10 {
+    margin: 10px;
+}
+
+.mrgn-15 {
+    margin: 15px;
+}
+
+.mrgn-20 {
+    margin: 20px;
+}
+
 
 //---------------- left-right-margin-X -------------------
 

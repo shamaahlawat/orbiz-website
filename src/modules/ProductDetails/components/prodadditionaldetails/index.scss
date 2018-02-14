@@ -1,0 +1,76 @@
+@import "../../../../data/assets/style/style_import";
+
+.ProdAddtnlDetails {
+    .ant-tabs {
+        .ant-tabs-bar {
+            border-bottom: none;
+            margin-bottom: 0;
+
+            .ant-tabs-ink-bar {
+                background-color: transparent;
+            }
+
+            .ant-tabs-nav {
+                .ant-tabs-tab {
+                    font-size: 12px;
+                    padding-top: 15px;
+                    padding-bottom: 15px;
+
+                    &.ant-tabs-tab-active, &:hover {
+                        color: $primary-bg;
+                    }
+                }
+            }
+
+            .ant-tabs-tab-prev-icon,
+            .ant-tabs-tab-next-icon {
+                &::before {
+                    color: $white;
+                }
+            }
+        }
+
+        .ant-tabs-content {
+            background-color: $black-bg-dark;
+            box-shadow: 0 1px 14px 0 rgba(0, 0, 0, 0.1);
+            padding: 15px;
+
+            .tabContent {
+                color: $font-color-light;
+
+                .title {
+                    color: $white;
+                }
+
+                .featureList {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+
+                    .feature {
+                        padding-left: 1em;
+                        // text-indent: -.8em;
+                        line-height: 3;
+
+                        &::before {
+                            background-color: $primary-bg;
+                            border-radius: 50%;
+                            content: "";
+                            display: inline-block;
+                            margin-right: 10px;
+                            margin-bottom: 0px;
+                            height: 8px;
+                            width: 8px;
+                        }
+                    }
+                }
+
+                .tag {
+                    color: $primary-bg;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+}

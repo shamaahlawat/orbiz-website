@@ -7,7 +7,7 @@
     background-color: $primary !important;
     border-color: $primary !important;
 
-    &:hover, &:focus {
+    &:hover, &:focus, &.active {
         background-color: $primary-bg !important;
         border-color: $primary-bg !important;
     }
@@ -16,11 +16,11 @@
 .btn-fill-black {
     color: $white !important;
     background-color: $black-bg-light !important;
-    border-color: $white !important;
+    border-color: $grey-bg !important;
 
-    &:hover, &:focus {
-		color: $black-bg-light !important;
-        background-color: $primary-bg !important;
+    &:hover, &:focus, &.active {
+		color: $primary-bg !important;
+        background-color: $black-bg-light !important;
         border-color: $primary-bg !important;
     }
 }
@@ -30,7 +30,7 @@
     background-color: $white !important;
     border-color: $font-dark !important;
 
-    &:hover, &:focus {
+    &:hover, &:focus, &.active {
 		color: $white !important;
         background-color: $font-dark !important;
         border-color: $font-dark !important;
@@ -42,7 +42,7 @@
     background-color: $green !important;
     border-color: $green !important;
 
-    &:hover, &:focus {
+    &:hover, &:focus, &.active {
         background-color: $green-bg !important;
         border-color: $green-bg !important;
     }
@@ -53,7 +53,7 @@
     background-color: $violet !important;
     border-color: $violet !important;
 
-    &:hover, &:focus {
+    &:hover, &:focus, &.active {
         background-color: $violet-bg !important;
         border-color: $violet-bg !important;
     }
@@ -64,7 +64,7 @@
     background-color: $warning !important;
     border-color: $warning !important;
 
-    &:hover, &:focus {
+    &:hover, &:focus, &.active {
         background-color: $warning-bg !important;
         border-color: $warning-bg !important;
     }
@@ -75,10 +75,14 @@
     background-color: $success !important;
     border-color: $success !important;
 
-    &:hover, &:focus {
+    &:hover, &:focus, &.active {
         background-color: $success-bg !important;
         border-color: $success-bg !important;
     }
+}
+
+.ant-btn.ant-card-loading-block {
+    border: none;
 }
 
 //---------------------- Ghost Button -----------------------
@@ -88,7 +92,7 @@
     height: auto !important;
     line-height: unset !important;
 
-    &:hover, &:focus {
+    &:hover, &:focus, &.active {
         background-color: $green-bg-light !important;
         border: 1px solid transparent !important;
     }
@@ -100,7 +104,7 @@
     height: auto !important;
     line-height: unset !important;
 
-    &:hover, &:focus {
+    &:hover, &:focus, &.active {
         background-color: $primary-bg-light !important;
         border: 1px solid transparent !important;
     }
@@ -113,7 +117,7 @@
     height: auto !important;
     line-height: unset !important;
 
-    &:hover, &:focus {
+    &:hover, &:focus, &.active {
         background-color: $info-bg-light !important;
         border: 1px solid transparent !important;
     }
@@ -125,7 +129,7 @@
     height: auto !important;
     line-height: unset !important;
 
-    &:hover,&:focus {
+    &:hover,&:focus, &.active {
         background-color: $warning-bg-light !important;
         border: 1px solid transparent !important;
     }
@@ -137,13 +141,19 @@
     height: auto !important;
     line-height: unset !important;
 
-    &:hover,&:focus {
+    &:hover,&:focus, &.active {
         background-color: $success-bg-light !important;
         border: 1px solid transparent !important;
     }
 }
 
 //------------------------ TAG CLASSES ----------------------------
+.tag {
+    border: 1px solid transparent !important;
+    cursor: default !important;
+    height: auto !important;
+    line-height: unset !important;
+}
 
 .tag-green {
     color: $green !important;

@@ -1,0 +1,78 @@
+@import "../../../../data/assets/style/style_import";
+
+.ProdDetails {
+    color: $grey-bg;
+
+    .tagContainer {
+        .tag {
+            background-color: $black-bg;
+            color: $grey-bg;
+        }
+    }
+
+    .titleContainer {
+        .name {
+            // color: $default;
+        }
+
+        .price {
+            font-size: 18px;
+            color: $green-dark;
+
+            .actualPrice.hasOffer {
+                opacity: 0.5;
+                text-decoration: line-through;
+            }
+
+            .offerPrice {
+                font-weight: 900;
+                margin-left: 10px;
+            }
+        }
+    }
+
+    .virtualFittingContainer {
+        border-style: solid;
+        border-width: 2px;
+        border-color: #fe5196;
+        border-image-source: linear-gradient(to right, #fe5196, #f77062);
+        border-image-slice: 1;
+        border-radius: 5px;
+    }
+
+    .designsContainer {
+        .design {
+            width: 25px;
+            height: 25px;
+            background-size: contain;
+            border: 1px solid $black-bg-light;
+
+            &.active {
+                border: 1px solid $primary-bg;
+            }
+        }
+    }
+
+    .cartContainer {
+        .icon {
+            background: $black-bg-light;
+            height: 30px;
+            width: 30px;
+            border-radius: 5px;
+        }
+
+        .count {
+            height: 30px;
+            width: 30px;
+        }
+
+        .btn-fill-violet {
+            padding: 10px 20px;
+            height: auto;
+
+            .material-icons {
+                font-size: 20px;
+            }
+        }
+    }
+}

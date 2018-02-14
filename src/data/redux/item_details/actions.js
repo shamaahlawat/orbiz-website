@@ -187,6 +187,7 @@ export function getItemDetails(item_id) {
                         offerPrice: 774,
                         description: "Choose a number plate design and add the product to the cart. You can give vehicle registration details on the check out page.1 Product contains two number plates, front and back.",
                         imageUrl: "https://i2.wp.com/orbiz.in/wp-content/uploads/2017/11/euro-taxi.jpg",
+                        tags: ['car', 'orbiz'],
                         designs: [
                             "https://i2.wp.com/orbiz.in/wp-content/uploads/2017/12/red-D-speedx-car.jpg?zoom=2&resize=600%2C0",
                             "https://i2.wp.com/orbiz.in/wp-content/uploads/2017/12/ind-roman-car.jpg?zoom=2&resize=600%2C0",
@@ -195,17 +196,20 @@ export function getItemDetails(item_id) {
                             "https://i0.wp.com/orbiz.in/wp-content/uploads/2017/12/black-ind-speedx-car.jpg?fit=4961%2C4961",
                             "https://i1.wp.com/orbiz.in/wp-content/uploads/2017/12/blue-flage-speedx-car-n8mber-plate.jpg?zoom=2&resize=600%2C0"
                         ],
-                        description: [
-                            "Good source of the raw material",
-                            "Vehicle number plate has Long life",
-                            "Vehicle number plate Rust resistant",
-                            "It  will Glow in the dark",
-                            "Vehicle  number plate is lightweight",
-                            "Vehicle number plate has Clear visibility",
-                            "Fine finish",
-                            "Impact resistant",
-
-                        ],
+                        features: {
+                            title: "ORBIZ VEHICLE NUMBER PLATES",
+                            subtitle: "OrbizAutomotivez engaged in exporting and manufacturing a wide range of best quality Aluminium Number Plates to our clients in India. These Aluminium Number Plates are in high demand in the market. Different sizes and designs are easily available in the market. Specially made from superior grade aluminum, these Aluminium Number Plates possess some striking features like resistance to rust and durable life",
+                            list: [
+                                "Good source of the raw material",
+                                "Vehicle number plate has Long life",
+                                "Vehicle number plate Rust resistant",
+                                "It  will Glow in the dark",
+                                "Vehicle  number plate is lightweight",
+                                "Vehicle number plate has Clear visibility",
+                                "Fine finish",
+                                "Impact resistant",
+                            ]
+                        },
                         additional_info: [
                             "Orbiz Blank", "Orbiz D Blue", "Orbiz D Red", "Orbiz IND Black", "Orbiz IND Blue", "Orbiz IND Blue Flag", "Orbiz IND Green", "Orbiz IND Orange", "Orbiz IND Red", "Orbiz IND White", "Orbiz IND White Flag", "Orbiz IND Yellow"
                         ],
