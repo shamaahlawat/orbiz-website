@@ -3,7 +3,7 @@ import { Row, Col, Button } from 'antd';
 import PropTypes from 'prop-types';
 
 import './index.scss';
-import If from '../../../../components/_if_component';
+// import If from '../../../../components/_if_component';
 
 export default class VirtualFitting extends Component {
     constructor(props) {
@@ -11,7 +11,6 @@ export default class VirtualFitting extends Component {
     }
 
     render() {
-        const { item } = this.props;
         return (
             <Row type="flex" align="center" className="pad-15 virtualFitting">
                 <Col span={24} className="font-12 is-font-bold title">Virtual Fitting:</Col>

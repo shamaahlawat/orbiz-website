@@ -78,20 +78,3 @@ export function getHomeCarousals() {
         }, 1500);
     };
 }
-
-export function getPrimaryCarousal() {
-    return function (dispatch) {
-        dispatch({
-            type: actionTypes.PRI_CAROUSAL_LOADING,
-        });
-
-        setTimeout(() => {
-            dispatch({
-                type: actionTypes.PRI_CAROUSAL_LOADED,
-                payload: {
-                    primary_carousal: page
-                }
-            });
-        }, 1500);
-    };
-}

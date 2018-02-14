@@ -179,7 +179,7 @@ export function getItemDetails(item_id) {
                 type: actionTypes.ITEM_LOADED,
                 payload: {
                     item: {
-                        _id: 0,
+                        _id: item_id,
                         type: "number_plate",
                         name: "Orbiz UK",
                         hasOffer: true,

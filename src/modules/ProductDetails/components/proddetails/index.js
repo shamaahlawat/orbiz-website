@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Row, Col, Button, Tabs } from 'antd';
+import { Row, Col, Button } from 'antd';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
-const TabPane = Tabs.TabPane;
 
 import './index.scss';
 import If from '../../../../components/_if_component';
@@ -20,9 +18,10 @@ export default class ProdDetails extends Component {
 
     changeCount = (type) => {
         this.setState({
-            count: ( type === 'inc' ) ? this.state.count + 1 : ( this.state.count > 0) ? this.state.count - 1 : 0,
-        })
+            count: (type === 'inc') ? this.state.count + 1 : (this.state.count > 0) ? this.state.count - 1 : 0,
+        });
     }
+
     render() {
         const { item } = this.props;
 
@@ -30,7 +29,7 @@ export default class ProdDetails extends Component {
             <Row className="l-pad-15 ProdDetails">
                 <Col span={24} className="tagContainer">
                     {item.tags.map((tag, index) => {
-                        return (<Button key={index} className="r-mrgn-10 tag">{tag}</Button>)
+                        return (<Button key={index} className="r-mrgn-10 tag">{tag}</Button>);
                     })}
                 </Col>
                 <Col span={24} className="t-mrgn-10 titleContainer">
@@ -61,9 +60,9 @@ export default class ProdDetails extends Component {
                 <Col span={24} className="t-mrgn-20 cartContainer">
                     <Col span={24} className="font-12 is-font-bold title">Quantity</Col>
                     <Col span={24} className="mrgn-5 flex-row flex-ac is-cursor-ptr counter">
-                        <div className="flex-row flex-center icon" onClick={()=>{this.changeCount('dec')}}>-</div>
+                        <div className="flex-row flex-center icon" onClick={() => { this.changeCount('dec'); }}>-</div>
                         <span className="flex-row flex-center count">{this.state.count}</span>
-                        <div className="flex-row flex-center is-cursor-ptr icon" onClick={() => { this.changeCount('inc') }}>+</div>
+                        <div className="flex-row flex-center is-cursor-ptr icon" onClick={() => { this.changeCount('inc'); }}>+</div>
                         <Button className="l-mrgn-20 flex-row flex-center btn-fill-violet">
                             <i className="r-mrgn-20 material-icons">shopping_cart</i>
                             <span className="font-16">ADD TO CART</span>
@@ -77,4 +76,4 @@ export default class ProdDetails extends Component {
 
 ProdDetails.propTypes = {
     item: PropTypes.object.isRequired
-}
+};

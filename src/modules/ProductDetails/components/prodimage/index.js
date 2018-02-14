@@ -40,5 +40,5 @@ export default class ProdImage extends Component {
 
 ProdImage.propTypes = {
     item: PropTypes.object.isRequired
-}
+};
 

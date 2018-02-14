@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Row, Col } from 'antd';
 import { push } from 'react-router-redux';
+import PropTypes from 'prop-types';
 
 import './index.scss';
 
@@ -10,7 +11,6 @@ import * as CONSTANTS from '../../data/config/constants';
 import * as pageActions from '../../data/redux/page_details/actions';
 import * as itemActions from '../../data/redux/item_details/actions';
 
-import If from '../../components/_if_component';
 import HomeCarousal from './components/homecarousal';
 import ItemListContainer from './components/itemlist';
 import VehicleSelector from './components/vehicleselector';
@@ -125,9 +125,9 @@ class Home extends Component {
     render() {
         const { page_details, item_details } = this.props;
         const itemActions = {
-            toggleItemFavorite: this.props.actions.toggleItemFavorite,
-            loadItemDetails: this.loadItemDetails,
-        }
+            // toggleItemFavorite: this.props.actions.toggleItemFavorite,
+            loadItemDetails: this.loadItemDetails
+        };
 
         return (
             <div className="HomeContainer page-container">
@@ -181,5 +181,12 @@ class Home extends Component {
         );
     }
 }
+
+Home.propTypes = {
+    actions: PropTypes.object,
+    push: PropTypes.func,
+    page_details: PropTypes.object,
+    item_details: PropTypes.object
+};
 
 export default connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(Home);

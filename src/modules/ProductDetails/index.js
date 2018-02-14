@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Row, Col } from 'antd';
 import { push } from 'react-router-redux';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import './index.scss';
 import * as CONSTANTS from '../../data/config/constants';
@@ -37,8 +37,7 @@ class ProductDetails extends Component {
     }
 
     render() {
-        const { page_details, item_details } = this.props;
-        console.log(item_details);
+        const { item_details } = this.props;
 
         if (item_details.loaders.item_loading) {
             return (
@@ -72,5 +71,12 @@ class ProductDetails extends Component {
         }
     }
 }
+
+ProductDetails.propTypes = {
+    actions: PropTypes.object,
+    match: PropTypes.object,
+    page_details: PropTypes.object,
+    item_details: PropTypes.object
+};
 
 export default connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(ProductDetails);

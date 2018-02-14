@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-rm -R dist/
+rm -R orbiz/
 npm run build
 mv dist orbiz
 rm orbiz.zip

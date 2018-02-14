@@ -1,22 +1,26 @@
 import React, { Component } from 'react';
-import { Row, Col, Button, Tabs } from 'antd';
+import { Row, Tabs } from 'antd';
 import PropTypes from 'prop-types';
 
 const TabPane = Tabs.TabPane;
 
 import './index.scss';
-import If from '../../../../components/_if_component';
+// import If from '../../../../components/_if_component';
 
 export default class ProdAddtnlDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            fullsizeView: false
+            fullsizeView: false,
+            current_tab: 1
         };
     }
 
     callback = (key) => {
-        console.log(key);
+        this.setState({
+            current_tab: key
+        });
+        // console.log(key);
     }
 
     render() {
@@ -63,5 +67,5 @@ export default class ProdAddtnlDetails extends Component {
 
 ProdAddtnlDetails.propTypes = {
     item: PropTypes.object.isRequired
-}
+};
 

@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Col, Button } from 'antd';
+import { Col } from 'antd';
 
 import './index.scss';
 
 export default class ItemLoader extends Component {
     render() {
-        const { item } = this.props;
-
         return (
             <Col xs={{ span: 24 }} className="is-relative pad-15 flex-column Item">
                 <Col xs={{ span: 24 }} className="is-relative is-cursor-ptr imageContainer">

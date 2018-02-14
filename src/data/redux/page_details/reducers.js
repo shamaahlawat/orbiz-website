@@ -40,7 +40,7 @@ export default function page_details(state = initialStates.page_details, action)
                     carousal_loading: true,
                     carousal_load_err: false
                 }
-            }
+            };
         }
 
         case actionTypes.CAROUSAL_LOADED: {
@@ -53,7 +53,7 @@ export default function page_details(state = initialStates.page_details, action)
                     carousal_loading: false,
                     carousal_load_err: false
                 }
-            }
+            };
         }
 
         case actionTypes.CAROUSAL_LOAD_ERR: {
@@ -64,7 +64,7 @@ export default function page_details(state = initialStates.page_details, action)
                     carousal_loading: false,
                     carousal_load_err: true
                 }
-            }
+            };
         }
 
         default:
