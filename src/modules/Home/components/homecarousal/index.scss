@@ -5,104 +5,105 @@
 
     .carousalItem {
         background-repeat: no-repeat;
-		background-size: cover;
+        background-size: cover;
 
-		.textContainer {
-			background-color: $white;
-			color: $font-dark;
-			padding: 15px;
+        .textContainer {
+            background-color: $white;
+            color: $font-dark;
+            padding: 15px;
 
-			.subtitle {
-				opacity: 0.5;
-				font-weight: 500;
-			}
+            .subtitle {
+                opacity: 0.5;
+                font-weight: 500;
+            }
 
-			.title {
-				.underline {
-					border-bottom: 2px solid $font-dark;
-					height: 5px;
-					opacity: .5;
-				}
-			}
+            .title {
+                .underline {
+                    border-bottom: 2px solid $font-dark;
+                    height: 5px;
+                    opacity: .5;
+                }
+            }
 
-			.description {
-				opacity: 0.69;
-			}
+            .description {
+                opacity: 0.69;
+            }
 
-			.button {
-				button {
-					padding: 10px 20px;
-					height: auto;
-				}
-			}
-		}
+            .button {
+                button {
+                    padding: 10px 20px;
+                    height: auto;
+                }
+            }
+        }
 
-		.mediaContainer {
-			min-width: 40vw;
-			background-size: cover;
-			// img {
-			// 	max-width: 100%;
-			// 	// width: 100%;
-			// 	height: auto;
-			// 	max-height: 75vh;
-			// }
-		}
-	}
+        .mediaContainer {
+            min-width: 40vw;
+            background-size: cover;
 
-	&.homeCarousal {
-		.carousalItem {
-			padding: 0 15px;
-			min-height: 300px;
-			max-height: 75vh;
-		}
+            // img {
+            // 	max-width: 100%;
+            // 	// width: 100%;
+            // 	height: auto;
+            // 	max-height: 75vh;
+            // }
+
+        }
+    }
+
+    &.homeCarousal {
+        .carousalItem {
+            padding: 0 15px;
+            min-height: 300px;
+            max-height: 75vh;
+        }
     }
 
     &.loadingContainer {
         background-color: $black-bg-light;
     }
 
-	.slick-list {
-		height: auto !important;
-	}
+    .slick-list {
+        height: auto !important;
+    }
 }
 
 .mobile {
-	.CarousalContainer {
-		.textContainer {
-			background-image: linear-gradient(303deg, #594cc3, #2b8aeb);
-			color: $white;
+    .CarousalContainer {
+        .textContainer {
+            background-image: linear-gradient(303deg, #594cc3, #2b8aeb);
+            color: $white;
 
-			.subtitle {
-				font-size: 12px;
-			}
+            .subtitle {
+                font-size: 12px;
+            }
 
-			.title {
-				font-size: 16px !important;
-			}
+            .title {
+                font-size: 16px !important;
+            }
 
-			.description {
-				display: none;
-			}
+            .description {
+                display: none;
+            }
 
-			.button {
-				button {
-					padding: 5px 10px;
-					font-size: 10px;
-					height: auto;
-				}
-			}
-		}
+            .button {
+                button {
+                    padding: 5px 10px;
+                    font-size: 10px;
+                    height: auto;
+                }
+            }
+        }
 
-		.mediaContainer {
-			max-width: 40vw;
-		}
+        .mediaContainer {
+            max-width: 40vw;
+        }
 
-		&.homeCarousal {
-			.carousalItem {
-				min-height: 200px;
-				max-height: 75vh;
-			}
-		}
-
-	}
+        &.homeCarousal {
+            .carousalItem {
+                min-height: 200px;
+                max-height: 75vh;
+            }
+        }
+    }
 }

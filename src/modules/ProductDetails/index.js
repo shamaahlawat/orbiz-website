@@ -10,32 +10,32 @@ import * as CONSTANTS from '../../data/config/constants';
 import * as pageActions from '../../data/redux/page_details/actions';
 
 function mapStateToProps(state) {
-	return {
-		page_details: state.page_details,
-	};
+    return {
+        page_details: state.page_details,
+    };
 }
 
 function mapDispatchToProps(dispatch) {
-	return {
-		actions: bindActionCreators(Object.assign({}, pageActions, ), dispatch)
-	};
+    return {
+        actions: bindActionCreators(Object.assign({}, pageActions, ), dispatch)
+    };
 }
 
 class ProductDetails extends Component {
-	componentWillMount() {
-		this.props.actions.pageChanged(CONSTANTS.appPages.PRODUCT_DETAILS);
-		console.log(this.props.match.params)
-	}
+    componentWillMount() {
+        this.props.actions.pageChanged(CONSTANTS.appPages.PRODUCT_DETAILS);
+        console.log(this.props.match.params)
+    }
 
-	render() {
-		return (
+    render() {
+        return (
             <div className="PageDetailsContainer with-t-mrgn page-container">
-				<Row type="flex">
-					asdass
+                <Row type="flex">
+                    asdass
 				</Row>
-			</div>
-		);
-	}
+            </div>
+        );
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(ProductDetails);

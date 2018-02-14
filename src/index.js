@@ -8,20 +8,20 @@ import configureStore, { history } from './data/store/configureStore';
 const store = configureStore({});
 
 render(
-	<AppContainer>
-		<Root store={store} history={history} />
-	</AppContainer>,
-	document.getElementById('app')
+    <AppContainer>
+        <Root store={store} history={history} />
+    </AppContainer>,
+    document.getElementById('app')
 );
 
 if (module.hot) {
-	module.hot.accept('./root_container', () => {
-		const NewRoot = require('./root_container').default;
-		render(
-			<AppContainer>
-				<NewRoot store={store} history={history} />
-			</AppContainer>,
-			document.getElementById('app')
-		);
-	});
+    module.hot.accept('./root_container', () => {
+        const NewRoot = require('./root_container').default;
+        render(
+            <AppContainer>
+                <NewRoot store={store} history={history} />
+            </AppContainer>,
+            document.getElementById('app')
+        );
+    });
 }

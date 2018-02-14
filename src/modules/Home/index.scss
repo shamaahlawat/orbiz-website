@@ -1,30 +1,29 @@
 @import "../data/assets/style/style_import";
 
 .HomeContainer {
-	.SectionContainer {
+    .SectionContainer {
+        &.black-bg {
+            background-color: $black-bg-dark;
+        }
 
-		&.black-bg {
-			background-color: $black-bg-dark;
-		}
+        .titleContainer {
+            &.primary {
+                .titleText {
+                    color: $primary;
+                }
+            }
+        }
 
-		.titleContainer {
-			&.primary {
-				.titleText {
-					color: $primary;
-				}
-			}
-		}
+        .underline {
+            border-bottom: 2px solid $primary;
+            width: 50px;
+            height: 5px;
+        }
+    }
 
-		.underline {
-			border-bottom: 2px solid $primary;
-			width: 50px;
-			height: 5px;
-		}
-	}
-
-	.CarousalContainer {
-		.slick-dots {
-			bottom: -30px;
-		}
-	}
+    .CarousalContainer {
+        .slick-dots {
+            bottom: -30px;
+        }
+    }
 }

@@ -11,7 +11,6 @@ import AppContainer from './app_container';
 import Home from './modules/Home';
 import ProductList from './modules/ProductList';
 import ProductDetails from './modules/ProductDetails';
-import TryIt from './modules/TryIt';
 
 import 'antd/dist/antd.css';
 

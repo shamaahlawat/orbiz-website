@@ -32,15 +32,15 @@ class AppContainer extends Component {
         }
     }
 
-	render() {
-		const { page_details } = this.props;
-		const is_mobile = (this.props.page_details.device_data.screen_width < 768);
+    render() {
+        const { page_details } = this.props;
+        const is_mobile = (this.props.page_details.device_data.screen_width < 768);
         return (
             <div className={classNames("flex-column full-width full-height AppContainer", { "mobile": is_mobile })}>
                 <Affix>
                     <AppNavbar page_details={page_details} />
                 </Affix>
-				<div className="MainContentContainer full-flex is-no-lr-pad">
+                <div className="MainContentContainer full-flex is-no-lr-pad">
                     {this.props.children}
                 </div>
             </div>
@@ -49,7 +49,7 @@ class AppContainer extends Component {
 }
 
 AppContainer.propTypes = {
-	page_details: PropTypes.object,
+    page_details: PropTypes.object,
     actions: PropTypes.object,
     children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired
 };

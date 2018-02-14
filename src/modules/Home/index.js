@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Row, Col } from 'antd';
-// import PropTypes from 'prop-types';
+import { push } from 'react-router-redux';
 
 import './index.scss';
 
@@ -104,6 +104,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        push: (path) => dispatch(push(path)),
         actions: bindActionCreators(Object.assign({}, pageActions, itemActions), dispatch)
     };
 }
@@ -117,8 +118,17 @@ class Home extends Component {
         this.props.actions.getFrames();
     }
 
+    loadItemDetails = (path) => {
+        this.props.push(path);
+    }
+
     render() {
         const { page_details, item_details } = this.props;
+        const itemActions = {
+            toggleItemFavorite: this.props.actions.toggleItemFavorite,
+            loadItemDetails: this.loadItemDetails,
+        }
+
         return (
             <div className="HomeContainer page-container">
                 <Row className="flex-column">
@@ -129,7 +139,7 @@ class Home extends Component {
 
                     {/* number plates list  section*/}
                     <Col xs={{ span: 22, offset: 1 }} className="tb-pad-20 SectionContainer NumberPlatesContainer">
-                        <ItemListContainer title="Number Plates" items={item_details.numplates_list} current_filter_type={'all'} loading={item_details.loaders.numplates_loading}/>
+                        <ItemListContainer title="Number Plates" items={item_details.numplates_list} current_filter_type={'all'} loading={item_details.loaders.numplates_loading} actions={itemActions}/>
                     </Col>
 
                     {/* custom carousal section */}
@@ -142,7 +152,7 @@ class Home extends Component {
 
                     {/* frames list  section*/}
                     <Col xs={{ span: 22, offset: 1 }} className="tb-pad-20 SectionContainer FramesContainer">
-                        <ItemListContainer title="Frames" items={item_details.frames_list} current_filter_type={'all'} loading={item_details.loaders.frames_loading} />
+                        <ItemListContainer title="Frames" items={item_details.frames_list} current_filter_type={'all'} loading={item_details.loaders.frames_loading} actions={itemActions}/>
                     </Col>
 
                     {/* choose vehicle list  section*/}

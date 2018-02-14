@@ -47,7 +47,7 @@ export default class ItemListContainer extends Component {
                         {items.length > 0 && items.map((item) => {
                             return (
                                 <Col xs={{ span: 12 }} sm={{ span: 8 }} md={{ span: 6 }} key={item._id} className="flex-row full-flex flex-ac pad-15 ItemContainer">
-                                    <Item item={item} {...actions} />
+                                    <Item item={item} actions={actions} />
                                 </Col>
                             );
                         })}
