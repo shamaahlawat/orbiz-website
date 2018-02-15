@@ -1,0 +1,41 @@
+@import "../../data/assets/style/_colors.scss";
+
+@media only screen and (min-width: 768px) {
+    .appFooterContainer {
+        .footerCardContainer {
+            position: absolute;
+            z-index: 1;
+        }
+    }
+}
+
+.appFooterContainer {
+    background-color: $black-bg;
+    color: $white;
+
+    .footerCardContainer {
+        background-color: $black-bg-light;
+    }
+
+    .footerHeaderContainer {
+        
+    }
+
+
+
+    .height-50 {
+        height: 50px;
+    }
+
+    .height-150 {
+        height: 150px;
+    }
+
+    .height-250 {
+        height: 250px;
+    }
+
+    .testContent {
+        background-color: $black;
+    }
+}
