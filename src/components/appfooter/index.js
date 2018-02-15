@@ -27,13 +27,11 @@ export default class AppFooter extends Component {
                                 </Col>
                             </Row>
                             <p className="font-14 font-primary">Follow Us :</p>
-                            <div className="b-mrgn-10 flex-row flex-wrap">
-
-                            </div>
+                            <div className="b-mrgn-10 flex-row flex-wrap">&nbsp;</div>
                             <p className="font-14 font-primary">Mail Us :</p>
-                            <p className="font-12">orbiz automotivez, orbiz arcade, calicut road, NH-17, mallapuram,kerala -673672 </p>
+                            <p className="font-12">orbiz automotivez, orbiz arcade, calicut road, NH-17, Malapuram,kerala -673672 </p>
                             <p className="font-12 t-mrgn-10"><span className="font-14 is-uppercase">PHONE : </span> (+91)9928683832</p>
-                            <p className="font-12"><span className="font-14">E-MAIL : </span> abcd@gmail.com</p>
+                            <p className="font-12"><span className="font-14">E-MAIL : </span> orbiznumberplates@gmail.com</p>
                         </Col>
                     </Row>
                     <Row className="footerHeaderContainer">

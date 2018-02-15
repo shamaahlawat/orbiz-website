@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { Col, Button } from 'antd';
 
 import './index.scss';
-import If from '../../../../components/_if_component';
+import If from '../_if_component';
 
 export default class Item extends Component {
 
@@ -16,7 +16,7 @@ export default class Item extends Component {
         const { item } = this.props;
 
         return (
-            <Col xs={{ span: 24 }} className="is-relative pad-15 flex-column Item">
+            <Col xs={{ span: 24 }} className="is-relative pad-15 flex-column is-cursor-ptr Item">
                 <If condition={item.hasOffer}>
                     <div className="font-12 offerTag">OFFER</div>
                 </If>

@@ -5,8 +5,8 @@ import classNames from 'classnames';
 
 import './index.scss';
 import If from '../../../../components/_if_component';
-import Item from '../item';
-import ItemLoader from '../item/loader';
+import Item from '../../../../components/item';
+import ItemLoader from '../../../../components/item/loader';
 
 export default class ItemListContainer extends Component {
     render() {

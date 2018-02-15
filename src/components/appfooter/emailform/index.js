@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, Form, Input, Button } from 'antd';
 import classNames from 'classnames';
-
-
-import './index.scss';
+import { Row, Col, Form, Input, Button } from 'antd';
 
 const FormItem = Form.Item;
 
+import './index.scss';
 
 function hasErrors(fieldsError) {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
@@ -30,7 +28,7 @@ export default class EmailForm extends Component {
         e.preventDefault();
         this.props.form.validateFields((err) => {
             if (!err) {
-                this.props.handleFormSubmit()
+                this.props.handleFormSubmit();
             }
         });
     }
