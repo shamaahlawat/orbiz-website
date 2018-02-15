@@ -8,6 +8,7 @@ import { Affix } from 'antd';
 import * as UTILS from './data/config/utils';
 import * as pageActions from './data/redux/page_details/actions';
 import AppNavbar from './components/appnavbar';
+import AppFooter from './components/appfooter';
 
 import './index.scss';
 
@@ -43,6 +44,7 @@ class AppContainer extends Component {
                 <div className="MainContentContainer full-flex is-no-lr-pad">
                     {this.props.children}
                 </div>
+                <AppFooter />
             </div>
         );
     }

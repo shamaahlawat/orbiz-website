@@ -1,0 +1,33 @@
+@import "../../data/assets/style/style_import.scss";
+
+@media only screen and (min-width: 768px) {
+    .appFooterContainer {
+        .footerCardContainer {
+            position: absolute;
+            z-index: 1;
+        }
+    }
+}
+
+.appFooterContainer {
+    background-color: $black-bg;
+
+    .footerCardContainer {
+        background-color: $black-bg-light;
+    }
+
+    .footerBodyContainer {
+        background-color: $black-bg-dark;
+
+        ul {
+            li {
+                cursor: pointer;
+
+                &:hover {
+                    text-decoration: underline;
+                    color: $primary;
+                }
+            }
+        }
+    }
+}
