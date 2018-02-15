@@ -47,7 +47,7 @@ export default class EmailForm extends Component {
                                 getFieldDecorator('emailId', {
                                     rules: [{ required: true, message: "please enter your Email ID. " }, { type: "email", message: "Enter a valid Email ID" }],
                                 })(
-                                    <Input placeholder="Your Email Address..." className="font-14 lr-pad-15 height-40 setInput" name="email" onChange={this.handleInputChange} />
+                                    <Input placeholder="Your Email Address..." className="font-14 lr-pad-15 height-40 box-shadow-dark setInput" name="email" onChange={this.handleInputChange} />
                                     )
                             }
                         </FormItem>

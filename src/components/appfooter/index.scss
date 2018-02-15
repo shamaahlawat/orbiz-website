@@ -1,4 +1,4 @@
-@import "../../data/assets/style/_colors.scss";
+@import "../../data/assets/style/style_import.scss";
 
 @media only screen and (min-width: 768px) {
     .appFooterContainer {
@@ -11,31 +11,23 @@
 
 .appFooterContainer {
     background-color: $black-bg;
-    color: $white;
 
     .footerCardContainer {
         background-color: $black-bg-light;
     }
 
-    .footerHeaderContainer {
-        
-    }
+    .footerBodyContainer {
+        background-color: $black-bg-dark;
 
+        ul {
+            li {
+                cursor: pointer;
 
-
-    .height-50 {
-        height: 50px;
-    }
-
-    .height-150 {
-        height: 150px;
-    }
-
-    .height-250 {
-        height: 250px;
-    }
-
-    .testContent {
-        background-color: $black;
+                &:hover {
+                    text-decoration: underline;
+                    color: $primary;
+                }
+            }
+        }
     }
 }
