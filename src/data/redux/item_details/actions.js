@@ -189,12 +189,30 @@ export function getItemDetails(item_id) {
                         imageUrl: "https://i2.wp.com/orbiz.in/wp-content/uploads/2017/11/euro-taxi.jpg",
                         tags: ['car', 'orbiz'],
                         designs: [
-                            "https://i2.wp.com/orbiz.in/wp-content/uploads/2017/12/red-D-speedx-car.jpg?zoom=2&resize=600%2C0",
-                            "https://i2.wp.com/orbiz.in/wp-content/uploads/2017/12/ind-roman-car.jpg?zoom=2&resize=600%2C0",
-                            "https://i2.wp.com/orbiz.in/wp-content/uploads/2017/12/ind-roman-car.jpg?fit=4961%2C4961",
-                            "https://i0.wp.com/orbiz.in/wp-content/uploads/2017/12/black-ind-speedx-car.jpg?zoom=2&resize=600%2C0",
-                            "https://i0.wp.com/orbiz.in/wp-content/uploads/2017/12/black-ind-speedx-car.jpg?fit=4961%2C4961",
-                            "https://i1.wp.com/orbiz.in/wp-content/uploads/2017/12/blue-flage-speedx-car-n8mber-plate.jpg?zoom=2&resize=600%2C0"
+                            { 
+                                name: "Black",
+                                image: "https://i2.wp.com/orbiz.in/wp-content/uploads/2017/12/red-D-speedx-car.jpg?zoom=2&resize=600%2C0",
+                                front_image: "https://res.cloudinary.com/poletalks/image/upload/v1518796033/orbiz/1.1.png",
+                                rear_image: "https://res.cloudinary.com/poletalks/image/upload/v1518796033/orbiz/1.2.png"
+                            },
+                            { 
+                                name: "Orange",
+                                image: "https://i2.wp.com/orbiz.in/wp-content/uploads/2017/12/ind-roman-car.jpg?fit=4961%2C4961",
+                                front_image: "https://res.cloudinary.com/poletalks/image/upload/v1518796033/orbiz/1.1.png",
+                                rear_image: "https://res.cloudinary.com/poletalks/image/upload/v1518796033/orbiz/1.2.png"
+                            },
+                            { 
+                                name: "Blue",
+                                image: "https://i0.wp.com/orbiz.in/wp-content/uploads/2017/12/black-ind-speedx-car.jpg?fit=4961%2C4961",
+                                front_image: "https://res.cloudinary.com/poletalks/image/upload/v1518796033/orbiz/1.1.png",
+                                rear_image: "https://res.cloudinary.com/poletalks/image/upload/v1518796033/orbiz/1.2.png"
+                            },
+                            { 
+                                name: "Green",
+                                image: "https://i0.wp.com/orbiz.in/wp-content/uploads/2017/12/black-ind-speedx-car.jpg?zoom=2&resize=600%2C0",
+                                front_image: "https://res.cloudinary.com/poletalks/image/upload/v1518796033/orbiz/1.1.png",
+                                rear_image: "https://res.cloudinary.com/poletalks/image/upload/v1518796033/orbiz/1.2.png"
+                            }
                         ],
                         features: {
                             title: "ORBIZ VEHICLE NUMBER PLATES",

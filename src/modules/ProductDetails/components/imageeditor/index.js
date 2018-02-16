@@ -13,6 +13,8 @@ export default class ImageEditor extends Component {
     constructor(props) {
         super(props);
         this.handleCarView = this.handleCarView.bind(this);
+        this.handleCarColor = this.handleCarColor.bind(this);
+        this.handleDesign = this.handleDesign.bind(this);
         
         let car_colors = [];
         for (let color in props.vehicle.images) {
@@ -25,7 +27,8 @@ export default class ImageEditor extends Component {
         this.state = {
             car_view: 'front',
             curr_car: car_colors[0],
-            car_colors
+            car_colors,
+            curr_design: this.props.design.designs[0]
         };
     }
 
@@ -37,12 +40,19 @@ export default class ImageEditor extends Component {
 
     handleCarColor = (value) => {
         this.setState({
-            curr_car: this.state.car_colors[value]
+            curr_car: this.state.car_colors[parseInt(value, 10)]
+        });
+    }
+
+    handleDesign = (value) => {
+        this.setState({
+            curr_design: this.props.design.designs[parseInt(value, 10)]
         });
     }
 
     render() {
         const car_image = (this.state.car_view === 'front') ? this.state.curr_car.front : this.state.curr_car.rear;
+        const { design } = this.props;
 
         return (
             <Row type="flex" justify="center" className="is-relative ImageEditor">
@@ -55,11 +65,21 @@ export default class ImageEditor extends Component {
                         </RadioGroup>
                     </div>
                     <div className="lr-pad-5 flex-row flex-center selector">
-                        <span className="r-mrgn-10 property">Color:</span>
-                        <Select defaultValue={0} style={{ width: 120 }} onChange={(e)=>{this.handleCarColor(e);}}>
+                        <span className="r-mrgn-10 property">Car Color:</span>
+                        <Select defaultValue="0" style={{ width: "auto" }} onChange={(e)=>{this.handleCarColor(e);}}>
                             { this.state.car_colors.map((color, index)=>{
                                 return(
-                                    <Option key={index} value={index}>{color.name}</Option>
+                                    <Option key={index} value={index.toString()}>{color.name}</Option>
+                                );
+                            })}
+                        </Select>
+                    </div>
+                    <div className="lr-pad-5 flex-row flex-center selector">
+                        <span className="r-mrgn-10 property">Design:</span>
+                        <Select defaultValue="0" style={{ width: "auto" }} onChange={(e)=>{this.handleDesign(e);}}>
+                            {design.designs.map((design, index)=>{
+                                return(
+                                    <Option key={index} value={index.toString()}>{design.name}</Option>
                                 );
                             })}
                         </Select>
@@ -74,6 +94,7 @@ export default class ImageEditor extends Component {
 }
 
 ImageEditor.propTypes = {
-    vehicle: PropTypes.object.isRequired
+    vehicle: PropTypes.object.isRequired,
+    design: PropTypes.object.isRequired
 };
 

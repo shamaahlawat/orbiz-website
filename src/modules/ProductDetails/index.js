@@ -51,7 +51,8 @@ class ProductDetails extends Component {
     componentWillReceiveProps(nextProps) {
         let try_path = `/${CONSTANTS.appPages.PRODUCT}/details/:product_id/try`;
         let self= this;
-        if (nextProps.match.path === try_path && nextProps.item_details.current_item !== this.props.item_details.current_item) {
+        let shouldOpenImageEditor = (nextProps.match.path === try_path && nextProps.item_details.current_item !== this.props.item_details.current_item) || (nextProps.match.path === try_path && nextProps.match.path !== this.props.match.path && nextProps.item_details.current_item._id);
+        if (shouldOpenImageEditor) {
             setTimeout(function() {
                 self.props.actions.getVehicleDetails("tesla-s");
                 self.setState({
@@ -63,7 +64,7 @@ class ProductDetails extends Component {
 
     handleCloseModal = () => {
         this.setState({
-            try_visible: true
+            try_visible: false
         }, () => {
             let prevPage = `/${CONSTANTS.appPages.PRODUCT}/details/${this.props.match.params.product_id}/`;
             this.props.history.push(prevPage);
@@ -90,7 +91,7 @@ class ProductDetails extends Component {
         } else {
             return (
                 <div className="ProductDetailsContainer tb-pad-30 page-container">
-                    <Row className="lr-pad-15">
+                    <Row className="lr-pad-15 animated zoomIn">
                         <Col xs={{ span: 24 }} sm={{ span: 12 }} className="ProdImageContainer">
                             {item_details.current_item && <ProdImage item={item_details.current_item} />}
                         </Col>
@@ -114,8 +115,8 @@ class ProductDetails extends Component {
                                 <If condition={vehicle_details.loaders.vehicle_loading}>
                                     <ImageEditorLoader />
                                 </If>
-                                <If condition={vehicle_details.loaders.vehicle_loaded && vehicle_details.current_vehicle && vehicle_details.current_vehicle._id}>
-                                    <ImageEditor vehicle={vehicle_details.current_vehicle}/>
+                                <If condition={vehicle_details.loaders.vehicle_loaded && vehicle_details.current_vehicle && !!vehicle_details.current_vehicle._id}>
+                                    <ImageEditor vehicle={vehicle_details.current_vehicle} design={item_details.current_item}/>
                                 </If>
                         </Modal>
                     </If>

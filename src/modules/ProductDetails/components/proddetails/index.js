@@ -52,7 +52,7 @@ export default class ProdDetails extends Component {
                     <Col span={24} className="flex-row flex-wrap">
                         {item.designs.map((design, index) => {
                             return (
-                                <div className="mrgn-5 design" key={index} style={{ backgroundImage: `url(${design})`}}>&nbsp;</div>
+                                <div className="mrgn-5 design" key={index} style={{ backgroundImage: `url(${design.image})`}}>&nbsp;</div>
                             );
                         })}
                     </Col>

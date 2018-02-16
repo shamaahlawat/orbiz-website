@@ -24,7 +24,7 @@ export default class ProdImage extends Component {
         return (
             <Row type="flex" justify="center" className="lr-pad-15 b-mrgn-10 ProdImage">
                 <If condition={!this.state.fullsizeView}>
-                    <div className="full-flex animated flipInX imageContainer" style={{ backgroundImage: `url(${item.imageUrl})` }} onClick={this.toggleView}>
+                    <div className="full-flex imageContainer" style={{ backgroundImage: `url(${item.imageUrl})` }} onClick={this.toggleView}>
                         &nbsp;
                     </div>
                 </If>
