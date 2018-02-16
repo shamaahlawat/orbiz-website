@@ -20,7 +20,7 @@ export default class AppFooter extends Component {
             <Row className="appFooterContainer">
                 <Col xs={{ span: 24 }}>
                     <Row>
-                        <Col xs={{ span: 20, offset: 2 }} sm={{ span: 6, offset: 1 }} md={{ span: 4, offset: 1 }} className="lr-pad-15 tb-pad-20  border-radius-5 box-shadow-dark footerCardContainer">
+                        <Col xs={{ span: 20, offset: 2 }} sm={{ span: 6, offset: 1 }} md={{ span: 4, offset: 1 }} className="lr-pad-15 tb-pad-20 border-radius-5 box-shadow-dark footerCardContainer">
                             <Row className="b-mrgn-20">
                                 <Col xs={{ span: 16, offset: 4 }}>
                                     <img src="https://i0.wp.com/orbiz.in/wp-content/uploads/2017/11/a.png" alt="" className="img-contain" />
@@ -47,60 +47,53 @@ export default class AppFooter extends Component {
                             </Row>
                         </Col>
                     </Row>
-                    <Row className="footerBodyContainer">
-                        <Col xs={{ span: 24 }} sm={{ span: 16, offset: 8 }} md={{ span: 18, offset: 6 }} className="b-pad-30 ">
-                            <Row>
-                                <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 12 }}>
-                                    <Row>
-                                        <Col xs={{ span: 24 }} sm={{ span: 12 }} className="lr-pad-15">
-                                            <p className="font-14 t-mrgn-30 b-mrgn-20">SHOP</p>
-                                            <ul className="font-12">
-                                                <li>Number plates for Bike</li>
-                                                <li>Number plates for Car</li>
-                                                <li>Number plates for Supercar</li>
-                                                <li>Number plates for Bus</li>
-                                                <li>Frames for Car </li>
-                                            </ul>
-                                        </Col>
-                                        <Col xs={{ span: 24 }} sm={{ span: 12 }} className="lr-pad-15">
-                                            <p className="font-14 t-mrgn-30 b-mrgn-20">PRODUCT</p>
-                                            <ul className="font-12">
-                                                <li>Number plates </li>
-                                                <li>Frames</li>
-                                                <li>Machines and raw materials</li>
-                                            </ul>
-                                        </Col>
-                                    </Row>
+                    <Row className="footerBodyContainer tb-pad-5">
+                        <Col xs={{ span: 24 }} sm={{ span: 16, offset: 8 }} md={{ span: 18, offset: 6 }} className="tb-pad-15">
+                            <Row type="flex">
+                                <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 12 }} className="flex-row">
+                                    <Col xs={{ span: 24 }} sm={{ span: 12 }} className="lr-pad-15 flex-column full-flex flex-jsa">
+                                        <p className="font-14 tb-pad-15">SHOP</p>
+                                        <ul className="font-12 flex-column flex-jsa">
+                                            <li>Number plates for Bike</li>
+                                            <li>Number plates for Car</li>
+                                            <li>Number plates for Supercar</li>
+                                            <li>Number plates for Bus</li>
+                                            <li>Frames for Car </li>
+                                        </ul>
+                                    </Col>
+                                    <Col xs={{ span: 24 }} sm={{ span: 12 }} className="lr-pad-15 flex-column full-flex flex-jsa">
+                                        <p className="font-14 tb-pad-15">PRODUCT</p>
+                                        <ul className="font-12 full-flex flex-column">
+                                            <li>Number plates </li>
+                                            <li>Frames</li>
+                                            <li>Machines and raw materials</li>
+                                        </ul>
+                                    </Col>
                                 </Col>
-                                <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 12 }}>
-                                    <Row>
-                                        <Col xs={{ span: 24 }} className="lr-pad-15">
-                                            <p className="font-14 t-mrgn-30 b-mrgn-20">COMPANY</p>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col xs={{ span: 24 }} sm={{ span: 12 }} className="lr-pad-15">
-                                            <ul className="font-12">
-                                                <li>About</li>
-                                                <li>Gallery</li>
-                                                <li>Blog</li>
-                                                <li>Say Hello</li>
-                                            </ul>
-                                        </Col>
-                                        <Col xs={{ span: 24 }} sm={{ span: 12 }} className="lr-pad-15">
-                                            <ul className="font-12">
-                                                <li>Terms and Condition </li>
-                                                <li>Careers</li>
-                                                <li>Site Map</li>
-                                            </ul>
-                                        </Col>
-                                    </Row>
+                                <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 12 }} className="flex-row">
+                                    <Col xs={{ span: 24 }} sm={{ span: 12 }} className="lr-pad-15 flex-column full-flex flex-jsa">
+                                        <p className="font-14 tb-pad-15">COMPANY</p>
+                                        <ul className="font-12 full-flex flex-column">
+                                            <li>About</li>
+                                            <li>Gallery</li>
+                                            <li>Blog</li>
+                                            <li>Say Hello</li>
+                                        </ul>
+                                    </Col>
+                                    <Col xs={{ span: 24 }} sm={{ span: 12 }} className="lr-pad-15 flex-column full-flex">
+                                        <p className="font-14 tb-pad-15">&nbsp;</p>
+                                        <ul className="font-12 flex-column full-flex">
+                                            <li>Terms and Condition </li>
+                                            <li>Careers</li>
+                                            <li>Site Map</li>
+                                        </ul>
+                                    </Col>
                                 </Col>
                             </Row>
                         </Col>
                     </Row>
                     <Row>
-                        <Col xs={{ span: 24 }} className="lr-pad-15 tb-pad-10">
+                        <Col xs={{ span: 24 }} className="lr-pad-15 tb-pad-10 copyright">
                             <p className="is-text-center font-14">Copyright © 2018 Orbiz Automotivez.</p>
                         </Col>
                     </Row>

@@ -11,9 +11,12 @@
 
 .appFooterContainer {
     background-color: $black-bg;
+    font-family: $font-family-secondary;
+    word-wrap: break-word;
 
     .footerCardContainer {
         background-color: $black-bg-light;
+        line-height: 1.7;
     }
 
     .footerBodyContainer {
@@ -22,6 +25,7 @@
         ul {
             li {
                 cursor: pointer;
+                padding: 2px 0;
 
                 &:hover {
                     text-decoration: underline;

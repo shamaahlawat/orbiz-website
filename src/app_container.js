@@ -37,7 +37,7 @@ class AppContainer extends Component {
         const { page_details } = this.props;
         const is_mobile = (this.props.page_details.device_data.screen_width < 768);
         return (
-            <div className={classNames("flex-column full-width full-height AppContainer", { "mobile": is_mobile })}>
+            <div className={classNames(`flex-column full-width full-min-height AppContainer ${page_details.current_page && page_details.current_page.split('/').join("")}`, { "mobile": is_mobile })}>
                 <Affix>
                     <AppNavbar page_details={page_details} />
                 </Affix>
