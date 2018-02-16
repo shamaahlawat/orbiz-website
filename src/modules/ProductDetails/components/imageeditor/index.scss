@@ -1,0 +1,22 @@
+.ImageEditor {
+    // max-height: 90vh;
+    
+    .imageContainer {
+        // min-height: 50vh;
+        // max-height: 40vh;
+
+        img {
+            max-height: 70vh; 
+            max-width: 100%;
+        }
+    }
+
+    &.loader {
+        min-width: 75vw;
+        min-height: 70vh;
+        
+        .imageContainer {
+            min-height: 70vh;
+        }
+    }
+}

@@ -32,6 +32,7 @@ export default class Root extends Component {
                             <Route path={CONSTANTS.appPages.PRODUCT.EXACT}>
                                 <Switch>
                                     <Route exact path={`/${CONSTANTS.appPages.PRODUCT}/list`} component={ProductList} />
+                                    <Route path={`/${CONSTANTS.appPages.PRODUCT}/details/:product_id/try`} component={ProductDetails} />
                                     <Route path={`/${CONSTANTS.appPages.PRODUCT}/details/:product_id`} component={ProductDetails} />
                                 </Switch>
                             </Route>
