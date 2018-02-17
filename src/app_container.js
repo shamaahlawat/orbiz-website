@@ -31,6 +31,17 @@ class AppContainer extends Component {
         if (systLang) {
             this.props.actions.setLang(systLang);
         }
+        this.timeout = false;
+    }
+
+    componentDidMount() {
+        let self = this;
+        window.addEventListener("resize", function () {
+            clearTimeout(this.timeout);
+            this.timeout = setTimeout(() => {
+                self.props.actions.setDeviceData(UTILS.checkDevice.deviceStatus())
+            }, 300);
+        });
     }
 
     render() {

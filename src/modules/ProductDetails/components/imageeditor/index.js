@@ -33,7 +33,7 @@ export default class ImageEditor extends Component {
             curr_car: car_colors[0],
             car_colors,
             curr_design: this.props.design.designs[0],
-            numplate_scale: 0.30,
+            numplate_scale: 0.15,
             show_canvas: true,
             curr_position: undefined
         };

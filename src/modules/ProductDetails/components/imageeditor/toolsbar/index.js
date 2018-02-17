@@ -19,9 +19,9 @@ export default class ToolsBar extends Component {
 
         if (!this.props.is_mobile) {
             slider_props.vertical = true;
-            slider_props.style = { height: 100 };
+            slider_props.style = { height: 200 };
         } else {
-            slider_props.style = { width: 100 };
+            slider_props.style = { width: 200 };
         }
 
         return (
