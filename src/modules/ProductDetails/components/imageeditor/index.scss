@@ -1,22 +1,62 @@
-.ImageEditor {
-    // max-height: 90vh;
-    
-    .imageContainer {
-        // min-height: 50vh;
-        // max-height: 40vh;
+@import "../../../../data/assets/style/style_import";
 
+.ImageEditor {
+    .imageContainer {
         img {
-            max-height: 70vh; 
+            max-height: 70vh;
             max-width: 100%;
+        }
+
+        .editorContainer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .toolsBar {
+            background-color: $black-bg-light;
+            color: $grey-bg;
+            border-radius: 5px;
+            position: absolute;
+            width: 50px;
+            right: 20px;
+
+            .tool {
+                cursor: pointer;
+
+                &:hover, &.active {
+                    color: $white;
+                }
+            }
         }
     }
 
     &.loader {
         min-width: 75vw;
         min-height: 70vh;
-        
+
         .imageContainer {
             min-height: 70vh;
+        }
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .ImageEditor {
+        .toolsBar {
+            position: absolute;
+            bottom: -40px !important;
+            left: auto;
+            right: auto !important;
+            width: auto !important;
+
+            .toolsBox {
+                display: flex;
+            }
         }
     }
 }

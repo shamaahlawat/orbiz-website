@@ -23,7 +23,7 @@ export default class ProdDetails extends Component {
     }
 
     render() {
-        const { item } = this.props;
+        const { item, actions, curr_design } = this.props;
 
         return (
             <Row className="l-pad-15 ProdDetails">
@@ -44,7 +44,7 @@ export default class ProdDetails extends Component {
                 </Col>
                 <Col span={24} className="t-mrgn-20">
                     <Col span={24} className="virtualFittingContainer">
-                        <VirtualFitting />
+                        <VirtualFitting actions={actions}/>
                     </Col>
                 </Col>
                 <Col span={24} className="t-mrgn-20 designsContainer">
@@ -52,7 +52,11 @@ export default class ProdDetails extends Component {
                     <Col span={24} className="flex-row flex-wrap">
                         {item.designs.map((design, index) => {
                             return (
-                                <div className="mrgn-5 design" key={index} style={{ backgroundImage: `url(${design.image})`}}>&nbsp;</div>
+                                <div className={classNames("mrgn-5 design", { 'active': index === curr_design })} 
+                                    key={index} 
+                                    style={{ backgroundImage: `url(${design.image})`}} 
+                                    onClick={() => { actions.handleDesignChange(index); }}>&nbsp;
+                                </div>
                             );
                         })}
                     </Col>
@@ -75,5 +79,7 @@ export default class ProdDetails extends Component {
 }
 
 ProdDetails.propTypes = {
-    item: PropTypes.object.isRequired
+    item: PropTypes.object.isRequired,
+    curr_design: PropTypes.number,
+    actions: PropTypes.object
 };

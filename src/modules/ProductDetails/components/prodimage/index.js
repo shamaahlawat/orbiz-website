@@ -20,17 +20,17 @@ export default class ProdImage extends Component {
     };
 
     render() {
-        const { item } = this.props;
+        const { item_image } = this.props;
         return (
             <Row type="flex" justify="center" className="lr-pad-15 b-mrgn-10 ProdImage">
                 <If condition={!this.state.fullsizeView}>
-                    <div className="full-flex imageContainer" style={{ backgroundImage: `url(${item.imageUrl})` }} onClick={this.toggleView}>
+                    <div className="full-flex imageContainer" style={{ backgroundImage: `url(${item_image})` }} onClick={this.toggleView}>
                         &nbsp;
                     </div>
                 </If>
                 <If condition={this.state.fullsizeView}>
                     <div className="animated flipInX fullViewContainer" onClick={this.toggleView}>
-                        <img className="itemImage" src={item.imageUrl} alt={item.description} />
+                        <img className="itemImage" src={item_image} alt="" />
                     </div>
                 </If>
             </Row>
@@ -39,6 +39,6 @@ export default class ProdImage extends Component {
 }
 
 ProdImage.propTypes = {
-    item: PropTypes.object.isRequired
+    item_image: PropTypes.string.isRequired
 };
 

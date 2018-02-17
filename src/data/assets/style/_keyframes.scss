@@ -61,6 +61,7 @@
     }
 }
 
+
 @include keyframes(click-ripple-out) {
     100% {
         top: -12px;
@@ -71,3 +72,13 @@
     }
 }
 
+
+@include keyframes(circle-to-square) {
+    from {
+        border-radius: 50%;
+    }
+
+    to {
+        border-radius: 0;
+    }
+}

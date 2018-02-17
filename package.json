@@ -36,6 +36,7 @@
     "object-assign": "4.1.1",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
+    "react-avatar-editor": "10.3.0",
     "react-burger-menu": "2.2.3",
     "react-dom": "^16.0.0",
     "react-ga": "2.3.5",

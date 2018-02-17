@@ -38,9 +38,12 @@ class ProductDetails extends Component {
     constructor() {
         super();
         this.state = {
-            try_visible: false
+            try_visible: false,
+            curr_design: 0
         };
         this.handleCloseModal = this.handleCloseModal.bind(this);
+        this.handleDesignChange = this.handleDesignChange.bind(this);
+        this.openImageEditor = this.openImageEditor.bind(this);
     }
 
     componentWillMount() {
@@ -62,6 +65,11 @@ class ProductDetails extends Component {
         }
     }
 
+    openImageEditor = () => {
+        let nextPage = `/${CONSTANTS.appPages.PRODUCT}/details/${this.props.match.params.product_id}/try`;
+        this.props.history.push(nextPage);
+    }
+
     handleCloseModal = () => {
         this.setState({
             try_visible: false
@@ -69,16 +77,27 @@ class ProductDetails extends Component {
             let prevPage = `/${CONSTANTS.appPages.PRODUCT}/details/${this.props.match.params.product_id}/`;
             this.props.history.push(prevPage);
         });
-		
+
     };
+
+    handleDesignChange = (index) => {
+        this.setState({
+            curr_design: index
+        });
+    }
 
     render() {
         const { item_details, vehicle_details } = this.props;
+        const is_mobile = (this.props.page_details.device_data.screen_width < 768);
+        const actions = {
+            handleDesignChange: this.handleDesignChange,
+            openImageEditor: this.openImageEditor
+        };
 
         if (item_details.loaders.item_loading) {
             return (
                 <div className="ProductDetailsContainer tb-pad-30 page-container">
-                    <Row className="lr-pad-15">
+                    <Row className="lr-pad-15 animated zoomIn">
                         <Col xs={{ span: 24 }} sm={{ span: 12 }} className="ProdImageContainer">
                             <ProdImageLoader />
                         </Col>
@@ -91,12 +110,12 @@ class ProductDetails extends Component {
         } else {
             return (
                 <div className="ProductDetailsContainer tb-pad-30 page-container">
-                    <Row className="lr-pad-15 animated zoomIn">
+                    <Row className="lr-pad-15">
                         <Col xs={{ span: 24 }} sm={{ span: 12 }} className="ProdImageContainer">
-                            {item_details.current_item && <ProdImage item={item_details.current_item} />}
+                            {item_details.current_item && <ProdImage item_image={item_details.current_item.designs[this.state.curr_design].image} />}
                         </Col>
                         <Col xs={{ span: 24 }} sm={{ span: 12 }} className="r-pad-15 ProdDetailsContainer">
-                            {item_details.current_item && <ProdDetails item={item_details.current_item} />}
+                            {item_details.current_item && <ProdDetails item={item_details.current_item} curr_design={this.state.curr_design} actions={actions} />}
                         </Col>
                         <Col xs={{ span: 24 }} className="t-mrgn-40 ProdAddtnlDetailsContainer">
                             {item_details.current_item && <ProdAddtnlDetails item={item_details.current_item} />}
@@ -116,7 +135,7 @@ class ProductDetails extends Component {
                                     <ImageEditorLoader />
                                 </If>
                                 <If condition={vehicle_details.loaders.vehicle_loaded && vehicle_details.current_vehicle && !!vehicle_details.current_vehicle._id}>
-                                    <ImageEditor vehicle={vehicle_details.current_vehicle} design={item_details.current_item}/>
+                                <ImageEditor vehicle={vehicle_details.current_vehicle} design={item_details.current_item} is_mobile={is_mobile}/>
                                 </If>
                         </Modal>
                     </If>
