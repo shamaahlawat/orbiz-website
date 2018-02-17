@@ -16,8 +16,9 @@ export default class ToolsBar extends Component {
             value: this.props.scale,
             onChange: actions.onScaleChange
         };
+        const portrait = window.matchMedia("(orientation: portrait)").matches;
 
-        if (!this.props.is_mobile) {
+        if (!this.props.is_mobile || !portrait) {
             slider_props.vertical = true;
             slider_props.style = { height: 200 };
         } else {
@@ -25,7 +26,7 @@ export default class ToolsBar extends Component {
         }
 
         return (
-            <div className={classNames('flex-center toolsBar tb-pad-5', {'flex-row': this.props.is_mobile, 'flex-cr': !this.props.is_mobile})}>
+            <div className={classNames('flex-center toolsBar tb-pad-5', {'flex-row': this.props.is_mobile && portrait, 'flex-cr': !this.props.is_mobile || !portrait})}>
                 <div className={classNames('pad-5 flex-column flex-center tool')}>
                     <Slider {...slider_props} />
                 </div>
