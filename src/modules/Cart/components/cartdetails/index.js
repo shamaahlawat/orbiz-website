@@ -5,12 +5,16 @@ import PropTypes from 'prop-types';
 import './index.scss';
 // import If from '../../../../components/_if_component';
 
+import CartItem from './cartitem';
+
 export default class CartDetails extends Component {
     render() {
         return (
             <Row className="lr-pad-15 b-mrgn-10 flex-column flex-ac CartSection CartDetails">
                 <Col xs={24} className="pad-15 sectionHeader">Review Cart</Col>
-                <Col xs={24} className="sectionContent">&nbsp;</Col>
+                <Col xs={24} className="sectionContent">
+                    <CartItem />
+                </Col>
                 <Col xs={24} className="tb-pad-10 sectionFooter flex-row flex-jsa">
                     <div className="flex-column flex-center subtotal">
                         <div className="">Subtotal</div>
