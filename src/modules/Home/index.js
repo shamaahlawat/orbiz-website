@@ -11,7 +11,7 @@ import * as pageActions from '../../data/redux/page_details/actions';
 import * as itemActions from '../../data/redux/item_details/actions';
 
 import HomeCarousal from './components/homecarousal';
-import ItemListContainer from './components/itemlist';
+import ItemListContainer from '../../components/itemlist';
 import VehicleSelector from './components/vehicleselector';
 import Awards from './components/awards';
 
