@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Row, Col } from 'antd';
-import { push } from 'react-router-redux';
 import PropTypes from 'prop-types';
 
 import './index.scss';
@@ -104,7 +103,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        push: (path) => dispatch(push(path)),
         actions: bindActionCreators(Object.assign({}, pageActions, itemActions), dispatch)
     };
 }
@@ -119,7 +117,7 @@ class Home extends Component {
     }
 
     loadItemDetails = (path) => {
-        this.props.push(path);
+        this.props.history.push(path);
     }
 
     render() {
@@ -183,8 +181,8 @@ class Home extends Component {
 }
 
 Home.propTypes = {
+    history: PropTypes.func,
     actions: PropTypes.object,
-    push: PropTypes.func,
     page_details: PropTypes.object,
     item_details: PropTypes.object
 };

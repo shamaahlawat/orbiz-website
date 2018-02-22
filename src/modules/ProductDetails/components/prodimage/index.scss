@@ -25,5 +25,25 @@
             margin: 0 auto;
         }
     }
+}
 
+.modalStyle {
+    .ant-modal-body {
+        text-align: center;
+    }
+
+    .itemImage {
+        margin: 0 auto;
+        width: auto;
+        max-width: 95vw;
+        max-height: 80vh;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .modalStyle {
+        .ant-modal-close-x {
+            display: block;
+        }
+    }
 }

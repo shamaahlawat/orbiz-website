@@ -11,6 +11,7 @@ import AppContainer from './app_container';
 import Home from './modules/Home';
 import ProductList from './modules/ProductList';
 import ProductDetails from './modules/ProductDetails';
+import Cart from './modules/Cart';
 
 import 'antd/dist/antd.css';
 
@@ -27,13 +28,14 @@ export default class Root extends Component {
             <Provider store={store}>
                 <ConnectedRouter history={history} onChange={logPageView}>
                     <Switch>
-                        <AppContainer history={history} >
+                        <AppContainer>
                             <Route exact path="/" component={Home} />
-                            <Route path={CONSTANTS.appPages.PRODUCT.EXACT}>
+                            <Route path={`/${CONSTANTS.appPages.PRODUCT}`}>
                                 <Switch>
                                     <Route exact path={`/${CONSTANTS.appPages.PRODUCT}/list`} component={ProductList} />
                                     <Route path={`/${CONSTANTS.appPages.PRODUCT}/details/:product_id/try`} component={ProductDetails} />
                                     <Route path={`/${CONSTANTS.appPages.PRODUCT}/details/:product_id`} component={ProductDetails} />
+                                    <Route exact path={`/${CONSTANTS.appPages.CART}`} component={Cart} />
                                 </Switch>
                             </Route>
                         </AppContainer>

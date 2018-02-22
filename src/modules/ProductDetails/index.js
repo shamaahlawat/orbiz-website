@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Row, Col, Modal, Button } from 'antd';
-import { push } from 'react-router-redux';
 import PropTypes from 'prop-types';
 
 import './index.scss';
@@ -10,7 +9,6 @@ import * as CONSTANTS from '../../data/config/constants';
 import * as pageActions from '../../data/redux/page_details/actions';
 import * as itemActions from '../../data/redux/item_details/actions';
 import * as vehicleActions from '../../data/redux/vehicle_details/actions';
-import If from '../../components/_if_component';
 import ProdDetails from './components/proddetails';
 import ProdDetailsLoader from './components/proddetails/loader';
 import ProdImage from './components/prodimage';
@@ -29,7 +27,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        push: (path) => dispatch(push(path)),
         actions: bindActionCreators(Object.assign({}, pageActions, itemActions, vehicleActions), dispatch)
     };
 }
@@ -121,24 +118,22 @@ class ProductDetails extends Component {
                             {item_details.current_item && <ProdAddtnlDetails item={item_details.current_item} />}
                         </Col>
                     </Row>
-                    <If condition={this.state.try_visible}>
-                        <Modal
-                            className={"modalStyle"}
-                            wrapClassName="vertical-center-modal"
-                            title={"Try your number plate"}
-                            visible={this.state.try_visible}
-                            onCancel={this.handleCloseModal}
-                            footer={[
-                                <Button key="back" onClick={this.handleCloseModal}>Cancel</Button>,
-                            ]}>
-                                <If condition={vehicle_details.loaders.vehicle_loading}>
-                                    <ImageEditorLoader />
-                                </If>
-                                <If condition={vehicle_details.loaders.vehicle_loaded && vehicle_details.current_vehicle && !!vehicle_details.current_vehicle._id}>
-                                <ImageEditor vehicle={vehicle_details.current_vehicle} design={item_details.current_item} is_mobile={is_mobile}/>
-                                </If>
-                        </Modal>
-                    </If>
+                    <Modal
+                        className={"modalStyle"}
+                        wrapClassName="vertical-center-modal"
+                        title={"Try your number plate"}
+                        visible={this.state.try_visible}
+                        onCancel={this.handleCloseModal}
+                        footer={[
+                            <Button key="back" onClick={this.handleCloseModal}>Cancel</Button>,
+                        ]}>
+
+                        {vehicle_details.loaders.vehicle_loading && <ImageEditorLoader />}
+
+                        { vehicle_details.loaders.vehicle_loaded && vehicle_details.current_vehicle && !!vehicle_details.current_vehicle._id &&
+                            <ImageEditor vehicle={vehicle_details.current_vehicle} design={item_details.current_item} is_mobile={is_mobile} />
+                        }
+                    </Modal>
                 </div>
             );
         }

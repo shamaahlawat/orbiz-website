@@ -52,9 +52,9 @@ export default class ProdDetails extends Component {
                     <Col span={24} className="flex-row flex-wrap">
                         {item.designs.map((design, index) => {
                             return (
-                                <div className={classNames("mrgn-5 design", { 'active': index === curr_design })} 
-                                    key={index} 
-                                    style={{ backgroundImage: `url(${design.image})`}} 
+                                <div className={classNames("mrgn-5 is-cursor-ptr design", { 'active': index === curr_design })}
+                                    key={index}
+                                    style={{ backgroundImage: `url(${design.image})`}}
                                     onClick={() => { actions.handleDesignChange(index); }}>&nbsp;
                                 </div>
                             );
