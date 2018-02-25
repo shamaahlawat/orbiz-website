@@ -35,9 +35,9 @@ export default class ProdDetails extends Component {
                 <Col span={24} className="t-mrgn-10 titleContainer">
                     <Col span={24} className="font-24 name">{item.name}</Col>
                     <Col span={24} className="t-pad-5 flex-row price">
-                        <span className={classNames("actualPrice", { 'hasOffer': item.offerPrice > 0 })}>₹{item.price}</span>
-                        <If condition={item.offerPrice > 0}>
-                            <div className="offerPrice">₹{item.offerPrice}</div>
+                        <span className={classNames("actualPrice", { 'hasOffer': item.has_offer })}>₹{item.actual_price}</span>
+                        <If condition={item.has_offer}>
+                            <div className="offerPrice">₹{item.price}</div>
                         </If>
                     </Col>
                     <Col span={24} className="t-pad-5 font-12 description">{item.description}</Col>
@@ -47,20 +47,22 @@ export default class ProdDetails extends Component {
                         <VirtualFitting actions={actions}/>
                     </Col>
                 </Col>
-                <Col span={24} className="t-mrgn-20 designsContainer">
-                    <Col span={24} className="font-12 is-font-bold title">Available Designs</Col>
-                    <Col span={24} className="flex-row flex-wrap">
-                        {item.designs.map((design, index) => {
-                            return (
-                                <div className={classNames("mrgn-5 is-cursor-ptr design", { 'active': index === curr_design })}
-                                    key={index}
-                                    style={{ backgroundImage: `url(${design.image})`}}
-                                    onClick={() => { actions.handleDesignChange(index); }}>&nbsp;
+                <If condition={item.product_types && item.product_types.length > 0}>
+                    <Col span={24} className="t-mrgn-20 designsContainer">
+                        <Col span={24} className="font-12 is-font-bold title">Available Designs</Col>
+                        <Col span={24} className="flex-row flex-wrap">
+                            {item.product_types.map((design, index) => {
+                                return (
+                                    <div className={classNames("mrgn-5 is-cursor-ptr design", { 'active': index === curr_design })}
+                                        key={index}
+                                        style={{ backgroundImage: `url(${design.image})` }}
+                                        onClick={() => { actions.handleDesignChange(index); }}>&nbsp;
                                 </div>
-                            );
-                        })}
+                                );
+                            })}
+                        </Col>
                     </Col>
-                </Col>
+                </If>
                 <Col span={24} className="t-mrgn-20 cartContainer">
                     <Col span={24} className="font-12 is-font-bold title">Quantity</Col>
                     <Col span={24} className="mrgn-5 flex-row flex-ac is-cursor-ptr counter">

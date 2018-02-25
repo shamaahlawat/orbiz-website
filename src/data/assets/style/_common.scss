@@ -45,7 +45,15 @@ body {
 }
 
 .bg-black {
-    background-color: $black;
+    background-color: $black-bg !important;
+}
+
+.bg-black-light {
+    background-color: $black-bg-light;
+}
+
+.bg-black-dark {
+    background-color: $black-bg-dark;
 }
 
 .bg-default {
@@ -207,11 +215,15 @@ body {
 }
 
 .font-white {
-    color: $white;
+    color: $white !important;
 }
 
 .font-primary {
-    color: $primary;
+    color: $primary !important;
+}
+
+.font-green-dark {
+    color: $green-dark !important;
 }
 
 .font-warning {
@@ -525,6 +537,10 @@ body {
 }
 
 //----------------- top-padding-X -------------------
+
+.t-pad-5 {
+    padding-top: 5px;
+}
 
 .t-pad-10 {
     padding-top: 10px;

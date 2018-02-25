@@ -22,8 +22,8 @@ function getHeaders() {
     return headers;
 }
 
-function fetchDataAndProceed(url, method, data, callback) {
-    axios({
+function fetchDataAndProceed(url, method, data) {
+    return axios({
         method: method,
         params: method === 'GET' ? data : {},
         data: method !== 'GET' ? data : {},
@@ -33,28 +33,29 @@ function fetchDataAndProceed(url, method, data, callback) {
         validateStatus: function (status) {
             return ((status >= 200 && status < 300) || status === 412 || status === 401 || status === 403);
         },
-    }).then(function (response) {
-        if (response.status === 401 || response.status === 403) {
-            localStorage.setItem('user', null);
-            response.data.status = response.status;
-            callback(true, response.data);
-        }
-        else {
-            callback(false, response.data);
-        }
-    }).catch(function (error) {
-        callback(true, error.response.data);
     });
 }
 
 /*--------------------------- STORE API ------------------------ */
 
-export const getBusinessProfile = (data, callback) => {
-    fetchDataAndProceed('/stores/businessScreen', method_types.get, data, callback);
+export const getProducts = () => {
+    return fetchDataAndProceed('/products.json', method_types.get);
 };
 
-export const getSpark = (data, callback) => {
-    fetchDataAndProceed('/sparks/getOne', method_types.get, data, callback);
+export const getProduct = (data) => {
+    return fetchDataAndProceed(`/products/${data.product_id}.json`, method_types.get);
+};
+
+export const getVehicles = () => {
+    return fetchDataAndProceed('/vehicles.json', method_types.get);
+};
+
+export const getVehicle = (data) => {
+    return fetchDataAndProceed(`/vehicles/${data.vehicle_id}.json`, method_types.get);
+};
+
+export const getVehicleTypes = () => {
+    return fetchDataAndProceed('/vehicle_types.json', method_types.get);
 };
 
 /*------------------------------ FANGIRL API -----------------------*/
