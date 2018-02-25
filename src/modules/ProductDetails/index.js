@@ -35,7 +35,7 @@ class ProductDetails extends Component {
     constructor() {
         super();
         this.state = {
-            try_visible: false,
+            show_editor: false,
             curr_design: 0
         };
         this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -45,7 +45,7 @@ class ProductDetails extends Component {
 
     componentWillMount() {
         this.props.actions.pageChanged(CONSTANTS.appPages.PRODUCT_DETAILS);
-        this.props.actions.getItemDetails(this.props.match.params);
+        this.props.actions.getItemDetails(this.props.match.params.product_id);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -56,7 +56,7 @@ class ProductDetails extends Component {
             setTimeout(function() {
                 self.props.actions.getVehicleDetails("tesla-s");
                 self.setState({
-                    try_visible: true
+                    show_editor: true
                 });
             }, 1000);
         }
@@ -69,7 +69,7 @@ class ProductDetails extends Component {
 
     handleCloseModal = () => {
         this.setState({
-            try_visible: false
+            show_editor: false
         }, () => {
             let prevPage = `/${CONSTANTS.appPages.PRODUCT}/details/${this.props.match.params.product_id}/`;
             this.props.history.push(prevPage);
@@ -79,17 +79,14 @@ class ProductDetails extends Component {
 
     handleDesignChange = (index) => {
         this.setState({
-            curr_design: index
+            curr_design: index,
+            curr_image: this.props.item_details.current_item.designs[index].image
         });
     }
 
     render() {
         const { item_details, vehicle_details } = this.props;
-        const is_mobile = (this.props.page_details.device_data.screen_width < 768);
-        const actions = {
-            handleDesignChange: this.handleDesignChange,
-            openImageEditor: this.openImageEditor
-        };
+
 
         if (item_details.loaders.item_loading) {
             return (
@@ -105,11 +102,18 @@ class ProductDetails extends Component {
                 </div>
             );
         } else {
+            const is_mobile = (this.props.page_details.device_data.screen_width < 768);
+            const actions = {
+                handleDesignChange: this.handleDesignChange,
+                openImageEditor: this.openImageEditor
+            };
+            const curr_image = this.state.curr_image ? this.state.curr_image : item_details.current_item ? item_details.current_item.image : null;
+
             return (
                 <div className="ProductDetailsContainer tb-pad-30 page-container">
                     <Row className="lr-pad-15">
                         <Col xs={{ span: 24 }} sm={{ span: 12 }} className="ProdImageContainer">
-                            {item_details.current_item && <ProdImage item_image={item_details.current_item.designs[this.state.curr_design].image} />}
+                            {item_details.current_item && <ProdImage item_image={curr_image} />}
                         </Col>
                         <Col xs={{ span: 24 }} sm={{ span: 12 }} className="r-pad-15 ProdDetailsContainer">
                             {item_details.current_item && <ProdDetails item={item_details.current_item} curr_design={this.state.curr_design} actions={actions} />}
@@ -122,7 +126,7 @@ class ProductDetails extends Component {
                         className={"modalStyle"}
                         wrapClassName="vertical-center-modal"
                         title={"Try your number plate"}
-                        visible={this.state.try_visible}
+                        visible={this.state.show_editor}
                         onCancel={this.handleCloseModal}
                         footer={[
                             <Button key="back" onClick={this.handleCloseModal}>Cancel</Button>,

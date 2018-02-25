@@ -31,9 +31,9 @@ export default class ProdAddtnlDetails extends Component {
                 <Tabs animated defaultActiveKey="1" onChange={this.callback} tabBarStyle={{ backgroundColor: '#111', color: '#dad8da'}}>
                     <TabPane tab="Description" key="1">
                         <div className="flex-column tabContent">
-                            <div className="font-20 is-font-medium tb-mrgn-10 title">{item.features.title}</div>
+                            <div className="font-20 is-font-medium tb-mrgn-10 title">{`ORBIZ VEHICLE NUMBER PLATES`}</div>
                             <ul className="featureList">
-                                {item.features.list.map((feature, index) => {
+                                {item.features && item.features.map((feature, index) => {
                                     return (
                                         <li key={index} className="font-12 feature">{feature}</li>
                                     );
@@ -46,7 +46,7 @@ export default class ProdAddtnlDetails extends Component {
                         <div className="lr-pad-30 flex-column tabContent">
                             <div className="font-20 is-font-medium tb-mrgn-10 title">Designs</div>
                             <span className="flex-row flex-wrap">
-                                {item.additional_info.map((tag, index) => {
+                                {item.additional_info && item.additional_info.map((tag, index) => {
                                     return (
                                         <a key={index} className="font-12 mrgn-5 tag">{tag}</a>
                                     );
@@ -54,7 +54,7 @@ export default class ProdAddtnlDetails extends Component {
                             </span>
                         </div>
                     </TabPane>
-                    <TabPane tab={`Reviews (${item.reviews.length})`} key="3">
+                    <TabPane tab={`Reviews (${(item.reviews && item.reviews.length) || 0})`} key="3">
                         <div className="flex-column tabContent" style={{ paddingLeft: 60}}>
                             <div className="font-20 is-font-medium tb-mrgn-10 title">Reviews will be added later</div>
                         </div>

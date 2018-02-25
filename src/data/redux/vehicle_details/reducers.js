@@ -37,6 +37,41 @@ export default function vehicle_details(state = initialStates.vehicle_details, a
                 }
             };
 
+        case actionTypes.VEHICLE_TYPE_LOADING:
+            return {
+                ...state,
+                loaders: {
+                    ...state.loaders,
+                    type_loading: true,
+                    type_loaded: false,
+                    type_load_err: false
+                }
+            };
+
+        case actionTypes.VEHICLE_TYPE_LOADED:
+            return {
+                ...state,
+                vehicle_types: action.payload.vehicle_types,
+                loaders: {
+                    ...state.loaders,
+                    type_loading: false,
+                    type_loaded: true,
+                    type_load_err: false
+                }
+            };
+
+        case actionTypes.VEHICLE_TYPE_LOAD_ERR:
+            return {
+                ...state,
+                vehicle_types: null,
+                loaders: {
+                    ...state.loaders,
+                    type_loading: false,
+                    type_loaded: false,
+                    type_load_err: true
+                }
+            };
+
         case actionTypes.VEHICLE_LOADING:
             return {
                 ...state,

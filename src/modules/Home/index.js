@@ -181,7 +181,7 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-    history: PropTypes.func,
+    history: PropTypes.object,
     actions: PropTypes.object,
     page_details: PropTypes.object,
     item_details: PropTypes.object
