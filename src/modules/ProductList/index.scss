@@ -1,0 +1,33 @@
+@import "../../data/assets/style/_style_import.scss";
+
+.ProductList {
+    .collapseContainer {
+        background-color: $black-bg-light;
+
+        .ant-collapse-item {
+            border: none !important;
+            margin-bottom: 3px;
+
+            & > .ant-collapse-header {
+                background-color: $black-bg-dark;
+                color: $white !important;
+                padding: 10px 5px 10px 32px !important;
+
+                &:hover {
+                    background-color: $black-bg-dark;
+                }
+
+                & > .arrow {
+                    color: $white !important;
+                    right: 16px !important;
+                    left: inherit !important;
+                }
+            }
+
+            .ant-collapse-content {
+                background-color: $black-bg-light;
+                border: none !important;
+            }
+        }
+    }
+}
