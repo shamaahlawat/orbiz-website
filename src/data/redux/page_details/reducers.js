@@ -32,37 +32,41 @@ export default function page_details(state = initialStates.page_details, action)
                 page_load_error: true
             };
 
-        case actionTypes.CAROUSAL_LOADING: {
+        case actionTypes.HOME_PAGE_LOADING: {
             return {
                 ...state,
                 loaders: {
                     ...state.loaders,
-                    carousal_loading: true,
-                    carousal_load_err: false
+                    page_loading: true,
+                    page_load_err: false
                 }
             };
         }
 
-        case actionTypes.CAROUSAL_LOADED: {
+        case actionTypes.HOME_PAGE_LOADED: {
+            let primary_carousal = action.payload.primary_carousal;
+            let secondary_carousal = action.payload.secondary_carousal;
+            localStorage.setItem('primary_carousal', JSON.stringify(primary_carousal));
+            localStorage.setItem('secondary_carousal', JSON.stringify(secondary_carousal));
             return {
                 ...state,
-                primary_carousal: action.payload.primary_carousal,
-                secondary_carousal: action.payload.secondary_carousal,
+                primary_carousal,
+                secondary_carousal,
                 loaders: {
                     ...state.loaders,
-                    carousal_loading: false,
-                    carousal_load_err: false
+                    page_loading: false,
+                    page_load_err: false
                 }
             };
         }
 
-        case actionTypes.CAROUSAL_LOAD_ERR: {
+        case actionTypes.HOME_PAGE_LOAD_ERR: {
             return {
                 ...state,
                 loaders: {
                     ...state.loaders,
-                    carousal_loading: false,
-                    carousal_load_err: true
+                    page_loading: false,
+                    page_load_err: true
                 }
             };
         }

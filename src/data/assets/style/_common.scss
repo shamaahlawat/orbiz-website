@@ -200,6 +200,10 @@ body {
     border-radius: 50% !important;
 }
 
+.blinkingImg {
+    @include animation('blink 1s infinite linear')
+}
+
 /*--------------------- FONT CLASSES ----------------------*/
 
 .font-light {

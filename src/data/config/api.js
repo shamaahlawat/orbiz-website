@@ -36,10 +36,14 @@ function fetchDataAndProceed(url, method, data) {
     });
 }
 
-/*--------------------------- STORE API ------------------------ */
+/*--------------------------- APIS ------------------------ */
 
-export const getProducts = () => {
-    return fetchDataAndProceed('/products.json', method_types.get);
+export const getHomePageData = () => {
+    return fetchDataAndProceed('/pages/home.json', method_types.get);
+};
+
+export const getProducts = (data) => {
+    return fetchDataAndProceed('/products.json', method_types.get, data);
 };
 
 export const getProduct = (data) => {
@@ -58,4 +62,4 @@ export const getVehicleTypes = () => {
     return fetchDataAndProceed('/vehicle_types.json', method_types.get);
 };
 
-/*------------------------------ FANGIRL API -----------------------*/
+/*------------------------------ APIS -----------------------*/

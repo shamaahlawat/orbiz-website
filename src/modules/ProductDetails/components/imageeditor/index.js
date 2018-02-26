@@ -21,18 +21,18 @@ export default class ImageEditor extends Component {
         this.saveImage = this.saveImage.bind(this);
 
         let car_colors = [];
-        for (let color in props.vehicle.images) {
+        for (let color in props.vehicle.vehicle_models) {
             let car_type = {
-                ...props.vehicle.images[color],
+                ...props.vehicle.vehicle_models[color],
                 name: color
             };
             car_colors.push(car_type);
         }
         this.state = {
             car_view: 'front',
-            curr_car: car_colors[0],
+            curr_car: props.vehicle.vehicle_models[0],
             car_colors,
-            curr_design: this.props.design.designs[0],
+            curr_design: this.props.design.product_types[0],
             numplate_scale: 0.15,
             show_canvas: true,
             curr_position: undefined
@@ -65,13 +65,13 @@ export default class ImageEditor extends Component {
 
     handleCarColor = (value) => {
         this.setState({
-            curr_car: this.state.car_colors[parseInt(value, 10)]
+            curr_car: this.props.vehicle.vehicle_models.find(vehicle => vehicle.id === parseInt(value, 10))
         });
     }
 
     handleDesign = (value) => {
         this.setState({
-            curr_design: this.props.design.designs[parseInt(value, 10)]
+            curr_design: this.props.design.product_types[parseInt(value, 10)]
         });
     }
 
@@ -124,7 +124,7 @@ export default class ImageEditor extends Component {
 
     render() {
         const { design } = this.props;
-        const car_image = (this.state.car_view === 'front') ? this.state.curr_car.front : this.state.curr_car.rear;
+        const car_image = (this.state.car_view === 'front') ? this.state.curr_car.front_image : this.state.curr_car.rear_image;
         const numplate_image = (this.state.car_view === 'front') ? this.state.curr_design.front_image : this.state.curr_design.rear_image;
 
         const toolsbar_actions = {
@@ -152,18 +152,18 @@ export default class ImageEditor extends Component {
                     </div>
                     <div className="pad-5 flex-row flex-center selector">
                         <span className="r-mrgn-10 property">Car Color:</span>
-                        <Select defaultValue="0" style={{ width: "auto" }} onChange={(e)=>{this.handleCarColor(e);}}>
-                            { this.state.car_colors.map((color, index)=>{
+                        <Select defaultValue={this.props.vehicle.vehicle_models[0].name} style={{ width: "auto" }} onChange={(e)=>{this.handleCarColor(e);}}>
+                            {this.props.vehicle.vehicle_models.map((model, index)=>{
                                 return(
-                                    <Option key={index} value={index.toString()}>{color.name}</Option>
+                                    <Option key={model.id} value={model.id}>{model.name}</Option>
                                 );
                             })}
                         </Select>
                     </div>
                     <div className="pad-5 flex-row flex-center selector">
                         <span className="r-mrgn-10 property">Design:</span>
-                        <Select defaultValue="0" style={{ width: "auto" }} onChange={(e)=>{this.handleDesign(e);}}>
-                            {design.designs.map((design, index)=>{
+                        <Select defaultValue={design.product_types[0].name} style={{ width: "auto" }} onChange={(e)=>{this.handleDesign(e);}}>
+                            {design.product_types.map((design, index)=>{
                                 return(
                                     <Option key={index} value={index.toString()}>{design.name}</Option>
                                 );

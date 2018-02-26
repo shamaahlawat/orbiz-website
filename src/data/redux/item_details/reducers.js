@@ -14,9 +14,11 @@ export default function item_details(state = initialStates.item_details, action)
             };
 
         case actionTypes.NUMPLATES_LOADED:
+            let numplates_list = action.payload.numplates;
+            localStorage.setItem('numplates_list', JSON.stringify(numplates_list));
             return {
                 ...state,
-                numplates_list: action.payload.numplates,
+                numplates_list,
                 loaders: {
                     ...state.loaders,
                     numplates_loading: false,
@@ -46,9 +48,11 @@ export default function item_details(state = initialStates.item_details, action)
             };
 
         case actionTypes.FRAMES_LOADED:
+            let frames_list = action.payload.frames;
+            localStorage.setItem('frames_list', JSON.stringify(frames_list));
             return {
                 ...state,
-                frames_list: action.payload.frames,
+                frames_list,
                 loaders: {
                     ...state.loaders,
                     frames_loading: false,
@@ -79,9 +83,11 @@ export default function item_details(state = initialStates.item_details, action)
             };
 
         case actionTypes.ITEM_LOADED:
+            let current_item = action.payload.item;
+            localStorage.setItem('current_item', JSON.stringify(current_item));
             return {
                 ...state,
-                current_item: action.payload.item,
+                current_item,
                 loaders: {
                     ...state.loaders,
                     item_loading: false,

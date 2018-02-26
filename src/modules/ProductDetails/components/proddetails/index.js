@@ -44,7 +44,7 @@ export default class ProdDetails extends Component {
                 </Col>
                 <Col span={24} className="t-mrgn-20">
                     <Col span={24} className="virtualFittingContainer">
-                        <VirtualFitting actions={actions}/>
+                        <VirtualFitting />
                     </Col>
                 </Col>
                 <If condition={item.product_types && item.product_types.length > 0}>

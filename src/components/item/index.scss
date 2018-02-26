@@ -3,6 +3,7 @@
 .Item {
     background: $black-bg-light;
     font-family: $font-family-secondary;
+    max-width: 250px;
 
     .offerTag {
         background-color: $green;
@@ -22,7 +23,7 @@
 
         .itemImage {
             max-height: 250px;
-            width: 100%;
+            min-width: 150px;
         }
 
         .itemDetails {

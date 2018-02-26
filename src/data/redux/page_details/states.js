@@ -1,16 +1,18 @@
+const primary_carousal = localStorage.getItem('primary_carousal') ? JSON.parse(localStorage.getItem('primary_carousal')) : [];
+const secondary_carousal = localStorage.getItem('secondary_carousal') ? JSON.parse(localStorage.getItem('secondary_carousal')) : [];
+
 const initialStates = {
     page_details: {
         lang: 'en',
         device_data: {},
         current_page: undefined,
         popup_user: {},
-        primary_carousal: [],
-        secondary_carousal: [],
+        primary_carousal,
+        secondary_carousal,
         loaders: {
-            user_popup_loading: false,
-            user_popup_loaded: false,
-            user_popup_error: false,
-            page_load_error: false,
+            page_loading: false,
+            page_loaded: false,
+            page_load_err: false,
             carousal_loading: false,
             carousal_load_err: false
         }

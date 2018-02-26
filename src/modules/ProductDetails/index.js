@@ -51,10 +51,10 @@ class ProductDetails extends Component {
     componentWillReceiveProps(nextProps) {
         let try_path = `/${CONSTANTS.appPages.PRODUCT}/details/:product_id/try`;
         let self= this;
-        let shouldOpenImageEditor = (nextProps.match.path === try_path && nextProps.item_details.current_item !== this.props.item_details.current_item) || (nextProps.match.path === try_path && nextProps.match.path !== this.props.match.path && nextProps.item_details.current_item._id);
+        let shouldOpenImageEditor = (nextProps.match.path === try_path && nextProps.item_details.current_item !== this.props.item_details.current_item) || (nextProps.match.path === try_path && nextProps.match.path !== this.props.match.path && nextProps.item_details.current_item.id);
         if (shouldOpenImageEditor) {
+            self.props.actions.getVehicleDetails(1);
             setTimeout(function() {
-                self.props.actions.getVehicleDetails("tesla-s");
                 self.setState({
                     show_editor: true
                 });
@@ -80,13 +80,12 @@ class ProductDetails extends Component {
     handleDesignChange = (index) => {
         this.setState({
             curr_design: index,
-            curr_image: this.props.item_details.current_item.designs[index].image
+            curr_image: this.props.item_details.current_item.product_types[index].image
         });
     }
 
     render() {
         const { item_details, vehicle_details } = this.props;
-
 
         if (item_details.loaders.item_loading) {
             return (
@@ -105,6 +104,7 @@ class ProductDetails extends Component {
             const is_mobile = (this.props.page_details.device_data.screen_width < 768);
             const actions = {
                 handleDesignChange: this.handleDesignChange,
+                getVehicleDetails: this.props.actions.getVehicleDetails,
                 openImageEditor: this.openImageEditor
             };
             const curr_image = this.state.curr_image ? this.state.curr_image : item_details.current_item ? item_details.current_item.image : null;
@@ -134,7 +134,7 @@ class ProductDetails extends Component {
 
                         {vehicle_details.loaders.vehicle_loading && <ImageEditorLoader />}
 
-                        { vehicle_details.loaders.vehicle_loaded && vehicle_details.current_vehicle && !!vehicle_details.current_vehicle._id &&
+                        { vehicle_details.loaders.vehicle_loaded && vehicle_details.current_vehicle && !!vehicle_details.current_vehicle.id &&
                             <ImageEditor vehicle={vehicle_details.current_vehicle} design={item_details.current_item} is_mobile={is_mobile} />
                         }
                     </Modal>

@@ -5,39 +5,31 @@ import PropTypes from 'prop-types';
 import SideNavbar from '../sidenavbar';
 import './index.scss';
 
-const dropdown_menu = (
-    <div className="navbarDropdownMenuContainer">
-        <Menu>
-            <Menu.Item key="0">
-                <a href="#" className="font-14 is-font-medium">
-                    <span>All</span>
-                </a>
-            </Menu.Item>
-            <Menu.Item key="1">
-                <a href="#" className="font-14 is-font-medium">
-                    <span>Bike</span>
-                </a>
-            </Menu.Item>
-            <Menu.Item key="2">
-                <a href="#" className="font-14 is-font-medium">
-                    <span>Car</span>
-                </a>
-            </Menu.Item>
-            <Menu.Item key="3">
-                <a href="#" className="font-14 is-font-medium">
-                    <span>Super Car</span>
-                </a>
-            </Menu.Item>
-            <Menu.Item key="4">
-                <a href="#" className="font-14 is-font-medium">
-                    <span>Bus</span>
-                </a>
-            </Menu.Item>
-        </Menu>
-    </div>
-);
+const dropdown_menu = (vehicle_types, onMenuClicked) => {
+    return (
+        <div className="navbarDropdownMenuContainer">
+            <Menu onClick={(e) => onMenuClicked(e.key)}>
+                <Menu.Item key="0">
+                    <a href=""><span className="font-14 is-font-medium">All</span></a>
+                </Menu.Item>
+
+                {vehicle_types.map((type) => {
+                    return (
+                        <Menu.Item key={type.name}>
+                            <a href=""><span className="font-14 is-font-medium">{type.name}</span></a>
+                        </Menu.Item>
+                    );
+                })}
+            </Menu>
+        </div>
+    );
+};
 
 export default class AppNavbar extends Component {
+
+    loadProductPage = (tag) => {
+        this.props.actions.navigateTo(`/product/list?tag=${tag}`);
+    }
 
     render() {
         let { page_details, actions } = this.props;
@@ -64,6 +56,7 @@ export default class AppNavbar extends Component {
             );
         }
         else {
+            // const dropdown_menu = this.createDropDown();
             return (
                 <Row className="appNavbarContainer">
                     <Col xs={{ span: 24 }}>
@@ -74,7 +67,7 @@ export default class AppNavbar extends Component {
                                         <img src="https://i0.wp.com/orbiz.in/wp-content/uploads/2017/11/a.png" alt="orbiz" className="is-cursor-ptr setBrandIcon" />
                                     </div>
                                     <div className="navItem">
-                                        <Dropdown overlay={dropdown_menu} placement="bottomCenter" trigger={['click']} style={{ display: 'flex' }}>
+                                        <Dropdown overlay={dropdown_menu(this.props.vehicle_types, this.loadProductPage)} placement="bottomCenter" trigger={['click']} style={{ display: 'flex' }}>
                                             <a className="ant-dropdown-link" href="#">Shop for <Icon style={{ fontSize: 10, verticalAlign: 'middle', paddingLeft: 5 }} type="caret-down" /></a>
                                         </Dropdown>
                                     </div>
@@ -109,5 +102,7 @@ export default class AppNavbar extends Component {
 
 AppNavbar.propTypes = {
     page_details: PropTypes.object,
+    cart_details: PropTypes.object,
+    vehicle_types: PropTypes.array,
     actions: PropTypes.object
 };

@@ -1,5 +1,5 @@
 import actionTypes from '../action_types';
-// import initialStates from './states';
+import * as API from '../../config/api';
 
 export function setLang(lang) {
     return function (dispatch) {
@@ -30,6 +30,41 @@ export function pageChanged(page) {
             payload: {
                 current_page: page
             }
+        });
+    };
+}
+
+export function getHomePageData() {
+    return function (dispatch) {
+        //frames, numberpplates and carousal loaders
+        dispatch({
+            type: actionTypes.HOME_PAGE_LOADING
+        });
+
+        API.getHomePageData().then(response => {
+            dispatch({
+                type: actionTypes.HOME_PAGE_LOADED,
+                payload: {
+                    primary_carousal: response.data.IMAGES.images,
+                    secondary_carousal: response.data.FEATURED_SECTION.featured_products
+                }
+            });
+            dispatch({
+                type: actionTypes.NUMPLATES_LOADED,
+                payload: {
+                    numplates: response.data.PRODUCT_SECTION_1.products
+                }
+            });
+            dispatch({
+                type: actionTypes.FRAMES_LOADED,
+                payload: {
+                    frames: response.data.PRODUCT_SECTION_2.products
+                }
+            });
+        }).catch(() => {
+            dispatch({
+                type: actionTypes.HOME_PAGE_LOAD_ERR
+            });
         });
     };
 }

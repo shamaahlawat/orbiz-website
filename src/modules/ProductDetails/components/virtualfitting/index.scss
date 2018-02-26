@@ -9,5 +9,14 @@
         .btn-fill-black{
             color: $grey-bg !important;
         }
+
+        .regNumInput {
+            border-radius: 5px;
+            line-height: 2;
+            margin-bottom: 0;
+            padding: 1px 10px;
+            border: 1px solid #fff;
+            max-width: 33%;
+        }
     }
 }

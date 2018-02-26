@@ -5,6 +5,15 @@ import { Col, Row, Carousel, Button, Icon } from 'antd';
 import './index.scss';
 
 export default class HomeCarousal extends Component {
+    constructor (props) {
+        super(props);
+        this.loadItemDetails = this.loadItemDetails.bind(this);
+    }
+
+    loadItemDetails = (id) => {
+        this.props.actions.loadItemDetails(`/product/details/${id}`);
+    }
+
     render() {
         const { options, items } = this.props;
 
@@ -16,11 +25,11 @@ export default class HomeCarousal extends Component {
             );
         } else if (this.props.type === 'image') {
             return (
-                <Row className="CarousalContainer">
+                <Row className="CarousalContainer imgCarousal">
                     <Carousel {...options}>
                         {items.map((item, index) => {
                             return (
-                                <img className="carousalItem" src={item.imageUrl} key={index} />
+                                <img className="carousalItem" src={item} key={index} />
                             );
                         })}
                     </Carousel>
@@ -34,19 +43,19 @@ export default class HomeCarousal extends Component {
                             return (
                                 <Col xs={{ span: 24 }} sm={{ span: 20 }} key={index} className="flex-row carousalItem">
                                     <div className="full-flex flex-column flex-jsa flex-ac  textContainer">
-                                        <div className="is-text-center word-wrap subtitle">{item.subtitle}</div>
+                                        <div className="is-text-center word-wrap subtitle">{item.tagline}</div>
                                         <div className="is-text-center font-24 word-wrap title">
                                             <span>{item.title}</span>
                                             <Col xs={{ span: 4, offset: 10 }} className="underline">&nbsp;</Col>
                                         </div>
                                         <div className="is-text-center font-14 word-wrap description">{item.description}</div>
                                         <div className="button">
-                                            <Button className="flex-row btn-fill-white">
+                                            <Button className="flex-row btn-fill-white" onClick={() => { this.loadItemDetails(item.product_id); }}>
                                                 <a href="#" className="flex-row flex-center full-flex">SHOP NOW</a>
                                             </Button>
                                         </div>
                                     </div>
-                                    <div className="mediaContainer" style={{ backgroundImage: `url(${item.imageUrl})` }} >
+                                    <div className="mediaContainer" style={{ backgroundImage: `url(${item.image})` }} >
                                         &nbsp;
 									</div >
                                 </Col>
@@ -61,7 +70,8 @@ export default class HomeCarousal extends Component {
 }
 
 HomeCarousal.propTypes = {
-    items: PropTypes.arrayOf(PropTypes.object).isRequired,
+    items: PropTypes.array.isRequired,
+    actions: PropTypes.object,
     type: PropTypes.string.isRequired,
     loading: PropTypes.bool,
     options: PropTypes.object

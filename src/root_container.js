@@ -28,7 +28,7 @@ export default class Root extends Component {
             <Provider store={store}>
                 <ConnectedRouter history={history} onChange={logPageView}>
                     <Switch>
-                        <AppContainer>
+                        <AppContainer history={history}>
                             <Route exact path="/" component={Home} />
                             <Route path={`/${CONSTANTS.appPages.PRODUCT}`}>
                                 <Switch>

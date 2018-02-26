@@ -40,21 +40,13 @@
         .mediaContainer {
             min-width: 40vw;
             background-size: cover;
-
-            // img {
-            // 	max-width: 100%;
-            // 	// width: 100%;
-            // 	height: auto;
-            // 	max-height: 75vh;
-            // }
-
         }
     }
 
     &.homeCarousal {
         .carousalItem {
             padding: 0 15px;
-            min-height: 300px;
+            min-height: 350px;
             max-height: 75vh;
         }
     }
@@ -97,12 +89,19 @@
 
         .mediaContainer {
             max-width: 40vw;
+            background-position: left;
         }
 
         &.homeCarousal {
             .carousalItem {
                 min-height: 200px;
                 max-height: 75vh;
+            }
+        }
+
+        &.imgCarousal {
+            .carousalItem {
+                min-height: 250px;
             }
         }
     }

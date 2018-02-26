@@ -32,7 +32,7 @@ export function getVehicleTypes() {
             dispatch({
                 type: actionTypes.VEHICLE_TYPE_LOADED,
                 payload: {
-                    vehicle_types: response.vehicles
+                    vehicle_types: response.data.vehicle_types
                 }
             });
         }).catch(() => {
@@ -53,13 +53,24 @@ export function getVehicleDetails(vehicle_id) {
             dispatch({
                 type: actionTypes.VEHICLE_LOADED,
                 payload: {
-                    vehicle_details: response
+                    vehicle_details: response.data.vehicle
                 }
             });
         }).catch(() => {
             dispatch({
                 type: actionTypes.VEHICLE_LOAD_ERR
             });
+        });
+    };
+}
+
+export function updateRegistrationNumber(registration_number) {
+    return function (dispatch) {
+        dispatch({
+            type: actionTypes.VEHICLE_REGISTRATION_ENTERED,
+            payload: {
+                registration_number
+            }
         });
     };
 }

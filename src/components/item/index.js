@@ -9,7 +9,7 @@ import If from '../_if_component';
 export default class Item extends Component {
 
     loadItemDetails = () => {
-        this.props.actions.loadItemDetails(`/product/details/${this.props.item.id}`);
+        this.props.actions.loadPath(`/product/details/${this.props.item.id}`);
     };
 
     render() {

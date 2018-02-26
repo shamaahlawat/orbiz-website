@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
 import classNames from 'classnames';
 import { Affix } from 'antd';
 
@@ -17,7 +16,8 @@ import './index.scss';
 function mapStateToProps(state) {
     return {
         page_details: state.page_details,
-        cart_details: state.cart_details
+        cart_details: state.cart_details,
+        vehicle_details: state.vehicle_details
     };
 }
 
@@ -37,7 +37,7 @@ class AppContainer extends Component {
         this.timeout = false;
 
         this.props.actions.getVehicles();
-        // this.props.actions.getVehicleTypes();
+        this.props.actions.getVehicleTypes();
     }
 
     componentDidMount() {
@@ -55,7 +55,7 @@ class AppContainer extends Component {
     }
 
     render() {
-        const { page_details, cart_details } = this.props;
+        const { page_details, cart_details, vehicle_details } = this.props;
         const is_mobile = (this.props.page_details.device_data.screen_width < 768);
         const actions = {
             navigateTo: this.navigateTo
@@ -64,7 +64,7 @@ class AppContainer extends Component {
         return (
             <div className={classNames(`flex-column full-width full-min-height AppContainer ${page_details.current_page && page_details.current_page.split('/').join("")}`, { "mobile": is_mobile })}>
                 <Affix>
-                    <AppNavbar page_details={page_details} cart_details={cart_details} actions={actions}/>
+                    <AppNavbar page_details={page_details} cart_details={cart_details} vehicle_types={vehicle_details.vehicle_types} actions={actions}/>
                 </Affix>
                 <div className="MainContentContainer full-flex is-no-lr-pad">
                     {this.props.children}
@@ -83,4 +83,4 @@ AppContainer.propTypes = {
     children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(withRouter(AppContainer));
+export default connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(AppContainer);
