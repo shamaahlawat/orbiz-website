@@ -1,13 +1,13 @@
 import actionTypes from '../action_types';
 import * as API from '../../config/api';
 
-export function getProducts() {
+export function getProducts(searchParams) {
     return function (dispatch) {
         dispatch({
             type: actionTypes.NUMPLATES_LOADING
         });
 
-        API.getProducts().then(response => {
+        API.getProducts(searchParams).then(response => {
             dispatch({
                 type: actionTypes.NUMPLATES_LOADED,
                 payload: {
@@ -39,6 +39,17 @@ export function getItemDetails(product_id) {
             dispatch({
                 type: actionTypes.ITEM_LOAD_ERR
             });
+        });
+    };
+}
+
+export function toggleItemFavorite(product_id) {
+    return function (dispatch) {
+        dispatch({
+            type: actionTypes.TOGGLE_FAVORITE,
+            payload: {
+                product_id
+            }
         });
     };
 }

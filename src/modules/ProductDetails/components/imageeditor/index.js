@@ -20,18 +20,9 @@ export default class ImageEditor extends Component {
         this.handleDesign = this.handleDesign.bind(this);
         this.saveImage = this.saveImage.bind(this);
 
-        let car_colors = [];
-        for (let color in props.vehicle.vehicle_models) {
-            let car_type = {
-                ...props.vehicle.vehicle_models[color],
-                name: color
-            };
-            car_colors.push(car_type);
-        }
         this.state = {
             car_view: 'front',
             curr_car: props.vehicle.vehicle_models[0],
-            car_colors,
             curr_design: this.props.design.product_types[0],
             numplate_scale: 0.15,
             show_canvas: true,
@@ -124,6 +115,7 @@ export default class ImageEditor extends Component {
 
     render() {
         const { design } = this.props;
+        const vehicle_type = this.props.vehicle.type;
         const car_image = (this.state.car_view === 'front') ? this.state.curr_car.front_image : this.state.curr_car.rear_image;
         const numplate_image = (this.state.car_view === 'front') ? this.state.curr_design.front_image : this.state.curr_design.rear_image;
 
@@ -150,26 +142,28 @@ export default class ImageEditor extends Component {
                             <RadioButton value="rear">Rear</RadioButton>
                         </RadioGroup>
                     </div>
-                    <div className="pad-5 flex-row flex-center selector">
-                        <span className="r-mrgn-10 property">Car Color:</span>
-                        <Select defaultValue={this.props.vehicle.vehicle_models[0].name} style={{ width: "auto" }} onChange={(e)=>{this.handleCarColor(e);}}>
-                            {this.props.vehicle.vehicle_models.map((model, index)=>{
-                                return(
-                                    <Option key={model.id} value={model.id}>{model.name}</Option>
-                                );
-                            })}
-                        </Select>
-                    </div>
-                    <div className="pad-5 flex-row flex-center selector">
-                        <span className="r-mrgn-10 property">Design:</span>
-                        <Select defaultValue={design.product_types[0].name} style={{ width: "auto" }} onChange={(e)=>{this.handleDesign(e);}}>
-                            {design.product_types.map((design, index)=>{
-                                return(
-                                    <Option key={index} value={index.toString()}>{design.name}</Option>
-                                );
-                            })}
-                        </Select>
-                    </div>
+                    <If condition={vehicle_type !== 'user'}>
+                        <div className="pad-5 flex-row flex-center selector">
+                            <span className="r-mrgn-10 property">Car Color:</span>
+                            <Select defaultValue={this.props.vehicle.vehicle_models[0].name} style={{ width: "auto" }} onChange={(e)=>{this.handleCarColor(e);}}>
+                                {this.props.vehicle.vehicle_models.map((model, index)=>{
+                                    return(
+                                        <Option key={model.id} value={model.id}>{model.name}</Option>
+                                    );
+                                })}
+                            </Select>
+                        </div>
+                        <div className="pad-5 flex-row flex-center selector">
+                            <span className="r-mrgn-10 property">Design:</span>
+                            <Select defaultValue={design.product_types[0].name} style={{ width: "auto" }} onChange={(e)=>{this.handleDesign(e);}}>
+                                {design.product_types.map((design, index)=>{
+                                    return(
+                                        <Option key={index} value={index.toString()}>{design.name}</Option>
+                                    );
+                                })}
+                            </Select>
+                        </div>
+                    </If>
                 </Col>
                 <Col span={24} className="is-no-mrgn flex-row flex-center is-relative imageContainer">
                     <div className="is-relative canvasContainer">
@@ -200,6 +194,7 @@ export default class ImageEditor extends Component {
 
 ImageEditor.propTypes = {
     vehicle: PropTypes.object.isRequired,
+    vehicle_type: PropTypes.string,
     design: PropTypes.object.isRequired,
     is_mobile: PropTypes.bool
 };

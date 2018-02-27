@@ -15,18 +15,12 @@ import Cart from './modules/Cart';
 
 import 'antd/dist/antd.css';
 
-ReactGA.initialize("ga-0008-your-id");
-
-function logPageView() {
-	ReactGA.pageview(window.location.pathname + window.location.search);
-}
-
 export default class Root extends Component {
     render() {
         const { store, history } = this.props;
         return (
             <Provider store={store}>
-                <ConnectedRouter history={history} onChange={logPageView}>
+                <ConnectedRouter history={history}>
                     <Switch>
                         <AppContainer history={history}>
                             <Route exact path="/" component={Home} />

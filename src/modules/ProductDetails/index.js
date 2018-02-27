@@ -49,22 +49,29 @@ class ProductDetails extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        let try_path = `/${CONSTANTS.appPages.PRODUCT}/details/:product_id/try`;
+        let try_path = `/product/details/:product_id/try`;
         let self= this;
-        let shouldOpenImageEditor = (nextProps.match.path === try_path && nextProps.item_details.current_item !== this.props.item_details.current_item) || (nextProps.match.path === try_path && nextProps.match.path !== this.props.match.path && nextProps.item_details.current_item.id);
+        let shouldOpenImageEditor = (nextProps.vehicle_details.current_vehicle && (nextProps.match.path === try_path && nextProps.item_details.current_item !== this.props.item_details.current_item) || (nextProps.match.path === try_path && nextProps.match.path !== this.props.match.path && !!nextProps.item_details.current_item.id));
         if (shouldOpenImageEditor) {
-            self.props.actions.getVehicleDetails(1);
-            setTimeout(function() {
+            setTimeout(function () {
                 self.setState({
                     show_editor: true
                 });
             }, 1000);
+        } else if (nextProps.match.path === try_path && !shouldOpenImageEditor ) {
+            this.props.history.push(`/product/details/${this.props.match.params.product_id}`);
         }
     }
 
     openImageEditor = () => {
-        let nextPage = `/${CONSTANTS.appPages.PRODUCT}/details/${this.props.match.params.product_id}/try`;
-        this.props.history.push(nextPage);
+        // let self = this;
+        setTimeout(() => {
+            if (this.props.vehicle_details.current_vehicle) {
+                let nextPage = `/${CONSTANTS.appPages.PRODUCT}/details/${this.props.match.params.product_id}/try`;
+                this.props.history.push(nextPage);
+            }
+        }, 100);
+
     }
 
     handleCloseModal = () => {
@@ -134,7 +141,7 @@ class ProductDetails extends Component {
 
                         {vehicle_details.loaders.vehicle_loading && <ImageEditorLoader />}
 
-                        { vehicle_details.loaders.vehicle_loaded && vehicle_details.current_vehicle && !!vehicle_details.current_vehicle.id &&
+                        { vehicle_details.loaders.vehicle_loaded && vehicle_details.current_vehicle && vehicle_details.current_vehicle.vehicle_models.length > 0 &&
                             <ImageEditor vehicle={vehicle_details.current_vehicle} design={item_details.current_item} is_mobile={is_mobile} />
                         }
                     </Modal>

@@ -8,15 +8,15 @@ import './index.scss';
 const dropdown_menu = (vehicle_types, onMenuClicked) => {
     return (
         <div className="navbarDropdownMenuContainer">
-            <Menu onClick={(e) => onMenuClicked(e.key)}>
+            <Menu theme="dark" onClick={(e) => onMenuClicked(e.key)}>
                 <Menu.Item key="0">
-                    <a href=""><span className="font-14 is-font-medium">All</span></a>
+                    <span className="font-14 is-font-medium">All</span>
                 </Menu.Item>
 
                 {vehicle_types.map((type) => {
                     return (
                         <Menu.Item key={type.name}>
-                            <a href=""><span className="font-14 is-font-medium">{type.name}</span></a>
+                            <span className="font-14 is-font-medium">{type.name}</span>
                         </Menu.Item>
                     );
                 })}
@@ -28,7 +28,11 @@ const dropdown_menu = (vehicle_types, onMenuClicked) => {
 export default class AppNavbar extends Component {
 
     loadProductPage = (tag) => {
-        this.props.actions.navigateTo(`/product/list?tag=${tag}`);
+        if(tag.toString() === "0"){
+            this.props.actions.navigateTo(`/product/list`);
+        } else {
+            this.props.actions.navigateTo(`/product/list?tags=${tag}`);   
+        }
     }
 
     render() {
@@ -68,22 +72,18 @@ export default class AppNavbar extends Component {
                                     </div>
                                     <div className="navItem">
                                         <Dropdown overlay={dropdown_menu(this.props.vehicle_types, this.loadProductPage)} placement="bottomCenter" trigger={['click']} style={{ display: 'flex' }}>
-                                            <a className="ant-dropdown-link" href="#">Shop for <Icon style={{ fontSize: 10, verticalAlign: 'middle', paddingLeft: 5 }} type="caret-down" /></a>
+                                            <span className="ant-dropdown-link">Shop for <Icon style={{ fontSize: 10, verticalAlign: 'middle', paddingLeft: 5 }} type="caret-down" /></span>
                                         </Dropdown>
                                     </div>
 
-                                    <div className="navItem">
-                                        <a href="#">
-                                            <div className="icon">Products</div>
-                                        </a>
-                                    </div>
-                                    <div className="navItem">
+                                    <div className="navItem" onClick={() => { actions.navigateTo('/product/list'); }}>Products</div>
+                                    {/* <div className="navItem">
                                         <a href="#">
                                             <div className="icon">
                                                 <Icon type="search" />
                                             </div>
                                         </a>
-                                    </div>
+                                    </div> */}
                                 </Col>
                                 <Col className="flex-row flex-jfe flex-ac">
                                     <div className="flex-row flex-center navItem" onClick={() => { actions.navigateTo('/cart'); }}>

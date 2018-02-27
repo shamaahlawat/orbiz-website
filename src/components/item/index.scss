@@ -23,7 +23,8 @@
 
         .itemImage {
             max-height: 250px;
-            min-width: 150px;
+            min-height: 220px;
+            min-width: 200px;
         }
 
         .itemDetails {
@@ -67,6 +68,10 @@
 
         .favorites {
             color: $font-color-light;
+
+            .active {
+                color: red;
+            }
         }
 
         .itemDetails {

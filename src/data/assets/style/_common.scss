@@ -72,6 +72,14 @@ body {
     text-align: center;
 }
 
+.is-text-left {
+    text-align: left;
+}
+
+.is-text-right {
+    text-align: right;
+}
+
 .is-cursor-ptr {
     cursor: pointer;
 }
@@ -201,7 +209,7 @@ body {
 }
 
 .blinkingImg {
-    @include animation('blink 1s infinite linear')
+    @include animation("blink 1s infinite linear");
 }
 
 /*--------------------- FONT CLASSES ----------------------*/
@@ -283,7 +291,7 @@ body {
 }
 
 .font-40 {
-    font-size:40px;
+    font-size: 40px;
 }
 
 .font-2rm {
@@ -649,7 +657,6 @@ body {
 .mrgn-20 {
     margin: 20px;
 }
-
 
 //---------------- left-right-margin-X -------------------
 

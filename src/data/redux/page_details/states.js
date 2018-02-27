@@ -9,6 +9,9 @@ const initialStates = {
         popup_user: {},
         primary_carousal,
         secondary_carousal,
+        product_details_page: {
+            editor_vehicle_type: 'saved'
+        },
         loaders: {
             page_loading: false,
             page_loaded: false,

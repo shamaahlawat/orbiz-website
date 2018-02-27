@@ -74,3 +74,14 @@ export function updateRegistrationNumber(registration_number) {
         });
     };
 }
+
+export function updateCurrentVehicle(vehicle_details) {
+    return function (dispatch) {
+        dispatch({
+            type: actionTypes.VEHICLE_LOADED,
+            payload: {
+                vehicle_details
+            }
+        });
+    };
+}

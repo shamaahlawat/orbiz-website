@@ -87,7 +87,11 @@ export default function vehicle_details(state = initialStates.vehicle_details, a
 
         case actionTypes.VEHICLE_LOADED:
             let current_vehicle = action.payload.vehicle_details;
-            localStorage.setItem('current_vehicle', JSON.stringify(current_vehicle));
+            if (current_vehicle.name) {
+                localStorage.setItem('current_vehicle', JSON.stringify(current_vehicle));
+            } else {
+                localStorage.removeItem('current_vehicle');
+            }
             return {
                 ...state,
                 current_vehicle,
@@ -116,21 +120,7 @@ export default function vehicle_details(state = initialStates.vehicle_details, a
             localStorage.setItem('registration_number', JSON.stringify(registration_number));
             return {
                 ...state,
-                user_vehicle: {
-                    ...state.user_vehicle,
-                    registration_number
-                },
-            };
-
-        case actionTypes.VEHICLE_IMAGES_ENTERED:
-            let user_vehicle_images = action.payload.user_vehicle_images;
-            localStorage.setItem('user_vehicle_images', JSON.stringify(user_vehicle_images));
-            return {
-                ...state,
-                user_vehicle: {
-                    ...state.user_vehicle,
-                    images: user_vehicle_images
-                },
+                registration_number
             };
 
         default:

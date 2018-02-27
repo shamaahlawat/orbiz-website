@@ -17,7 +17,11 @@
 				display: block !important;
 			}
 		}
-	}
+    }
+    
+    .emptyList {
+        min-height: 200px;
+    }
 
 	.btn-fill-black {
 		min-width: 100px;

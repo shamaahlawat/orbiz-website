@@ -11,7 +11,7 @@ export default class HomeCarousal extends Component {
     }
 
     loadItemDetails = (id) => {
-        this.props.actions.loadItemDetails(`/product/details/${id}`);
+        this.props.actions.loadPath(`/product/details/${id}`);
     }
 
     render() {
@@ -50,9 +50,7 @@ export default class HomeCarousal extends Component {
                                         </div>
                                         <div className="is-text-center font-14 word-wrap description">{item.description}</div>
                                         <div className="button">
-                                            <Button className="flex-row btn-fill-white" onClick={() => { this.loadItemDetails(item.product_id); }}>
-                                                <a href="#" className="flex-row flex-center full-flex">SHOP NOW</a>
-                                            </Button>
+                                            <Button className="flex-row btn-fill-white" onClick={() => { this.loadItemDetails(item.product_id); }}>SHOP NOW</Button>
                                         </div>
                                     </div>
                                     <div className="mediaContainer" style={{ backgroundImage: `url(${item.image})` }} >

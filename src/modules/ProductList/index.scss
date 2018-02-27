@@ -1,6 +1,11 @@
 @import "../../data/assets/style/_style_import.scss";
 
 .ProductList {
+    .titleContainer {
+        background-color: $black-bg-light;
+        text-transform: capitalize;
+    }
+
     .collapseContainer {
         background-color: $black-bg-light;
 
@@ -25,8 +30,26 @@
             }
 
             .ant-collapse-content {
+                padding: 0;
                 background-color: $black-bg-light;
                 border: none !important;
+
+                .filterList {
+                    margin: 0;
+                    padding: 0;
+                    width: 100%;
+
+                    .filterItem {
+                        padding: 5px 15px;
+                        color: $grey-bg;
+                        cursor: pointer;
+
+                        &:hover, &.active {
+                            color: $black-bg;
+                            background: $primary;
+                        }
+                    }
+                }
             }
         }
     }

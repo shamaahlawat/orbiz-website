@@ -20,7 +20,6 @@ export default class ProdAddtnlDetails extends Component {
         this.setState({
             current_tab: key
         });
-        // console.log(key);
     }
 
     render() {

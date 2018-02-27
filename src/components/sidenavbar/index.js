@@ -14,8 +14,6 @@ export default class SideNavbar extends Component {
                     <div className="is-relative sideBarContent">
 						<ul className="menulist">
 							<li className="menuItem">Products</li>
-							<li className="menuItem">Search</li>
-							<li className="menuItem">Login/Signup</li>
 						</ul>
                     </div>
                 </Sidebar>

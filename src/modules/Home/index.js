@@ -128,7 +128,7 @@ class Home extends Component {
             );
         } else {
             const itemActions = {
-                // toggleItemFavorite: this.props.actions.toggleItemFavorite,
+                toggleItemFavorite: this.props.actions.toggleItemFavorite,
                 loadPath: this.loadPath
             };
 

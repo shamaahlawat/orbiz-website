@@ -132,16 +132,26 @@
     }
 }
 
+
+
 .navbarDropdownMenuContainer {
     padding-top: 8px;
 
-    .ant-menu-item {
-        color: $font-color-light !important;
+    .ant-menu {
+        .ant-menu-item {
+            color: $font-color-light !important;
 
-        &:hover {
-            span {
-                color: $black;
-                opacity: 0.8;
+            &:hover {
+                span {
+                    color: $primary;
+                }
+            }
+
+            &.ant-menu-item-selected {
+                background-color: $primary !important;
+                span {
+                    color: $black-bg !important;
+                }
             }
         }
     }

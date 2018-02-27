@@ -5,11 +5,34 @@
         color: #fff;
     }
 
-    .selectors {
-        .btn-fill-black{
-            color: $grey-bg !important;
-        }
+    .btn-fill-black:not(.active) {
+        color: $grey-bg !important;
+    }
 
+    .btn-fill-black:hover {
+        color: $primary-bg !important;
+    }
+
+    .ant-select {
+        color: $grey-bg;
+
+        .ant-select-selection {
+            height: auto;
+            padding: 3px 20px;
+            background-color: $black-bg;
+
+            .ant-select-arrow {
+                color: $grey-bg;
+            }
+
+            &:hover, &:focus,
+            &.ant-select-focused, &.ant-select-enabled {
+                border-color: $primary-bg;
+            }
+        }
+    }
+
+    .selectors {
         .regNumInput {
             border-radius: 5px;
             line-height: 2;
@@ -17,6 +40,18 @@
             padding: 1px 10px;
             border: 1px solid #fff;
             max-width: 33%;
+            color: $grey-bg !important;
+
+            &:active, &:focus {
+                border: 1px solid $primary-bg !important;
+                outline: none;
+            }
+        }
+    }
+
+    .ant-upload-list-item-info {
+        .anticon {
+            color: $grey-bg !important;
         }
     }
 }
