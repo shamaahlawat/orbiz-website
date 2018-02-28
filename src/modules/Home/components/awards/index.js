@@ -3,9 +3,6 @@ import { Row } from 'antd';
 
 import './index.scss';
 
-import img1 from '../../data/assets/img/24x7.png';
-import img2 from '../../data/assets/img/award.png';
-
 export default class Awards extends Component {
     render() {
         return (
@@ -15,11 +12,11 @@ export default class Awards extends Component {
 				</div>
                 <div className="tb-pad-30 flex-row flex-jsa flex-ac awardIconList">
                     <div className="r-pad-50 flex-column flex-center">
-                        <img className="awardIcon" src={img1} alt="" />
+                        <img className="awardIcon" src="https://res.cloudinary.com/poletalks/image/upload/v1519805416/orbiz/award.png" alt="" />
                         <span className="tb-pad-10 awardTitle">24*7 Support</span>
                     </div>
                     <div className="flex-column flex-center">
-                        <img className="awardIcon" src={img2} alt="" />
+                        <img className="awardIcon" src="https://res.cloudinary.com/poletalks/image/upload/v1519805416/orbiz/24x7.png" alt="" />
                         <span className="tb-pad-10 awardTitle">1 Year Warranty</span>
                     </div>
                 </div>

@@ -11,7 +11,7 @@ export default class ToolsBar extends Component {
         const slider_props = {
             min: 0.01,
             step: 0.01,
-            max: 1.2,
+            max: 0.5,
             defaultValue: 0.3,
             value: this.props.scale,
             onChange: actions.onScaleChange

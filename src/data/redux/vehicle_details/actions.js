@@ -1,13 +1,13 @@
 import actionTypes from '../action_types';
 import * as API from '../../config/api';
 
-export function getVehicles() {
+export function getVehicles(searchParams) {
     return function (dispatch) {
         dispatch({
             type: actionTypes.VEHICLE_LIST_LOADING
         });
 
-        API.getVehicles().then(response => {
+        API.getVehicles(searchParams).then(response => {
             dispatch({
                 type: actionTypes.VEHICLE_LIST_LOADED,
                 payload: {

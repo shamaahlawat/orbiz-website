@@ -8,6 +8,7 @@ import { Affix } from 'antd';
 import * as UTILS from './data/config/utils';
 import * as pageActions from './data/redux/page_details/actions';
 import * as vehicleActions from './data/redux/vehicle_details/actions';
+import * as itemActions from './data/redux/item_details/actions';
 import AppNavbar from './components/appnavbar';
 import AppFooter from './components/appfooter';
 
@@ -23,7 +24,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(Object.assign({}, pageActions, vehicleActions), dispatch)
+        actions: bindActionCreators(Object.assign({}, pageActions, itemActions, vehicleActions), dispatch)
     };
 }
 
@@ -35,8 +36,6 @@ class AppContainer extends Component {
             this.props.actions.setLang(systLang);
         }
         this.timeout = false;
-
-        this.props.actions.getVehicles();
         this.props.actions.getVehicleTypes();
     }
 

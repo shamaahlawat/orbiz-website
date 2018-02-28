@@ -32,69 +32,6 @@ const option1 = {
     centerMode: true
 };
 
-const vehicleData = [
-    {
-        _id: 0,
-        type: "Car",
-        models: [
-            {
-                _id: 0,
-                name: "Maruti 800"
-            },
-            {
-                _id: 1,
-                name: "I20"
-            }
-        ]
-    },
-    {
-        _id: 1,
-        type: "Bike",
-        models: [
-            {
-                _id: 0,
-                name: "Royal Enfield"
-            },
-            {
-                _id: 1,
-                name: "Pulsar 200 NS"
-            },
-            {
-                _id: 2,
-                name: "Triumph"
-            }
-        ]
-    },
-    {
-        _id: 2,
-        type: "Super Car",
-        models: [
-            {
-                _id: 0,
-                name: "Lamborghini"
-            },
-            {
-                _id: 1,
-                name: "Porsche Cayenne"
-            }
-        ]
-    },
-    {
-        _id: 3,
-        type: "Bus",
-        models: [
-            {
-                _id: 0,
-                name: "Tata"
-            },
-            {
-                _id: 1,
-                name: "Ashok Leyland"
-            }
-        ]
-    }
-];
-
 function mapStateToProps(state) {
     return {
         page_details: state.page_details,
@@ -181,7 +118,7 @@ class Home extends Component {
                                 <div className="lr-pad-15 is-text-center font-24 titleText">Want to see how number plate will look on your vehicle?</div>
                             </Col>
                             <Col xs={{ span: 22, offset: 1 }}>
-                                <VehicleSelector vehicles={vehicleData} />
+                                <VehicleSelector />
                             </Col>
                         </Col>
 

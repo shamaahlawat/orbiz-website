@@ -50,8 +50,8 @@ export const getProduct = (data) => {
     return fetchDataAndProceed(`/products/${data.product_id}.json`, method_types.get);
 };
 
-export const getVehicles = () => {
-    return fetchDataAndProceed('/vehicles.json', method_types.get);
+export const getVehicles = (data) => {
+    return fetchDataAndProceed('/vehicles.json', method_types.get, data);
 };
 
 export const getVehicle = (data) => {

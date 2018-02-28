@@ -18,7 +18,6 @@ export default function vehicle_details(state = initialStates.vehicle_details, a
 
         case actionTypes.VEHICLE_LIST_LOADED:
             vehicle_list = action.payload.vehicle_list;
-            localStorage.setItem('vehicle_list', JSON.stringify(vehicle_list));
             return {
                 ...state,
                 vehicle_list,
@@ -89,7 +88,7 @@ export default function vehicle_details(state = initialStates.vehicle_details, a
 
         case actionTypes.VEHICLE_LOADED:
             current_vehicle = action.payload.vehicle_details;
-            if (current_vehicle.name) {
+            if (current_vehicle && current_vehicle.name) {
                 localStorage.setItem('current_vehicle', JSON.stringify(current_vehicle));
             } else {
                 localStorage.removeItem('current_vehicle');

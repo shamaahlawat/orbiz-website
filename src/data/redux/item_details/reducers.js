@@ -33,6 +33,14 @@ export default function item_details(state = initialStates.item_details, action)
                 }
             };
 
+        case actionTypes.ALL_NUMPLATES_LOADED:
+            localStorage.setItem('all_numplates_list', JSON.stringify(action.payload.numplates));
+
+            return {
+                ...state,
+                all_numplates_list: action.payload.numplates
+            };
+
         case actionTypes.NUMPLATES_LOAD_ERR:
             return {
                 ...state,

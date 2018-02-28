@@ -51,12 +51,12 @@ export default class ProdDetails extends Component {
                     <Col span={24} className="t-mrgn-20 designsContainer">
                         <Col span={24} className="font-12 is-font-bold title">Available Designs</Col>
                         <Col span={24} className="flex-row flex-wrap">
-                            {item.product_types.map((design, index) => {
+                            {item.product_types.map((design) => {
                                 return (
-                                    <div className={classNames("mrgn-5 is-cursor-ptr design", { 'active': index === curr_design })}
-                                        key={index}
+                                    <div className={classNames("mrgn-5 is-cursor-ptr design", { 'active': design.id === curr_design.id })}
+                                        key={design.id}
                                         style={{ backgroundImage: `url(${design.image})` }}
-                                        onClick={() => { actions.handleDesignChange(index); }}>&nbsp;
+                                        onClick={() => { actions.handleDesignChange(design); }}>&nbsp;
                                 </div>
                                 );
                             })}
@@ -82,6 +82,6 @@ export default class ProdDetails extends Component {
 
 ProdDetails.propTypes = {
     item: PropTypes.object.isRequired,
-    curr_design: PropTypes.number,
+    curr_design: PropTypes.object,
     actions: PropTypes.object
 };

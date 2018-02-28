@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Row, Col, Select, Button, Upload, Icon} from 'antd';
+import { Row, Col, Select, Button, Upload, Icon, message} from 'antd';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -30,29 +30,27 @@ function mapDispatchToProps(dispatch) {
 class VirtualFitting extends Component {
     constructor(props) {
         super(props);
-        let current_user_vehicle, front_img_list = [], rear_img_list = [];
-        if (props.vehicle_details.current_vehicle) {
-            //prepopulating upload image details if present
-            current_user_vehicle = props.vehicle_details.current_vehicle;
-            front_img_list = [JSON.parse(localStorage.getItem('front_file'))];
-            rear_img_list = [JSON.parse(localStorage.getItem('rear_file'))];
-        } else {
-            current_user_vehicle = {
-                complete: false,
-                name: null,
-                type: 'user',
-                vehicle_models: [
-                    {
-                        name: 'User Vehicle',
-                        front_image: null,
-                        rear_image: null
-                    }
-                ]
-            };
-        }
+        let current_vehicle;
+        let front_img_list = JSON.parse(localStorage.getItem('front_file')) ? [JSON.parse(localStorage.getItem('front_file'))] : [];
+        let rear_img_list = JSON.parse(localStorage.getItem('rear_file')) ? [JSON.parse(localStorage.getItem('rear_file'))] : [];
+        let current_user_vehicle = {
+            complete: false,
+            name: null,
+            type: 'user',
+            vehicle_models: [
+                {
+                    id: 0,
+                    name: 'User Vehicle',
+                    front_image: front_img_list,
+                    rear_image: rear_img_list
+                }
+            ]
+        };
         this.state = {
             view_mode: null,
-            current_vehicle: null,
+            type: undefined,
+            model: undefined,
+            current_vehicle,
             front_img_list,
             rear_img_list,
             current_user_vehicle
@@ -60,9 +58,6 @@ class VirtualFitting extends Component {
 
         this.processFrontFile = this.processFrontFile.bind(this);
         this.processRearFile = this.processRearFile.bind(this);
-        this.onFrontFileRemoved = this.onFrontFileRemoved.bind(this);
-        this.onRearFileRemoved = this.onRearFileRemoved.bind(this);
-        this.openImageEditor = this.openImageEditor.bind(this);
     }
 
     registrationEntered = (registration_number) => {
@@ -70,17 +65,65 @@ class VirtualFitting extends Component {
     }
 
     setMode = (view_mode) => {
+        let current_user_vehicle, current_vehicle, front_img_list = [], rear_img_list = [];
+        if (view_mode === 'user_vehicle_upload') {
+            if (this.props.vehicle_details.current_vehicle && this.props.vehicle_details.current_vehicle.type === 'user') {
+                //prepopulating upload image details if present
+                current_user_vehicle = this.props.vehicle_details.current_vehicle;
+            } else {
+                front_img_list = [JSON.parse(localStorage.getItem('front_file'))];
+                rear_img_list = [JSON.parse(localStorage.getItem('rear_file'))];
+                current_user_vehicle = {
+                    complete: false,
+                    name: null,
+                    type: 'user',
+                    vehicle_models: [
+                        {
+                            id: 0,
+                            name: 'User Vehicle',
+                            front_image: front_img_list,
+                            rear_image: rear_img_list
+                        }
+                    ]
+                };
+            }
+        } else {
+            current_vehicle = (this.props.vehicle_details.current_vehicle && this.props.vehicle_details.current_vehicle.type !== 'user') ? this.props.vehicle_details.current_vehicle : undefined;
+        }
         this.setState({
-            view_mode
+            view_mode,
+            type: undefined,
+            model: undefined,
+            current_vehicle,
+            current_user_vehicle
         });
     }
 
-    onTypeSelected = () => {
-
+    handleTypeChange = (value) => {
+        this.props.actions.getVehicles({ vehicle_type: value });
+        this.props.actions.updateCurrentVehicle();
+        this.setState({
+            type: value,
+            model: undefined
+        });
     }
 
-    onModelSelected = () => {
-
+    handleModelChange = (value) => {
+        let current_vehicle = this.props.vehicle_details.vehicle_list.find((vehicle) => {
+            return vehicle.id === parseInt(value, 10);
+        });
+        if (current_vehicle && current_vehicle.id) {
+            this.setState({
+                model: value,
+                current_vehicle
+            });
+        } else {
+            this.setState({
+                model: undefined,
+                current_vehicle: undefined
+            });
+            message.error('Something went wrong! Try again!');
+        }
     }
 
     processFrontFile = (e) => {
@@ -127,7 +170,7 @@ class VirtualFitting extends Component {
             }
         });
         localStorage.removeItem('front_file');
-        this.props.actions.updateCurrentVehicle({});
+        this.props.actions.updateCurrentVehicle();
     }
 
     processRearFile = (e) => {
@@ -174,7 +217,7 @@ class VirtualFitting extends Component {
             }
         });
         localStorage.removeItem('rear_file');
-        this.props.actions.updateCurrentVehicle({});
+        this.props.actions.updateCurrentVehicle();
     }
 
     openImageEditor = (type) => {
@@ -185,6 +228,8 @@ class VirtualFitting extends Component {
 
     render() {
         const { vehicle_details } = this.props;
+        const model_btn_active = this.state.model && this.state.current_vehicle;
+        const user_btn_active = this.state.current_user_vehicle && this.state.current_user_vehicle.complete;
         return (
             <Row type="flex" align="center" className="pad-15 virtualFitting">
                 <Col span={24} className="font-12 is-font-bold title">Virtual Fitting:</Col>
@@ -200,29 +245,45 @@ class VirtualFitting extends Component {
                             <div className="flex-row flex-center uploadContainer">
                                 <Col xs={8} className="pad-5 is-text-center">
                                     <Select
-                                        style={{ width: "auto" }}
-                                        placeholder="Select Type"
-                                        defaultValue="0"
-                                        size="small"
-                                    >
-                                        <Option value="0">Car</Option>
-                                        <Option value="1">Bike</Option>
-                                    </Select>
-                                </Col>
-                                <Col xs={8} className="pad-5 is-text-center">
-                                    <Select showSearch
-                                        defaultValue="0"
-                                        size="small"
-                                        style={{ minWidth: "auto" }}
+                                        style={{ width: "auto", maxWidth: "100%" }}
+                                        placeholder="Select type"
                                         optionFilterProp="children"
-                                        placeholder="Select Model"
-                                    >
-                                        <Option value="0">Tesla S</Option>
-                                        <Option value="1">Royal Enfield</Option>
+                                        onChange={(val) => this.handleTypeChange(val)}
+                                        value={this.state.type}
+                                        notFoundContent="Not Matches Found"
+                                        filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
+                                        {vehicle_details.vehicle_types.map((type) => {
+                                            return (
+                                                <Option key={type.id} value={type.name}>{type.name}</Option>
+                                            );
+                                        })}
                                     </Select>
                                 </Col>
                                 <Col xs={8} className="pad-5 is-text-center">
-                                    <Button className="font-12 btn-fill-black" onClick={() => { this.openImageEditor('model'); }} disabled={!this.state.current_vehicle}>CONFIRM</Button>
+                                    <Select
+                                        showSearch
+                                        style={{ width: "auto", maxWidth: "100%" }}
+                                        placeholder="Select Modal"
+                                        optionFilterProp="children"
+                                        onChange={(val) => this.handleModelChange(val)}
+                                        value={this.state.model}
+                                        notFoundContent="Not Matches Found"
+                                        filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                                    >
+                                        {vehicle_details.loaders.list_loaded && vehicle_details.vehicle_list.map((item) => {
+                                            return (<Option key={item.id} value={item.id.toString()}>{item.name}</Option>);
+                                        })}
+
+                                        {!vehicle_details.loaders.list_loaded &&
+                                            <Option key="0" value="0" disabled><Icon type="loading" /></Option>
+                                        }
+                                    </Select>
+                                </Col>
+                                <Col xs={8} className="pad-5 is-text-center">
+                                    <Button className="font-12 btn-fill-black"
+                                        style={{ padding: '10px 15px', height: 'auto' }}
+                                        onClick={() => { this.openImageEditor('modal'); }}
+                                        disabled={!model_btn_active}>CONFIRM</Button>
                                 </Col>
                             </div>
                         </Row>
@@ -247,7 +308,7 @@ class VirtualFitting extends Component {
                                 >
                                     <Button className="font-12 btn-fill-black mrgn-5"><Icon type="upload" /> Rear</Button>
                                 </Upload>
-                                <Button className="font-12 btn-fill-black mrgn-5" onClick={() => { this.openImageEditor('user'); }} disabled={!this.state.current_user_vehicle.complete}>CONFIRM</Button>
+                                <Button className="font-12 btn-fill-black mrgn-5" onClick={() => { this.openImageEditor('user'); }} disabled={!user_btn_active}>CONFIRM</Button>
                             </div>
                         </Row>
                     </If>

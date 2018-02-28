@@ -36,7 +36,7 @@ class ProductDetails extends Component {
         super();
         this.state = {
             show_editor: false,
-            curr_design: 0
+            curr_design: undefined
         };
         this.handleCloseModal = this.handleCloseModal.bind(this);
         this.handleDesignChange = this.handleDesignChange.bind(this);
@@ -61,17 +61,21 @@ class ProductDetails extends Component {
         } else if (nextProps.match.path === try_path && !shouldOpenImageEditor ) {
             this.props.history.push(`/product/details/${this.props.match.params.product_id}`);
         }
+
+        if (nextProps.item_details.loaders.item_loading !== this.props.item_details.loaders.item_loading && !nextProps.item_details.loaders.item_loading) {
+            this.setState ({
+                curr_design: this.props.item_details.current_item.product_types[0]
+            });
+        }
     }
 
     openImageEditor = () => {
-        // let self = this;
         setTimeout(() => {
             if (this.props.vehicle_details.current_vehicle) {
                 let nextPage = `/${CONSTANTS.appPages.PRODUCT}/details/${this.props.match.params.product_id}/try`;
                 this.props.history.push(nextPage);
             }
         }, 100);
-
     }
 
     handleCloseModal = () => {
@@ -84,17 +88,16 @@ class ProductDetails extends Component {
 
     };
 
-    handleDesignChange = (index) => {
+    handleDesignChange = (design) => {
         this.setState({
-            curr_design: index,
-            curr_image: this.props.item_details.current_item.product_types[index].image
+            curr_design: design
         });
     }
 
     render() {
         const { item_details, vehicle_details } = this.props;
 
-        if (item_details.loaders.item_loading) {
+        if (item_details.loaders.item_loading || !this.state.curr_design) {
             return (
                 <div className="ProductDetailsContainer tb-pad-30 page-container">
                     <Row className="lr-pad-15 animated zoomIn">
@@ -114,13 +117,12 @@ class ProductDetails extends Component {
                 getVehicleDetails: this.props.actions.getVehicleDetails,
                 openImageEditor: this.openImageEditor
             };
-            const curr_image = this.state.curr_image ? this.state.curr_image : item_details.current_item ? item_details.current_item.image : null;
 
             return (
                 <div className="ProductDetailsContainer tb-pad-30 page-container">
                     <Row className="lr-pad-15">
                         <Col xs={{ span: 24 }} sm={{ span: 12 }} className="ProdImageContainer">
-                            {item_details.current_item && <ProdImage item_image={curr_image} />}
+                            {item_details.current_item && <ProdImage item_image={this.state.curr_design && this.state.curr_design.image} />}
                         </Col>
                         <Col xs={{ span: 24 }} sm={{ span: 12 }} className="r-pad-15 ProdDetailsContainer">
                             {item_details.current_item && <ProdDetails item={item_details.current_item} curr_design={this.state.curr_design} actions={actions} />}
@@ -141,7 +143,7 @@ class ProductDetails extends Component {
 
                         {vehicle_details.loaders.vehicle_loading && <ImageEditorLoader />}
 
-                        { vehicle_details.loaders.vehicle_loaded && vehicle_details.current_vehicle && vehicle_details.current_vehicle.vehicle_models.length > 0 &&
+                        {vehicle_details.loaders.vehicle_loaded && vehicle_details.current_vehicle && vehicle_details.current_vehicle.name &&
                             <ImageEditor vehicle={vehicle_details.current_vehicle} design={item_details.current_item} is_mobile={is_mobile} />
                         }
                     </Modal>

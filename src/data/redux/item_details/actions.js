@@ -14,6 +14,15 @@ export function getProducts(searchParams) {
                     numplates: response.data.products
                 }
             });
+
+            if (searchParams.category === 'number') {
+                dispatch({
+                    type: actionTypes.ALL_NUMPLATES_LOADED,
+                    payload: {
+                        numplates: response.data.products
+                    }
+                });
+            }
         }).catch(() => {
             dispatch({
                 type: actionTypes.NUMPLATES_LOAD_ERR

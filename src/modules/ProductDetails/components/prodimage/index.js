@@ -38,6 +38,6 @@ export default class ProdImage extends Component {
 }
 
 ProdImage.propTypes = {
-    item_image: PropTypes.string.isRequired
+    item_image: PropTypes.string
 };
 
