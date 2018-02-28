@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Row, Col, Collapse, Select } from 'antd';
+import { Row, Col, Collapse } from 'antd';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import './index.scss';
-
+import * as CONSTANTS from '../../data/config/constants';
 import * as pageActions from '../../data/redux/page_details/actions';
 import * as itemActions from '../../data/redux/item_details/actions';
 
 import ItemListContainer from '../../components/itemlist';
 
 const Panel = Collapse.Panel;
-const Option = Select.Option;
 
 function mapStateToProps(state) {
     return {
@@ -42,6 +41,10 @@ class ProductList extends Component {
         this.state = {
             search_term
         };
+    }
+
+    componentWillMount() {
+        this.props.actions.pageChanged(CONSTANTS.appPages.PRODUCT_LIST);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -136,6 +139,7 @@ class ProductList extends Component {
 
 ProductList.propTypes = {
     history: PropTypes.object,
+    location: PropTypes.object,
     actions: PropTypes.object,
     page_details: PropTypes.object,
     item_details: PropTypes.object,

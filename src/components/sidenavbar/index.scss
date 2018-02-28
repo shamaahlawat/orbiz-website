@@ -11,17 +11,17 @@
 
         .bm-icon {
             display: flex;
-			color: $font-color-light;
+            color: $font-color-light;
 
-			.material-icons {
-				font-size: 45px;
-			}
+            .material-icons {
+                font-size: 45px;
+            }
         }
     }
 
     .bm-menu-wrap {
-		top: 0;
-		left: 0;
+        top: 0;
+        left: 0;
 
         .bm-menu {
             background: $black-bg-dark;
@@ -29,20 +29,26 @@
             .bm-item-list {
                 .sideBarContent {
                     height: 100%;
-					min-height: 100vh;
+                    min-height: 100vh;
 
-					.menulist {
-						padding-top: 30px;
+                    .menulist {
+                        padding-top: 30px;
 
-						.menuItem {
-							font-size: 18px;
-							padding: 15px;
+                        .menuItem {
+                            font-size: 18px;
+                            padding: 15px;
+                            cursor: pointer;
 
-							&.active {
-								color: $primary;
-							}
-						}
-					}
+                            &.active {
+                                color: $primary;
+                            }
+
+                            &.subMenuItem {
+                                padding: 5px;
+                                padding-left: 30px;
+                            }
+                        }
+                    }
                 }
             }
         }

@@ -146,7 +146,7 @@ export default class ImageEditor extends Component {
                         <div className="pad-5 flex-row flex-center selector">
                             <span className="r-mrgn-10 property">Car Color:</span>
                             <Select defaultValue={this.props.vehicle.vehicle_models[0].name} style={{ width: "auto" }} onChange={(e)=>{this.handleCarColor(e);}}>
-                                {this.props.vehicle.vehicle_models.map((model, index)=>{
+                                {this.props.vehicle.vehicle_models.map((model)=>{
                                     return(
                                         <Option key={model.id} value={model.id}>{model.name}</Option>
                                     );

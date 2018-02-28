@@ -1,6 +1,8 @@
 import actionTypes from '../action_types';
 import initialStates from './states';
 
+let numplates_list, frames_list, current_item, index, favorites, updated_frames_list, updated_numplates_list;
+
 export default function item_details(state = initialStates.item_details, action) {
     switch (action.type) {
         case actionTypes.NUMPLATES_LOADING:
@@ -14,7 +16,7 @@ export default function item_details(state = initialStates.item_details, action)
             };
 
         case actionTypes.NUMPLATES_LOADED:
-            let numplates_list = action.payload.numplates;
+            numplates_list = action.payload.numplates;
             numplates_list = numplates_list.map((item) => {
                 item.is_favorite = (state.favorites.indexOf(item.id) > -1);
                 return item;
@@ -52,7 +54,7 @@ export default function item_details(state = initialStates.item_details, action)
             };
 
         case actionTypes.FRAMES_LOADED:
-            let frames_list = action.payload.frames;
+            frames_list = action.payload.frames;
             frames_list = frames_list.map((item) => {
                 item.is_favorite = (state.favorites.indexOf(item.id) > -1);
                 return item;
@@ -90,7 +92,7 @@ export default function item_details(state = initialStates.item_details, action)
             };
 
         case actionTypes.ITEM_LOADED:
-            let current_item = action.payload.item;
+            current_item = action.payload.item;
             current_item.is_favorite = (state.favorites.indexOf(current_item.id) > -1);
             localStorage.setItem('current_item', JSON.stringify(current_item));
             return {
@@ -115,8 +117,7 @@ export default function item_details(state = initialStates.item_details, action)
             };
 
         case actionTypes.TOGGLE_FAVORITE:
-            let index = state.favorites.indexOf(action.payload.product_id);
-            let favorites;
+            index = state.favorites.indexOf(action.payload.product_id);
             if (index > -1) {
                 favorites = [
                     ...state.favorites.slice(0, index),
@@ -129,22 +130,22 @@ export default function item_details(state = initialStates.item_details, action)
                 ];
             }
 
-            const updated_numplates_list = state.numplates_list.map(item => {
+            updated_numplates_list = state.numplates_list.map(item => {
                 if (item.id === action.payload.product_id) {
                     return {
                         ...item,
                         is_favorite: !item.is_favorite
-                    }
+                    };
                 }
                 return item;
             });
 
-            const updated_frames_list = state.frames_list.map(item => {
+            updated_frames_list = state.frames_list.map(item => {
                 if (item.id === action.payload.product_id) {
                     return {
                         ...item,
                         is_favorite: !item.is_favorite
-                    }
+                    };
                 }
                 return item;
             });

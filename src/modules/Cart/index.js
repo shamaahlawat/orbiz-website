@@ -5,7 +5,7 @@ import { Row, Col, Form } from 'antd';
 import PropTypes from 'prop-types';
 
 import './index.scss';
-
+import * as CONSTANTS from '../../data/config/constants';
 import * as pageActions from '../../data/redux/page_details/actions';
 import * as cartActions from '../../data/redux/cart_details/actions';
 import CartDetails from './components/cartdetails';
@@ -27,6 +27,10 @@ function mapDispatchToProps(dispatch) {
 }
 
 class Cart extends Component {
+    componentWillMount() {
+        this.props.actions.pageChanged(CONSTANTS.appPages.CART);
+    }
+
     render() {
         return (
             <div className="CartContainer page-container">

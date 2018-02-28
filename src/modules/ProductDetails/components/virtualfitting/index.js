@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Row, Col, Form, Select, Radio, Button, Upload, Icon} from 'antd';
+import { Row, Col, Select, Button, Upload, Icon} from 'antd';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-const FormItem = Form.Item;
+const Option = Select.Option;
 
 import './index.scss';
-import * as CONSTANTS from '../../../../data/config/constants';
 import * as pageActions from '../../../../data/redux/page_details/actions';
 import * as itemActions from '../../../../data/redux/item_details/actions';
 import * as vehicleActions from '../../../../data/redux/vehicle_details/actions';
@@ -109,12 +108,12 @@ class VirtualFitting extends Component {
                 lastModified: e.lastModified
             };
             localStorage.setItem('front_file', JSON.stringify(front_file));
-        }
+        };
         reader.readAsDataURL(e);
         return false;
     }
 
-    onFrontFileRemoved = (e) => {
+    onFrontFileRemoved = () => {
         let self = this;
         let user_vehicle_model = [...self.state.current_user_vehicle.vehicle_models];
         user_vehicle_model[0].front_image = null;
@@ -156,12 +155,12 @@ class VirtualFitting extends Component {
                 lastModified: e.lastModified
             };
             localStorage.setItem('rear_file', JSON.stringify(rear_file));
-        }
+        };
         reader.readAsDataURL(e);
         return false;
     }
 
-    onRearFileRemoved = (e) => {
+    onRearFileRemoved = () => {
         let self = this;
         let user_vehicle_model = [...self.state.current_user_vehicle.vehicle_models];
         user_vehicle_model[0].rear_image = null;
@@ -185,14 +184,14 @@ class VirtualFitting extends Component {
     }
 
     render() {
-        const { vehicle_details, actions } = this.props;
+        const { vehicle_details } = this.props;
         return (
             <Row type="flex" align="center" className="pad-15 virtualFitting">
                 <Col span={24} className="font-12 is-font-bold title">Virtual Fitting:</Col>
                 <Col span={24} className="flex-row flex-center flex-wrap selectors">
                     <input className="font-12 btn-fill-black tb-mrgn-10 regNumInput" value={vehicle_details.registration_number} onChange={(e) => { this.registrationEntered(e.target.value); }} placeholder="Enter your registration number"/>
-                    <Button className={classNames("font-12 btn-fill-black lr-mrgn-10 tb-mrgn-10", { active: this.state.view_mode === 'select_model' })} onClick={() => { this.setMode('select_model') }}>Try on your vehicle model</Button>
-                    <Button className={classNames("font-12 btn-fill-black tb-mrgn-10", { active: this.state.view_mode === 'user_vehicle_upload'})} onClick={() => { this.setMode('user_vehicle_upload')}}>Try on your vehicle</Button>
+                    <Button className={classNames("font-12 btn-fill-black lr-mrgn-10 tb-mrgn-10", { active: this.state.view_mode === 'select_model' })} onClick={() => { this.setMode('select_model'); }}>Try on your vehicle model</Button>
+                    <Button className={classNames("font-12 btn-fill-black tb-mrgn-10", { active: this.state.view_mode === 'user_vehicle_upload' })} onClick={() => { this.setMode('user_vehicle_upload'); }}>Try on your vehicle</Button>
                 </Col>
                 <Col span={24} className="t-pad-15 flex-row flex-center flex-wrap actionsContainer">
                     <If condition={this.state.view_mode === 'select_model'}>

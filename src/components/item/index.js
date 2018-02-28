@@ -12,7 +12,7 @@ export default class Item extends Component {
         this.props.actions.loadPath(`/product/details/${this.props.item.id}`);
     };
 
-    toggleItemFavorite = (e) => {
+    toggleItemFavorite = () => {
         this.props.actions.toggleItemFavorite(this.props.item.id);
     };
 

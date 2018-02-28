@@ -1,6 +1,8 @@
 import actionTypes from '../action_types';
 import initialStates from './states';
 
+let vehicle_list, vehicle_types, current_vehicle, registration_number;
+
 export default function vehicle_details(state = initialStates.vehicle_details, action) {
     switch (action.type) {
         case actionTypes.VEHICLE_LIST_LOADING:
@@ -15,7 +17,7 @@ export default function vehicle_details(state = initialStates.vehicle_details, a
             };
 
         case actionTypes.VEHICLE_LIST_LOADED:
-            let vehicle_list = action.payload.vehicle_list;
+            vehicle_list = action.payload.vehicle_list;
             localStorage.setItem('vehicle_list', JSON.stringify(vehicle_list));
             return {
                 ...state,
@@ -50,7 +52,7 @@ export default function vehicle_details(state = initialStates.vehicle_details, a
             };
 
         case actionTypes.VEHICLE_TYPE_LOADED:
-            let vehicle_types = action.payload.vehicle_types;
+            vehicle_types = action.payload.vehicle_types;
             localStorage.setItem('vehicle_types', JSON.stringify(vehicle_types));
             return {
                 ...state,
@@ -86,7 +88,7 @@ export default function vehicle_details(state = initialStates.vehicle_details, a
             };
 
         case actionTypes.VEHICLE_LOADED:
-            let current_vehicle = action.payload.vehicle_details;
+            current_vehicle = action.payload.vehicle_details;
             if (current_vehicle.name) {
                 localStorage.setItem('current_vehicle', JSON.stringify(current_vehicle));
             } else {
@@ -116,7 +118,7 @@ export default function vehicle_details(state = initialStates.vehicle_details, a
             };
 
         case actionTypes.VEHICLE_REGISTRATION_ENTERED:
-            let registration_number = action.payload.registration_number;
+            registration_number = action.payload.registration_number;
             localStorage.setItem('registration_number', JSON.stringify(registration_number));
             return {
                 ...state,

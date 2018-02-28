@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router';
 import { ConnectedRouter } from 'react-router-redux';
 import { Provider } from 'react-redux';
-import ReactGA from 'react-ga';
 
 import * as CONSTANTS from './data/config/constants';
 
@@ -12,8 +11,6 @@ import Home from './modules/Home';
 import ProductList from './modules/ProductList';
 import ProductDetails from './modules/ProductDetails';
 import Cart from './modules/Cart';
-
-import 'antd/dist/antd.css';
 
 export default class Root extends Component {
     render() {

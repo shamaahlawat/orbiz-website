@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Col, Row, Button, Select } from 'antd';
+import { Col, Row, Button } from 'antd';
 import classNames from 'classnames';
 
 import './index.scss';
@@ -14,7 +14,7 @@ export default class ItemListContainer extends Component {
     };
 
     render() {
-        const { actions, items, title, loading, filters, show_filter, show_sort } = this.props;
+        const { actions, items, title, loading, filters, show_filter } = this.props;
         let search_term;
         if(title && title.toLowerCase() === 'number plates'){
             search_term = 'category=number';
@@ -44,7 +44,9 @@ export default class ItemListContainer extends Component {
                         </If>
                     </div>
                     <div className="flex-row flex-jsa filterContainer mobile">
-                        <span className="filterItem is-capitalize pad-10 active" onClick={() => { this.loadPath(`/product/list?${search_term}`); }}>View All</span>
+                        <If condition={show_filter}>
+                            <span className="filterItem is-capitalize pad-10 active" onClick={() => { this.loadPath(`/product/list?${search_term}`); }}>View All</span>
+                        </If>
                     </div>
                 </Col>
 

@@ -78,6 +78,7 @@ class AppContainer extends Component {
 AppContainer.propTypes = {
     page_details: PropTypes.object,
     cart_details: PropTypes.object,
+    vehicle_details: PropTypes.object,
     actions: PropTypes.object,
     history: PropTypes.object,
     children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired
