@@ -1,6 +1,10 @@
 @import "colors";
 @import "variables";
 
+.ant-message {
+    color: #333 !important;
+}
+
 //---------------------- BUTTON CLASSES ----------------------
 .btn-fill-primary {
     color: $white !important;
@@ -19,7 +23,7 @@
     border-color: $grey-bg !important;
 
     &:hover, &:focus, &.active {
-		color: $primary-bg !important;
+        color: $primary-bg !important;
         background-color: $black-bg-light !important;
         border-color: $primary-bg !important;
     }
@@ -31,7 +35,7 @@
     border-color: $font-dark !important;
 
     &:hover, &:focus, &.active {
-		color: $white !important;
+        color: $white !important;
         background-color: $font-dark !important;
         border-color: $font-dark !important;
     }
@@ -109,7 +113,6 @@
         border: 1px solid transparent !important;
     }
 }
-
 
 .btn-ghost-info {
     color: $info !important;

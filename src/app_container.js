@@ -9,6 +9,7 @@ import * as UTILS from './data/config/utils';
 import * as pageActions from './data/redux/page_details/actions';
 import * as vehicleActions from './data/redux/vehicle_details/actions';
 import * as itemActions from './data/redux/item_details/actions';
+import * as cartActions from './data/redux/cart_details/actions';
 import AppNavbar from './components/appnavbar';
 import AppFooter from './components/appfooter';
 
@@ -24,7 +25,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(Object.assign({}, pageActions, itemActions, vehicleActions), dispatch)
+        actions: bindActionCreators(Object.assign({}, pageActions, itemActions, vehicleActions, cartActions), dispatch)
     };
 }
 
@@ -37,6 +38,7 @@ class AppContainer extends Component {
         }
         this.timeout = false;
         this.props.actions.getVehicleTypes();
+        this.props.actions.initializeCart();
     }
 
     componentDidMount() {

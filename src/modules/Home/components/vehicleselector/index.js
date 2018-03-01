@@ -151,5 +151,5 @@ VehicleSelector.propTypes = {
     actions: PropTypes.object
 };
 
-export default connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(withRouter(VehicleSelector));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(VehicleSelector));
 

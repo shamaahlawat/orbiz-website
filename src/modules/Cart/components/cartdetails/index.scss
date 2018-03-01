@@ -1,0 +1,20 @@
+@import "../../../../data/assets/style/style_import";
+
+.CartDetails {
+    .sectionContent {
+        max-height: 400px;
+        overflow: scroll;
+        .emptyContent {
+            color: $grey-bg;
+        }
+    }
+
+    .sectionFooter {
+        .subtotal {
+            .price {
+                color: $green;
+            }
+        }
+    }
+
+}

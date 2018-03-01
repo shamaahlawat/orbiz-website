@@ -1,13 +1,48 @@
+@import "../../../../../data/assets/style/style_import";
+
 .CartItem {
     text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
 
     .itemImageBox {
-        height: 80px;
-        width: 80px;
-        background-color: white; // remove this 
+        max-height: 100px;
+        max-width: 100px;
+        background-color: $grey-bg;
     }
 
-    .inputCounter {
-        width: 45px;
+    .itemDetails {
+        color: $grey-bg;
+
+        .counter {
+            .count {
+                height: 30px;
+                width: 30px;
+            }
+
+            .icon {
+                background: $black-bg;
+                height: 30px;
+                width: 30px;
+                border-radius: 5px;
+            }
+        }
+    }
+
+    .anticon {
+        &:hover {
+            transform: scale(1.2);
+
+            &.edit-icon {
+                color: $info;
+            }
+
+            &.delete-icon {
+                color: $danger;
+            }
+        }
+    }
+
+    .right-box {
+
     }
 }

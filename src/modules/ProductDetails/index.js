@@ -9,6 +9,7 @@ import * as CONSTANTS from '../../data/config/constants';
 import * as pageActions from '../../data/redux/page_details/actions';
 import * as itemActions from '../../data/redux/item_details/actions';
 import * as vehicleActions from '../../data/redux/vehicle_details/actions';
+import * as cartActions from '../../data/redux/cart_details/actions';
 import ProdDetails from './components/proddetails';
 import ProdDetailsLoader from './components/proddetails/loader';
 import ProdImage from './components/prodimage';
@@ -21,13 +22,14 @@ function mapStateToProps(state) {
     return {
         page_details: state.page_details,
         item_details: state.item_details,
-        vehicle_details: state.vehicle_details
+        vehicle_details: state.vehicle_details,
+        cart_details: state.cart_details
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(Object.assign({}, pageActions, itemActions, vehicleActions), dispatch)
+        actions: bindActionCreators(Object.assign({}, pageActions, itemActions, vehicleActions, cartActions), dispatch)
     };
 }
 
@@ -36,7 +38,8 @@ class ProductDetails extends Component {
         super();
         this.state = {
             show_editor: false,
-            curr_design: undefined
+            curr_design: undefined,
+            curr_variant: undefined
         };
         this.handleCloseModal = this.handleCloseModal.bind(this);
         this.handleDesignChange = this.handleDesignChange.bind(this);
@@ -51,7 +54,7 @@ class ProductDetails extends Component {
     componentWillReceiveProps(nextProps) {
         let try_path = `/product/details/:product_id/try`;
         let self= this;
-        let shouldOpenImageEditor = (nextProps.vehicle_details.current_vehicle && (nextProps.match.path === try_path && nextProps.item_details.current_item !== this.props.item_details.current_item) || (nextProps.match.path === try_path && nextProps.match.path !== this.props.match.path && !!nextProps.item_details.current_item.id));
+        let shouldOpenImageEditor = (nextProps.vehicle_details.current_vehicle && nextProps.match.path === try_path && !!nextProps.item_details.current_item.id);
         if (shouldOpenImageEditor) {
             setTimeout(function () {
                 self.setState({
@@ -62,7 +65,7 @@ class ProductDetails extends Component {
             this.props.history.push(`/product/details/${this.props.match.params.product_id}`);
         }
 
-        if (nextProps.item_details.loaders.item_loading !== this.props.item_details.loaders.item_loading && !nextProps.item_details.loaders.item_loading) {
+        if (nextProps.item_details.loaders.item_loading !== this.props.item_details.loaders.item_loading && !nextProps.item_details.loaders.item_loading && this.props.item_details.current_item && this.props.item_details.current_item.product_types.length > 0) {
             this.setState ({
                 curr_design: this.props.item_details.current_item.product_types[0]
             });
@@ -88,16 +91,26 @@ class ProductDetails extends Component {
 
     };
 
-    handleDesignChange = (design) => {
+    handleDesignChange = (curr_design) => {
         this.setState({
-            curr_design: design
+            curr_design
         });
     }
 
-    render() {
-        const { item_details, vehicle_details } = this.props;
+    handleVariantChange = (curr_variant) => {
+        this.setState({
+            curr_variant
+        });
+    }
 
-        if (item_details.loaders.item_loading || !this.state.curr_design) {
+    loadPath = (path) => {
+        this.props.history.push(path);
+    }
+
+    render() {
+        const { item_details, vehicle_details, cart_details } = this.props;
+
+        if (item_details.loaders.item_loading) {
             return (
                 <div className="ProductDetailsContainer tb-pad-30 page-container">
                     <Row className="lr-pad-15 animated zoomIn">
@@ -114,21 +127,36 @@ class ProductDetails extends Component {
             const is_mobile = (this.props.page_details.device_data.screen_width < 768);
             const actions = {
                 handleDesignChange: this.handleDesignChange,
+                handleVariantChange: this.handleVariantChange,
                 getVehicleDetails: this.props.actions.getVehicleDetails,
-                openImageEditor: this.openImageEditor
+                openImageEditor: this.openImageEditor,
+                loadPath: this.loadPath,
+                addToCart: this.props.actions.addToCart,
+                removeFromCart: this.props.actions.removeFromCart
             };
 
             return (
                 <div className="ProductDetailsContainer tb-pad-30 page-container">
                     <Row className="lr-pad-15">
                         <Col xs={{ span: 24 }} sm={{ span: 12 }} className="ProdImageContainer">
-                            {item_details.current_item && <ProdImage item_image={this.state.curr_design && this.state.curr_design.image} />}
+                            { item_details.current_item &&
+                                <ProdImage item_image={this.state.curr_design && this.state.curr_design.image} />
+                            }
                         </Col>
                         <Col xs={{ span: 24 }} sm={{ span: 12 }} className="r-pad-15 ProdDetailsContainer">
-                            {item_details.current_item && <ProdDetails item={item_details.current_item} curr_design={this.state.curr_design} actions={actions} />}
+                            { item_details.current_item &&
+                                <ProdDetails item={item_details.current_item}
+                                    curr_design={this.state.curr_design}
+                                    curr_variant={this.state.curr_variant}
+                                    registration_number={vehicle_details.registration_number}
+                                    cart_details={cart_details} actions={actions}
+                                />
+                            }
                         </Col>
                         <Col xs={{ span: 24 }} className="t-mrgn-40 ProdAddtnlDetailsContainer">
-                            {item_details.current_item && <ProdAddtnlDetails item={item_details.current_item} />}
+                            { item_details.current_item &&
+                                <ProdAddtnlDetails item={item_details.current_item} />
+                            }
                         </Col>
                     </Row>
                     <Modal
@@ -159,7 +187,8 @@ ProductDetails.propTypes = {
     match: PropTypes.object,
     page_details: PropTypes.object,
     item_details: PropTypes.object,
-    vehicle_details: PropTypes.object
+    vehicle_details: PropTypes.object,
+    cart_details: PropTypes.object
 };
 
 export default connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(ProductDetails);

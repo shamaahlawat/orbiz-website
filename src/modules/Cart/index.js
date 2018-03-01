@@ -31,16 +31,26 @@ class Cart extends Component {
         this.props.actions.pageChanged(CONSTANTS.appPages.CART);
     }
 
+    loadPath = (path) => {
+        this.props.history.push(path);
+    }
+
     render() {
+        const { cart_details, actions } = this.props;
+        let actionProps = {
+            ...actions,
+            loadPath: this.loadPath
+        };
+
         return (
             <div className="CartContainer page-container">
                 <Row type="flex">
                     <Col span={24} className="text-center">
                         <Col xs={24} sm={12} md={{ span: 12, offset: 3 }} className="cartDetailsContainer">
-                            <CartDetails />
+                            <CartDetails cart_details={cart_details} actions={actionProps}/>
                         </Col>
                         <Col xs={24} sm={12} md={{ span: 6 }} className="addressDetailsContainer">
-                            <CartAddressDetails />
+                            <CartAddressDetails cart_details={cart_details} actions={actionProps}/>
                         </Col>
                     </Col>
                 </Row>
@@ -51,6 +61,7 @@ class Cart extends Component {
 
 Cart.propTypes = {
     actions: PropTypes.object,
+    history: PropTypes.object,
     page_details: PropTypes.object,
     cart_details: PropTypes.object,
 };

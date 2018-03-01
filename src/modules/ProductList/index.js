@@ -108,7 +108,7 @@ class ProductList extends Component {
                                         >Number Plates</li>
                                         <li
                                             className={classNames("filterItem", { 'active': this.state.search_term && this.state.search_term.category === 'frames'})}
-                                            onClick={()=>{ this.loadPath('/product/list?category=number'); }}
+                                            onClick={()=>{ this.loadPath('/product/list?category=frames'); }}
                                         >Frames</li>
                                     </ul>
                                 </Panel>

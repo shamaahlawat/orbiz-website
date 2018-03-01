@@ -62,4 +62,11 @@ export const getVehicleTypes = () => {
     return fetchDataAndProceed('/vehicle_types.json', method_types.get);
 };
 
-/*------------------------------ APIS -----------------------*/
+export const createOrder = (data) => {
+    return fetchDataAndProceed('/orders.json', method_types.post, data);
+};
+
+export const updatePaymentStatus = (data) => {
+    return fetchDataAndProceed('/orders.json', method_types.put, data);
+};
+

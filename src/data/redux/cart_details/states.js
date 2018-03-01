@@ -1,18 +1,25 @@
+
 const initialStates = {
-    page_details: {
-        lang: 'en',
-        device_data: {},
-        current_page: undefined,
-        popup_user: {},
-        primary_carousal: [],
-        secondary_carousal: [],
+    cart_details: {
+        cart_items: [],
+        cart_item_ids: [],
+        total_amount: 0,
+        shipping_address: {
+            address: "",
+            pincode: "",
+            city: "",
+            state: "",
+            country: "India",
+            email: "",
+            phone: "",
+        },
+        order_id: undefined,
+        payment_status: undefined,
+        order_details: {},
         loaders: {
-            user_popup_loading: false,
-            user_popup_loaded: false,
-            user_popup_error: false,
-            page_load_error: false,
-            carousal_loading: false,
-            carousal_load_err: false
+            order_adding: false,
+            order_added: false,
+            order_add_err: false
         }
     },
 };

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Dropdown, Icon } from 'antd';
+import { Row, Col, Dropdown, Icon, Badge } from 'antd';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -19,7 +19,7 @@ export default class AppNavbar extends Component {
     }
 
     render() {
-        let { page_details, vehicle_types, actions } = this.props;
+        let { page_details, vehicle_types, cart_details, actions } = this.props;
 
         if (page_details.device_data.screen_width < 768) {
             return (
@@ -29,7 +29,7 @@ export default class AppNavbar extends Component {
                             <Col xs={{ span: 24 }} sm={{ span: 22, offset: 1 }} className="flex-row flex-jsb">
                                 <Col className="flex-row flex-jsa flex-ac">
                                     <div className="sidenavbar">
-                                        <SideNavbar page_details={page_details} vehicle_types={vehicle_types} actions={actions}/>
+                                        <SideNavbar page_details={page_details} cart_details={cart_details} vehicle_types={vehicle_types} actions={actions}/>
                                     </div>
                                     <div onClick={() => { actions.navigateTo('/'); }} className="navItem">
                                         <img src="https://i0.wp.com/orbiz.in/wp-content/uploads/2017/11/a.png" alt="orbiz" className="is-cursor-ptr setBrandIcon" />
@@ -72,6 +72,7 @@ export default class AppNavbar extends Component {
                                     <div className={classNames("flex-row flex-center navItem", { 'active': page_details.current_page === CONSTANTS.appPages.CART })} onClick={() => { actions.navigateTo('/cart'); }}>
                                         <span>Cart&nbsp;</span>
                                         <i className="material-icons iconColor">shopping_cart</i>
+                                        <Badge count={cart_details.cart_items.length}/>
                                     </div>
                                 </Col>
                             </Col>
