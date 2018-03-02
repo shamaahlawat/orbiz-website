@@ -54,10 +54,38 @@
 
     <!-- libraries -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 
 <body>
     <div id="app"></div>
+    <script>
+        function openPaymentPage(data, callback) {
+            var options = {
+                "key": "rzp_test_YSH9mReyszUKGo", //test
+                // "key": "rzp_live_Nud13N537pCqmZ", //live
+                "amount": data.total * 100, // 2000 paise = INR 20
+                "name": "Orbiz Automotivez",
+                "description": data.total_count + " items payment",
+                "image": "https://i0.wp.com/orbiz.in/wp-content/uploads/2017/11/a.png",
+                "handler": function (response) {
+                    callback(response);
+                },
+                "prefill": {
+                    "email": data.email,
+                    "contact": data.phone
+                },
+                "notes": {
+                },
+                "theme": {
+                    "color": "#F37254"
+                }
+            };
+
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+        }
+    </script>
 </body>
 
 </html>

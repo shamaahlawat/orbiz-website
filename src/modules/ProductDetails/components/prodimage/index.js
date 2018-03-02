@@ -24,7 +24,7 @@ export default class ProdImage extends Component {
             <Row type="flex" justify="center" className="lr-pad-15 b-mrgn-10 ProdImage">
                 <div className="full-flex imageContainer" style={{ backgroundImage: `url(${item_image})` }} onClick={this.toggleView}>&nbsp;</div>
                 <Modal
-                    className={"modalStyle"}
+                    className="modalStyle"
                     wrapClassName="vertical-center-modal"
                     title={"Product Image"}
                     visible={this.state.fullsizeView}

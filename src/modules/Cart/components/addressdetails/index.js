@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Form, Input, Button, Icon, message } from 'antd';
+import { Row, Col, Form, Input, Button, Icon, message, Modal } from 'antd';
 import PropTypes from 'prop-types';
 
 import './index.scss';
@@ -18,43 +18,94 @@ export default class AddressDetails extends Component {
 
         this.state = {
             pincodeValidationError: false,
-            pincodeErrorMsg: ""
+            pincodeErrorMsg: "",
+            show_message_modal: false
         };
 
         this.loading_timer = false;
     }
 
     componentDidMount() {
-        for(let feild in this.props.cart_details.shipping_address){
-            this.props.form.setFieldsValue({
-                [feild] : this.props.cart_details.shipping_address[feild]
+        const { cart_details, form } = this.props;
+        for(let feild in cart_details.shipping_address){
+            form.setFieldsValue({
+                [feild] : cart_details.shipping_address[feild]
             });
         }
-        this.props.form.validateFields(); // To disabled submit button at the beginning.
+        form.validateFields(); // To disabled submit button at the beginning.
+        if (cart_details.order_details && cart_details.order_details.id && !cart_details.razorpay_id) {
+            if (cart_details.order_details.payment_status === 'UNPAID' || cart_details.order_details.payment_status === 'FAILED') {
+                const title = 'Your last payment attempt failed?';
+                const content = `Your last attempt for payment failed for ${cart_details.cart_items.length} items. Do you want to retry?`;
+                this.showConfirmPopup('confirm', title, content, this.retryPayment);
+            } else {
+                this.props.actions.clearCart();
+            }
+        }
     }
 
-    // componentWillReceiveProps(nextProps) {
-    //     const loaders = this.props.cart_details.loaders;
-    //     const next_loaders = nextProps.cart_details.loaders;
-    //     if (loaders !== next_loaders) {
-    //         if (next_loaders.order_adding) {
-    //             this.showMessage('loading', 'Placing your Order. Please wait!');
-    //         } else if (next_loaders.order_added) {
-    //             this.showMessage('loading', 'Redirecting to payment gateway...');
-    //         } else if (next_loaders.order_add_err) {
-    //             this.showMessage('error', 'Placing order failed! Please retry!');
-    //         }
-    //     }
-    // }
+    componentWillReceiveProps(nextProps) {
+        const loaders = this.props.cart_details.loaders;
+        const next_loaders = nextProps.cart_details.loaders;
+        if (loaders !== next_loaders) {
+            let title, content;
+            this.setState({
+                show_message_modal: false,
+                message: ""
+            }, () => {
+                if (next_loaders.order_updating) {
+                    this.setState({
+                        show_message_modal: true,
+                        message: "Processing you payment..."
+                    });
+                } else if (next_loaders.order_updated) {
+                    title = 'Your Order has been placed';
+                    content = `Thank you for placing your oder. Your order will be delivered in next 7-10 business working days. Please note down your order id - ${nextProps.cart_details.order_details.id.toUppercase()} and your payment reference id- ${nextProps.cart_details.razorpay_id.toUppercase()}. In case of any clarifications, contact (+91)9928683832/orbiznumberplates@gmail.com`;
+                    this.showConfirmPopup('success', title, content, this.props.actions.clearCart(), this.props.actions.clearCart());
+                } else if (next_loaders.order_update_err) {
+                    title = 'Your paymeny status updation failed!';
+                    content = `Sorry for the inconvienience caused. Your money, if any deducted,  will be refunded in next 7-10 business working days. Please note down your order id- ${nextProps.cart_details.order_details.id.toUppercase()} and your payment reference id - ${nextProps.cart_details.razorpay_id.toUppercase()}. In case of any clarifications, contact (+91)9928683832/orbiznumberplates@gmail.com`;
+                    this.showConfirmPopup('error', title, content, this.props.actions.clearCart(), this.props.actions.clearCart());
+                }
 
-    showMessage = (type, time, message) => {
-        if (type === 'loading') {
-            message.loading(message, time);
-        } else if (type === 'success') {
-            message.success(message, time);
-        } else {
-            message.error(message, time);
+                if (next_loaders.order_adding) {
+                    this.setState({
+                        show_message_modal: true,
+                        message: "Placing your Order..."
+                    });
+                } else if (next_loaders.order_added) {
+                    this.setState({
+                        show_message_modal: true,
+                        message: "Redirecting to payment gateway.."
+                    }, () => {
+                        setTimeout(() => {
+                            this.setState({
+                                show_message_modal: false,
+                                message: ""
+                            });
+                        }, 2000);
+                    });
+                } else if (next_loaders.order_add_err) {
+                    this.showConfirmPopup('error', 'Error', 'Placing order failed! Please retry!');
+                }
+            });
         }
+    }
+
+    showConfirmPopup = (type, title, content, okFunc, cancelFunc) => {
+        const popup = Modal[type];
+        popup({
+            title: title,
+            content: content,
+            okText: 'Yes',
+            cancelText: 'No',
+            onOk() {
+                okFunc && okFunc();
+            },
+            onCancel() {
+                cancelFunc && cancelFunc();
+            }
+        });
     }
 
     validatePincode = (value) => {
@@ -106,6 +157,17 @@ export default class AddressDetails extends Component {
         });
     }
 
+    retryPayment = () => {
+        const { cart_details, actions } = this.props;
+        let order = {
+            ...cart_details.order_details,
+            total_count: cart_details.cart_items.length,
+            email: cart_details.shipping_address.email,
+            phone: cart_details.shipping_address.phone
+        };
+        actions.showPaymentPage(order);
+    }
+
     render() {
         const { cart_details } = this.props;
         const { pincodeValidationError, pincodeErrorMsg } = this.state;
@@ -117,9 +179,25 @@ export default class AddressDetails extends Component {
         const cityError = isFieldTouched('city') && getFieldError('city');
         const stateError = isFieldTouched('state') && getFieldError('state');
         const countryError = isFieldTouched('country') && getFieldError('country');
+        const show_retry = (cart_details.order_details && cart_details.order_details.id && (cart_details.order_details.payment_status === 'UNPAID' || cart_details.order_details.payment_status === 'FAILED') && !cart_details.razorpay_id);
 
         return (
             <Row className="lr-pad-15 b-mrgn-10 flex-column flex-ac CartSection AddressDetails">
+                <Modal
+                    className="modalStyle"
+                    wrapClassName="vertical-center-modal"
+                    visible={this.state.show_message_modal}
+                    title={null}
+                    closable={false}
+                    maskClosable={false}
+                    footer={null}
+                    width={'auto'}
+                >
+                    <div className="tb-pad-5 lr-pad-15 flex-row flex-center content">
+                        <Icon type="loading" />
+                        <span className="l-mrgn-10">{this.state.message}</span>
+                    </div>
+                </Modal>
                 <Col xs={24} className="pad-15 sectionHeader">Shipping Address</Col>
                 <Col xs={24} className="pad-15 sectionContent">
                     <div className="full-width">
@@ -198,9 +276,14 @@ export default class AddressDetails extends Component {
                             </FormItem>
                             <FormItem className="is-no-b-mrgn">
                                 <div className="flex-row flex-jc t-pad-5">
-                                    <Button size="large" className="btn-fill-violet" htmlType="submit" disabled={hasErrors(getFieldsError()) || cart_details.loaders.order_adding} >
+                                    <Button size="large" className="btn-fill-violet" htmlType="submit" disabled={hasErrors(getFieldsError()) || cart_details.cart_item_ids.length === 0 ||cart_details.loaders.order_adding} >
                                         {cart_details.loaders.order_adding && <Icon type="loading" /> }SAVE & CONTINUE
                                     </Button>
+                                    { show_retry &&
+                                        <Button size="large" type="danger" className="l-mrgn-5 btn-danger" disabled={cart_details.loaders.order_updating} onClick={() => { this.retryPayment(); }}>
+                                            RETRY PAYMENT
+                                        </Button>
+                                    }
                                 </div>
                             </FormItem>
                         </Form>

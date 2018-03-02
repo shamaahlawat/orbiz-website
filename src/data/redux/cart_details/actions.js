@@ -1,6 +1,5 @@
 import actionTypes from '../action_types';
 import * as API from '../../../data/config/api';
-// import initialStates from './states';
 
 export function initializeCart() {
     return function (dispatch) {
@@ -75,25 +74,24 @@ export function createOrder(order) {
             type: actionTypes.ORDER_ADDING
         });
 
-        API.createOrder({order}).then(response => {
+        API.createOrder({ order }).then(response => {
             dispatch({
                 type: actionTypes.ORDER_ADDED,
                 payload: {
-                    order_details: response.data.order
+                    order_details: response.data
                 }
             });
+            let order_details = {
+                ...response.data,
+                total_count: order.order_items_attributes.length,
+                email: order.shipping_address_attributes.email,
+                phone: order.shipping_address_attributes.phone
+            };
+            openRazorPay(dispatch, order_details);
         }).catch(() => {
             dispatch({
                 type: actionTypes.ORDER_ADD_ERR
             });
-        });
-    };
-}
-
-export function updatePaymentStatus() {
-    return function (dispatch) {
-        dispatch({
-            type: actionTypes.PAYMENT_STATUS_UPDATE
         });
     };
 }
@@ -105,6 +103,42 @@ export function updateShippingDetails(shipping_address) {
             payload: {
                 shipping_address
             }
+        });
+    };
+}
+
+export function showPaymentPage(order) {
+    return function (dispatch) {
+        openRazorPay(dispatch, order);
+    };
+}
+
+function openRazorPay(dispatch, order) {
+    window.openPaymentPage(order,(razorResponse) => {
+        dispatch({
+            type: actionTypes.ORDER_UPDATING,
+            payload: {
+                razorpay_id: razorResponse.razorpay_payment_id
+            }
+        });
+
+        API.updatePaymentStatus({ order_id: order.id, razorpay_id: razorResponse.razorpay_payment_id, amount: order.total }, (res) => {
+            dispatch({
+                type: actionTypes.ORDER_UPDATED,
+                payload: res.order
+            });
+        }, () => {
+            dispatch({
+                type: actionTypes.ORDER_UPDATE_ERR
+            });
+        });
+    });
+}
+
+export function clearCart() {
+    return function (dispatch) {
+        dispatch({
+            type: actionTypes.CLEAR_CART
         });
     };
 }

@@ -157,12 +157,86 @@ export default function cart_details(state = initialStates.cart_details, action)
             return cart_details;
         }
 
+        case actionTypes.ORDER_UPDATING: {
+            let cart_details = {
+                ...state,
+                razorpay_id: action.payload.razorpay_id,
+                loaders: {
+                    ...state.loaders,
+                    order_updating: true,
+                    order_updated: false,
+                    order_update_err: false
+                },
+            };
+            localStorage.setItem('cart_details', JSON.stringify(cart_details));
+            return cart_details;
+        }
+
+        case actionTypes.ORDER_UPDATED: {
+            let cart_details = {
+                ...state,
+                order_details: action.payload.order_details,
+                loaders: {
+                    ...state.loaders,
+                    order_updating: false,
+                    order_updated: true,
+                    order_update_err: false
+                },
+            };
+            localStorage.setItem('cart_details', JSON.stringify(cart_details));
+            return cart_details;
+        }
+
+        case actionTypes.ORDER_UPDATE_ERR: {
+            let cart_details = {
+                ...state,
+                loaders: {
+                    ...state.loaders,
+                    order_updating: false,
+                    order_updated: false,
+                    order_update_err: true
+                },
+            };
+            localStorage.setItem('cart_details', JSON.stringify(cart_details));
+            return cart_details;
+        }
+
         case actionTypes.UPDATE_SHIPPING_ADDRESS: {
             let cart_details = {
                 ...state,
                 shipping_address: action.payload.shipping_address,
             };
             localStorage.setItem('cart_details', JSON.stringify(cart_details));
+            return cart_details;
+        }
+
+        case actionTypes.CLEAR_CART: {
+            let cart_details = {
+                cart_items: [],
+                cart_item_ids: [],
+                total_amount: 0,
+                shipping_address: {
+                    address: "",
+                    pincode: "",
+                    city: "",
+                    state: "",
+                    country: "India",
+                    email: "",
+                    phone: "",
+                },
+                order_id: undefined,
+                payment_status: undefined,
+                order_details: {},
+                loaders: {
+                    order_adding: false,
+                    order_added: false,
+                    order_add_err: false,
+                    order_updating: false,
+                    order_updated: false,
+                    order_update_err: false,
+                }
+            };
+            localStorage.removeItem('cart_details');
             return cart_details;
         }
 

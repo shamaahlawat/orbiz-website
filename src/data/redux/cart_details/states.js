@@ -19,7 +19,10 @@ const initialStates = {
         loaders: {
             order_adding: false,
             order_added: false,
-            order_add_err: false
+            order_add_err: false,
+            order_updating: false,
+            order_updated: false,
+            order_update_err: false,
         }
     },
 };

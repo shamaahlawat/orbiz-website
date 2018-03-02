@@ -29,10 +29,7 @@ function fetchDataAndProceed(url, method, data) {
         data: method !== 'GET' ? data : {},
         url: url,
         baseURL: CONSTANTS.base_url,
-        headers: getHeaders(),
-        validateStatus: function (status) {
-            return ((status >= 200 && status < 300) || status === 412 || status === 401 || status === 403);
-        },
+        headers: getHeaders()
     });
 }
 
@@ -67,6 +64,6 @@ export const createOrder = (data) => {
 };
 
 export const updatePaymentStatus = (data) => {
-    return fetchDataAndProceed('/orders.json', method_types.put, data);
+    return fetchDataAndProceed('/orders/capture_payment.json', method_types.post, data);
 };
 
