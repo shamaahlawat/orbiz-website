@@ -12,6 +12,8 @@ import ProductList from './modules/ProductList';
 import ProductDetails from './modules/ProductDetails';
 import Cart from './modules/Cart';
 
+import 'antd/dist/antd.css';
+
 export default class Root extends Component {
     render() {
         const { store, history } = this.props;
