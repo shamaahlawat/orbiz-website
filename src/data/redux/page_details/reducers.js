@@ -44,14 +44,10 @@ export default function page_details(state = initialStates.page_details, action)
         }
 
         case actionTypes.HOME_PAGE_LOADED: {
-            let primary_carousal = action.payload.primary_carousal;
-            let secondary_carousal = action.payload.secondary_carousal;
-            localStorage.setItem('primary_carousal', JSON.stringify(primary_carousal));
-            localStorage.setItem('secondary_carousal', JSON.stringify(secondary_carousal));
+            localStorage.setItem('home_page_data', JSON.stringify(action.payload.home_page_data));
             return {
                 ...state,
-                primary_carousal,
-                secondary_carousal,
+                home_page_data: action.payload.home_page_data,
                 loaders: {
                     ...state.loaders,
                     page_loading: false,

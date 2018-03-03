@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Col, Row, Carousel, Button, Icon } from 'antd';
+import { Col, Row, Carousel, Button } from 'antd';
 
 import './index.scss';
 
@@ -17,13 +17,7 @@ export default class HomeCarousal extends Component {
     render() {
         const { options, items } = this.props;
 
-        if (this.props.loading || items.length === 0) {
-            return (
-                <Row className="flex-row flex-center loadingContainer CarousalContainer">
-                    <Icon type="loading" style={{ fontSize: 40}} />
-                </Row>
-            );
-        } else if (this.props.type === 'image') {
+        if (this.props.type === 'image') {
             return (
                 <Row className="CarousalContainer imgCarousal">
                     <Carousel {...options}>
@@ -71,7 +65,6 @@ HomeCarousal.propTypes = {
     items: PropTypes.array.isRequired,
     actions: PropTypes.object,
     type: PropTypes.string.isRequired,
-    loading: PropTypes.bool,
     options: PropTypes.object
 };
 

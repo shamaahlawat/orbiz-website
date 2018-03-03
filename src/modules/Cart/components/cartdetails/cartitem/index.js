@@ -48,7 +48,7 @@ export default class CartItem extends Component {
         return (
             <Row>
                 <Col xs={24} className="flex-row pad-10 CartItem">
-                    <div className="itemImageBox is-cursor-ptr" onClick={() => { actions.loadPath(`/product/${item.product_id}/details`); }}>
+                    <div className="itemImageBox is-cursor-ptr" onClick={() => { actions.loadPath(`/product/details/${item.product_id}`); }}>
                         <img src={item.product_img} alt="" className="img-contain" />
                     </div>
                     <div className="itemDetails full-flex flex-column lr-pad-10">

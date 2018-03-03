@@ -70,20 +70,20 @@ class Home extends Component {
             };
 
             const plateListProps = {
-                title: "Number Plates",
-                items: item_details.numplates_list,
+                title: page_details.home_page_data.PRODUCT_SECTION_1.title,
+                items: page_details.home_page_data.PRODUCT_SECTION_1.products,
                 current_filter_type: 'all',
                 filters: vehicle_details.vehicle_types,
                 show_filter: true,
                 show_sort: false,
-                loading: item_details.loaders.numplates_loading
+                loading: item_details.loaders.page_loading
             };
 
             const frameListProps = {
                 ...plateListProps,
-                title: "Frames",
-                items: item_details.frames_list,
-                loading: item_details.loaders.frames_loading
+                title: page_details.home_page_data.PRODUCT_SECTION_2.title,
+                items: page_details.home_page_data.PRODUCT_SECTION_2.products,
+                loading: item_details.loaders.page_loading
             };
 
             return (
@@ -91,7 +91,7 @@ class Home extends Component {
                     <Row className="flex-column">
                         {/* primary carousal section*/}
                         <Col xs={{ span: 24 }} className="SectionContainer MainCarousalContainer">
-                            <HomeCarousal type="image" items={page_details.primary_carousal} options={option} loading={page_details.loaders.carousal_loading} />
+                            <HomeCarousal type="image" items={page_details.home_page_data.IMAGES.images} options={option} />
                         </Col>
 
                         {/* number plates list  section*/}
@@ -104,7 +104,7 @@ class Home extends Component {
                             <Col xs={{ span: 24 }} className="b-mrgn-20 flex-row flex-center titleContainer">
                                 <div className="lr-pad-15 is-text-center font-24 titleText">We Also Make Custom Number Plates For Your Premium Car</div>
                             </Col>
-                            <HomeCarousal type="mixed" items={page_details.secondary_carousal} options={option1} actions={itemActions} loading={page_details.loaders.carousal_loading} />
+                            <HomeCarousal type="mixed" items={page_details.home_page_data.FEATURED_SECTION.featured_products} options={option1} actions={itemActions} />
                         </Col>
 
                         {/* frames list  section*/}
@@ -132,7 +132,6 @@ class Home extends Component {
                                 <Awards />
                             </Col>
                         </Col>
-
                     </Row>
                 </div>
             );

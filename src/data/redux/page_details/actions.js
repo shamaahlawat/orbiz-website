@@ -36,7 +36,6 @@ export function pageChanged(page) {
 
 export function getHomePageData() {
     return function (dispatch) {
-        //frames, numberpplates and carousal loaders
         dispatch({
             type: actionTypes.HOME_PAGE_LOADING
         });
@@ -45,20 +44,7 @@ export function getHomePageData() {
             dispatch({
                 type: actionTypes.HOME_PAGE_LOADED,
                 payload: {
-                    primary_carousal: response.data.IMAGES.images,
-                    secondary_carousal: response.data.FEATURED_SECTION.featured_products
-                }
-            });
-            dispatch({
-                type: actionTypes.NUMPLATES_LOADED,
-                payload: {
-                    numplates: response.data.PRODUCT_SECTION_1.products
-                }
-            });
-            dispatch({
-                type: actionTypes.FRAMES_LOADED,
-                payload: {
-                    frames: response.data.PRODUCT_SECTION_2.products
+                    home_page_data: response.data
                 }
             });
         }).catch(() => {
