@@ -17,6 +17,7 @@ import ProdImageLoader from './components/prodimage/loader';
 import ProdAddtnlDetails from './components/prodadditionaldetails';
 import ImageEditorLoader from './components/imageeditor/loader';
 import ImageEditor from './components/imageeditor';
+import FontEditor from './components/fonteditor';
 
 function mapStateToProps(state) {
     return {
@@ -72,13 +73,23 @@ class ProductDetails extends Component {
         }
     }
 
-    openImageEditor = () => {
-        setTimeout(() => {
-            if (this.props.vehicle_details.current_vehicle) {
-                let nextPage = `/${CONSTANTS.appPages.PRODUCT}/details/${this.props.match.params.product_id}/try`;
-                this.props.history.push(nextPage);
-            }
-        }, 100);
+    openImageEditor = (type) => {
+        if (type === 'font') {
+            this.setState({
+                show_editor: true,
+                editor_mode: 'font'
+            });
+        } else {
+            this.setState({
+                editor_mode: null
+            });
+            setTimeout(() => {
+                if (this.props.vehicle_details.current_vehicle) {
+                    let nextPage = `/${CONSTANTS.appPages.PRODUCT}/details/${this.props.match.params.product_id}/try`;
+                    this.props.history.push(nextPage);
+                }
+            }, 100);
+        }
     }
 
     handleCloseModal = () => {
@@ -108,7 +119,7 @@ class ProductDetails extends Component {
     }
 
     render() {
-        const { item_details, vehicle_details, cart_details } = this.props;
+        const { page_details, item_details, vehicle_details, cart_details } = this.props;
 
         if (item_details.loaders.item_loading) {
             return (
@@ -169,10 +180,13 @@ class ProductDetails extends Component {
                             <Button key="back" onClick={this.handleCloseModal}>Cancel</Button>,
                         ]}>
 
-                        {vehicle_details.loaders.vehicle_loading && <ImageEditorLoader />}
+                        {this.state.editor_mode !== 'font' &&  vehicle_details.loaders.vehicle_loading && <ImageEditorLoader />}
 
-                        {vehicle_details.loaders.vehicle_loaded && vehicle_details.current_vehicle && vehicle_details.current_vehicle.name &&
+                        {this.state.editor_mode !== 'font' &&  vehicle_details.loaders.vehicle_loaded && vehicle_details.current_vehicle && vehicle_details.current_vehicle.name &&
                             <ImageEditor vehicle={vehicle_details.current_vehicle} design={item_details.current_item} is_mobile={is_mobile} />
+                        }
+                        {this.state.editor_mode === 'font' &&
+                            <FontEditor page_details={page_details} font="batman" design="https://res.cloudinary.com/poletalks/image/upload/v1521560575/orbiz/WhatsApp_Image_2018-03-19_at_14.41.32_yoo0pn.jpg" reg_number={vehicle_details.registration_number}/>
                         }
                     </Modal>
                 </div>

@@ -3,7 +3,7 @@ import initialStates from './states';
 
 let numplates_list, frames_list, current_item, index, favorites, updated_frames_list, updated_numplates_list;
 
-export default function item_details(state = initialStates.item_details, action) {
+export default function item_details(state = initialStates.item_details, action) {  
     switch (action.type) {
         case actionTypes.NUMPLATES_LOADING:
             return {

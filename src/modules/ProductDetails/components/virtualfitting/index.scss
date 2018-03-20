@@ -32,19 +32,23 @@
         }
     }
 
-    .selectors {
+    .regNumInputContainer {
         .regNumInput {
             border-radius: 5px;
             line-height: 2;
             margin-bottom: 0;
             padding: 1px 10px;
             border: 1px solid #fff;
-            max-width: 33%;
+            max-width: 100%;
             color: $grey-bg !important;
 
             &:active, &:focus {
                 border: 1px solid $primary-bg !important;
                 outline: none;
+            }
+
+            &.error{
+                border-color: $danger !important;
             }
         }
     }

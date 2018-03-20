@@ -7,6 +7,8 @@ import './index.scss';
 import If from '../../../../components/_if_component';
 import VirtualFitting from '../virtualfitting';
 
+const numRegEx = new RegExp("[0-9]{1,4}$");
+
 export default class ProdDetails extends Component {
     constructor(props) {
         super(props);
@@ -51,7 +53,8 @@ export default class ProdDetails extends Component {
 
     render() {
         const { item, actions, curr_design, curr_variant, registration_number, cart_details } = this.props;
-        const cartDisabled = ((!registration_number || registration_number === "") || (curr_design && !curr_design.id) || !curr_variant || (curr_variant && !curr_variant.id));
+        let parts = registration_number.split(" ");
+        const cartDisabled = (parts.length > 4 || registration_number.length === 0 || !numRegEx.test(parts[parts.length - 1]) || (curr_design && !curr_design.id) || !curr_variant || (curr_variant && !curr_variant.id));
 
         let proceed_to_cart = false;
         let cart_item_index = cart_details.cart_item_ids.indexOf(item.id);
@@ -154,7 +157,7 @@ export default class ProdDetails extends Component {
                         }
                     </Col>
                     <If condition={cartDisabled}>
-                        <Col span={24} className="t-mrgn-10 error-text">* Dont forget to add your registration number, choose a design and product variant before adding to cart!</Col>
+                        <Col span={24} className="t-mrgn-10 error-text">* Dont forget to add a valid registration number, choose a design and product variant before adding to cart!</Col>
                     </If>
                 </Col>
             </Row>

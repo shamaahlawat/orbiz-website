@@ -47,7 +47,7 @@ class VirtualFitting extends Component {
             ]
         };
         this.state = {
-            view_mode: null,
+            view_mode: 'registration_number',
             type: undefined,
             model: undefined,
             current_vehicle,
@@ -61,6 +61,18 @@ class VirtualFitting extends Component {
     }
 
     registrationEntered = (registration_number) => {
+        let regex = new RegExp("^[0-9a-zA-Z \b]+$");
+        let numRegEx = new RegExp("[0-9]{1,4}$");
+        if (!regex.test(registration_number)) {
+            registration_number = registration_number.replace(/[^0-9a-zA-Z \b]+/, "")
+        }
+        registration_number = registration_number.substring(0, 14);
+
+        let parts = registration_number.split(" ");
+        let registration_number_err = (parts.length > 4 || registration_number.length === 0 || !numRegEx.test(parts[parts.length - 1]));
+        this.setState({
+            registration_number_err
+        });
         this.props.actions.updateRegistrationNumber(registration_number.toUpperCase());
     }
 
@@ -226,6 +238,10 @@ class VirtualFitting extends Component {
         this.props.openImageEditor();
     }
 
+    openFontEditor = () => {
+        this.props.openImageEditor('font');
+    }
+
     render() {
         const { vehicle_details } = this.props;
         const model_btn_active = this.state.model && this.state.current_vehicle;
@@ -234,11 +250,30 @@ class VirtualFitting extends Component {
             <Row type="flex" align="center" className="pad-15 virtualFitting">
                 <Col span={24} className="font-12 is-font-bold title">Virtual Fitting:</Col>
                 <Col span={24} className="flex-row flex-center flex-wrap selectors">
-                    <input className="font-12 btn-fill-black tb-mrgn-10 regNumInput" value={vehicle_details.registration_number} onChange={(e) => { this.registrationEntered(e.target.value); }} placeholder="Enter your registration number"/>
+                    <Button className={classNames("font-12 btn-fill-black lr-mrgn-10 tb-mrgn-10", { active: this.state.view_mode === 'registration_number' })} onClick={() => { this.setMode('select_model'); }}>Registration number</Button>
                     <Button className={classNames("font-12 btn-fill-black lr-mrgn-10 tb-mrgn-10", { active: this.state.view_mode === 'select_model' })} onClick={() => { this.setMode('select_model'); }}>Try on your vehicle model</Button>
                     <Button className={classNames("font-12 btn-fill-black tb-mrgn-10", { active: this.state.view_mode === 'user_vehicle_upload' })} onClick={() => { this.setMode('user_vehicle_upload'); }}>Try on your vehicle</Button>
                 </Col>
                 <Col span={24} className="t-pad-15 flex-row flex-center flex-wrap actionsContainer">
+                    <If condition={this.state.view_mode === 'registration_number'}>
+                        <Row className="full-width actions">
+                            <span className="t-pad-10 full-width is-text-left">Enter your registration number</span>
+                            <div className="flex-row flex-center flex-wrap regNumInputContainer">
+                                <Col xs={8} className="pad-5 is-text-center">
+                                    <input className={classNames("font-12 btn-fill-black tb-mrgn-10 regNumInput", { error: this.state.registration_number_err})} value={vehicle_details.registration_number} onChange={(e) => { this.registrationEntered(e.target.value); }} placeholder="Enter your registration number" />
+                                </Col>
+
+                                <Col xs={8} className="pad-5 l-mrgn-15 is-text-center">
+                                    <Button className="font-12 btn-fill-black"
+                                        style={{ padding: '10px 15px', height: 'auto' }}
+                                        onClick={() => { this.openFontEditor(); }}
+                                        disabled={this.state.registration_number_err}>
+                                        View how it looks
+                                    </Button>
+                                </Col>
+                            </div>
+                        </Row>
+                    </If>
                     <If condition={this.state.view_mode === 'select_model'}>
                         <Row className="full-width actions">
                             <span className="t-pad-10 full-width is-text-left">Select your vehicle type and model</span>

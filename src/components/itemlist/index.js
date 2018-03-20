@@ -4,7 +4,6 @@ import { Col, Row, Button } from 'antd';
 import classNames from 'classnames';
 
 import './index.scss';
-import If from '../_if_component';
 import Item from '../item';
 import ItemLoader from '../item/loader';
 
@@ -25,7 +24,7 @@ export default class ItemListContainer extends Component {
             <Row className="full-flex ItemsListContainer">
                 <Col xs={{ span: 24 }} className="flex-row flex-jsb flex-ac titleContainer">
                     <div className="font-24 titleText">{title}</div>
-                    <div className="flex-row flex-jsa filterContainer desktop">
+
                         {/* <If condition={show_sort}>
                             <span className="filterItem is-capitalize r-pad-10">Sort By:</span>
                             <Select defaultValue="0" size="small" style={{ width: "auto"}} placeholder="Select sort">
@@ -33,7 +32,8 @@ export default class ItemListContainer extends Component {
                                 <Option value="1">Price: Highest to Lowest</Option>
                             </Select>
                         </If> */}
-                        <If condition={show_filter}>
+                    {show_filter &&
+                        <div className="flex-row flex-jsa filterContainer desktop">
                             <span className="filterItem is-capitalize pad-10">For:</span>
                             <span className={classNames("is-capitalize pad-10 is-cursor-ptr filterItem", { 'active': this.props.current_filter_type === 'all' })}>All</span>
                             {filters.map(filter => {
@@ -41,16 +41,17 @@ export default class ItemListContainer extends Component {
                                     <span key={filter.id} className={classNames("is-capitalize pad-10 is-cursor-ptr filterItem", { 'active': this.props.current_filter_type === filter.name })} onClick={()=> { this.loadPath(`/product/list?tags=${filter.name}`);}}>{filter.name}</span>
                                 );
                             })}
-                        </If>
-                    </div>
-                    <div className="flex-row flex-jsa filterContainer mobile">
-                        <If condition={show_filter}>
+                        </div>
+                    }
+
+                    {show_filter &&
+                        <div className="flex-row flex-jsa filterContainer mobile">
                             <span className="filterItem is-capitalize pad-10 active" onClick={() => { this.loadPath(`/product/list?${search_term}`); }}>View All</span>
-                        </If>
-                    </div>
+                        </div>
+                    }
                 </Col>
 
-                <If condition={loading}>
+                {loading &&
                     <Col xs={{ span: 24 }} className="flex-row flex-wrap flex-ac ItemsList">
                         {[1, 2, 3, 4].map((item) => {
                             return (
@@ -60,9 +61,9 @@ export default class ItemListContainer extends Component {
                             );
                         })}
                     </Col>
-                </If>
+                }
 
-                <If condition={!loading}>
+                {!loading &&
                     <Col xs={{ span: 24 }} className="flex-row flex-wrap flex-ac ItemsList">
                         {items.length > 0 && items.map((item) => {
                             return (
@@ -74,16 +75,16 @@ export default class ItemListContainer extends Component {
                         {items.length == 0 &&
                             <span className="flex-row flex-center full-flex emptyList">Sorry! No products to display. Please refine your search!</span>
                         }
-                     </Col>
-                </If>
+                    </Col>
+                }
 
-                <If condition={this.props.type !== 'list_page'}>
+                {this.props.type !== 'list_page' &&
                     <Col xs={{ span: 24 }} className="pad-15 flex-row flex-center buttonContainer">
                         <Button className="animated zoomIn flex-row btn-fill-black" onClick={() => { this.loadPath(`/product/list?${search_term}`); }}>
                             <span className="flex-row flex-center full-flex">SHOW ALL</span>
                         </Button>
                     </Col>
-                </If>
+                }
             </Row>
         );
     }
