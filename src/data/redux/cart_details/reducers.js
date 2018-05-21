@@ -58,7 +58,7 @@ export default function cart_details(state = initialStates.cart_details, action)
         case actionTypes.EDIT_CART_ITEM: {
             let cart_details = {
                 ...state,
-                cart_items: state.cart_items.map((item,i) => i === action.payload.index ? action.payload.cart_item : item),
+                cart_items: state.cart_items.map((item, i) => i === action.payload.index ? action.payload.cart_item : item),
             };
             localStorage.setItem('cart_details', JSON.stringify(cart_details));
             return cart_details;
@@ -99,7 +99,7 @@ export default function cart_details(state = initialStates.cart_details, action)
                 return cart_details;
             } else {
                 cart_details = {
-                ...state,
+                    ...state,
                     cart_items: state.cart_items.map((item, i) => {
                         return (i === action.payload.index) ? {
                             ...item,

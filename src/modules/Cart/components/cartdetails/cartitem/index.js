@@ -54,7 +54,7 @@ export default class CartItem extends Component {
                     <div className="itemDetails full-flex flex-column lr-pad-10">
                         <span className="font-16 font-primary b-pad-5">{item.product_name} - {item.product_type} - {item.variant}</span>
                         <span className="font-12">Registration Number: {item.info}</span>
-                        <span className="font-12">Instructions: {item.description} <Icon type="edit" className="font-16 is-cursor-ptr edit-icon" onClick={() => { this.openEditor(); }}/></span>
+                        <span className="font-12">Instructions: {item.description} <Icon type="edit" className="font-16 is-cursor-ptr edit-icon" onClick={() => { this.openEditor(); }} /></span>
                         <div className="full-width flex-row flex-ac t-pad-5">
                             <span className="r-pad-10 font-12">Quantity :</span>
                             <span className="mrgn-5 flex-row flex-ac is-cursor-ptr counter">
@@ -77,7 +77,7 @@ export default class CartItem extends Component {
                     onCancel={this.closeEditor}
                     cancelText="cancel"
                 >
-                    <TextArea placeholder="Enter your additional instructions to be taken care of here..."  value={this.state.instruction} autosize={{ minRows: 2, maxRows: 6 }} onChange={(e) => {  this.handleInstructionInput(e.target.value); }}/>
+                    <TextArea placeholder="Enter your additional instructions to be taken care of here..." value={this.state.instruction} autosize={{ minRows: 2, maxRows: 6 }} onChange={(e) => { this.handleInstructionInput(e.target.value); }} />
                 </Modal>
             </Row>
         );

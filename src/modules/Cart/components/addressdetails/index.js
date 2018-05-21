@@ -27,9 +27,9 @@ export default class AddressDetails extends Component {
 
     componentDidMount() {
         const { cart_details, form } = this.props;
-        for(let feild in cart_details.shipping_address){
+        for (let feild in cart_details.shipping_address) {
             form.setFieldsValue({
-                [feild] : cart_details.shipping_address[feild]
+                [feild]: cart_details.shipping_address[feild]
             });
         }
         form.validateFields(); // To disabled submit button at the beginning.
@@ -132,7 +132,7 @@ export default class AddressDetails extends Component {
             this.validatePincode(event.target.value);
         }
         this.props.form.setFieldsValue({
-            [event.target.name] : event.target.value
+            [event.target.name]: event.target.value
         });
         let shipping_address = {
             ...this.props.cart_details.shipping_address,
@@ -220,7 +220,7 @@ export default class AddressDetails extends Component {
                                     getFieldDecorator('phone', {
                                         rules: [
                                             { required: true, message: 'Please enter your phone number! ' },
-                                            { len: 10, message: 'Phone number should be 10 digits!'},
+                                            { len: 10, message: 'Phone number should be 10 digits!' },
                                         ]
                                     })(
                                         <Input addonBefore={"+91"} placeholder="Phone Number" className="font-12 height-30 font-white bg-black" type="number" name="phone" onChange={this.handleInputChange} />
@@ -236,7 +236,7 @@ export default class AddressDetails extends Component {
                                     )
                                 }
                             </FormItem>
-                            <FormItem  validateStatus={pincodeError ? "error" : (pincodeValidationError ? "error" : "")} help={pincodeError ? pincodeError : (pincodeValidationError ? pincodeErrorMsg : '')}>
+                            <FormItem validateStatus={pincodeError ? "error" : (pincodeValidationError ? "error" : "")} help={pincodeError ? pincodeError : (pincodeValidationError ? pincodeErrorMsg : '')}>
                                 {
                                     getFieldDecorator('pincode', {
                                         rules: [
@@ -276,10 +276,10 @@ export default class AddressDetails extends Component {
                             </FormItem>
                             <FormItem className="is-no-b-mrgn">
                                 <div className="flex-row flex-jc t-pad-5">
-                                    <Button size="large" className="btn-fill-violet" htmlType="submit" disabled={hasErrors(getFieldsError()) || cart_details.cart_item_ids.length === 0 ||cart_details.loaders.order_adding} >
-                                        {cart_details.loaders.order_adding && <Icon type="loading" /> }SAVE & CONTINUE
+                                    <Button size="large" className="btn-fill-violet" htmlType="submit" disabled={hasErrors(getFieldsError()) || cart_details.cart_item_ids.length === 0 || cart_details.loaders.order_adding} >
+                                        {cart_details.loaders.order_adding && <Icon type="loading" />}SAVE & CONTINUE
                                     </Button>
-                                    { show_retry &&
+                                    {show_retry &&
                                         <Button size="large" type="danger" className="l-mrgn-5 btn-danger" disabled={cart_details.loaders.order_updating} onClick={() => { this.retryPayment(); }}>
                                             RETRY PAYMENT
                                         </Button>

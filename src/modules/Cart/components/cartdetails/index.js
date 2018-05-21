@@ -23,7 +23,7 @@ export default class CartDetails extends Component {
                             );
                         })
                     }
-                    { cart_details.cart_items.length == 0 &&
+                    {cart_details.cart_items.length == 0 &&
                         <span className="pad-15 t-mrgn-40 emptyContent">Seems like you haven't chose anything to make your vehicle cool. Add some of our prouducts to your cart! </span>
                     }
                 </Col>
@@ -36,7 +36,7 @@ export default class CartDetails extends Component {
                         <div className="">&nbsp;</div>
                         <div className="">&nbsp;</div>
                     </div>
-                    { cart_details.total_amount > 0 &&
+                    {cart_details.total_amount > 0 &&
                         <div className="r-pad-15 flex-column full-flex flex-jc is-text-right subtotal">
                             <div className="title">Total Amount</div>
                             <div className="price">₹{cart_details.total_amount}</div>

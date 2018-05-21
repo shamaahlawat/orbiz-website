@@ -65,7 +65,7 @@ class AppContainer extends Component {
         return (
             <div className={classNames(`flex-column full-width full-min-height AppContainer ${page_details.current_page && page_details.current_page.split('/').join("")}`, { "mobile": is_mobile })}>
                 <Affix>
-                    <AppNavbar page_details={page_details} cart_details={cart_details} vehicle_types={vehicle_details.vehicle_types} actions={actions}/>
+                    <AppNavbar page_details={page_details} cart_details={cart_details} vehicle_types={vehicle_details.vehicle_types} actions={actions} />
                 </Affix>
                 <div className="MainContentContainer full-flex is-no-lr-pad">
                     {this.props.children}
